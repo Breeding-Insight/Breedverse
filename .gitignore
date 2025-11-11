@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store
+BIVerse_demo.Rproj
+inst/doc
+/Meta/
+/doc/
+/data/

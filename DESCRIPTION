@@ -1,0 +1,36 @@
+Package: BIverse
+Title: Collection of packages created by Breeding Insight
+Version: 0.0.1
+Authors@R: c(person(given='Breeding', 
+                    family='Insight', 
+                    email = 'cht47@cornell.edu', 
+                    role = c('cre', 'aut'))
+             )
+Description: Provides a interface for users to add modules from BIGapp, Qploidy and AlloMate packages.
+License: AGPL (>= 3)
+Depends: R (>= 3.6.0)
+biocViews:
+Imports: 
+    shiny,
+    DT,
+    bs4Dash,
+    config,
+    golem,
+    shinyWidgets,
+    shinydisconnect,
+    shinyalert
+Encoding: UTF-8
+URL: https://github.com/Cristianetaniguti/Qploidy
+BugReports: https://github.com/Cristianetaniguti/Qploidy/issues
+LazyData: true
+RoxygenNote: 7.3.2
+Suggests: 
+    covr,
+    spelling,
+    rmdformats,
+    knitr (>= 1.10),
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Language: en-US
+VignetteBuilder: knitr
