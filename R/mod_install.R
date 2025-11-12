@@ -83,6 +83,16 @@ mod_install_ui <- function(id) {
                 )),
                 span("Installed", class = "install-status-badge install-status-ok")
               ),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Allele intensities/read counts standardization"),
+                  tags$li("Sample ploidy estimation"),
+                  tags$li("Aneuploidy detection"),
+                  tags$li("Multipoint (HMM) copy number estimation (beta)")
+                ),
+                br()
+              ),
               p("Qploidy is installed. You can access ploidy estimation features in the app.")
             ),
             
@@ -104,6 +114,16 @@ mod_install_ui <- function(id) {
                   ),
                 )),
                 span("Not installed", class = "install-status-badge install-status-missing")
+              ),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Allele intensities/read counts standardization"),
+                  tags$li("Sample ploidy estimation"),
+                  tags$li("Aneuploidy detection"),
+                  tags$li("Multipoint (HMM) copy number estimation (beta)")
+                ),
+                br()
               ),
               p("Install the Qploidy package to enable ploidy estimation workflows."),
               
@@ -151,7 +171,18 @@ mod_install_ui <- function(id) {
                 )),
                 span("Installed", class = "install-status-badge install-status-ok")
               ),
-              p("BIGapp is installed. You can now access BIGapp features in the app.")
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Genotype Processing (call off-targets SNPs, Filtering)"),
+                  tags$li("Markers Summary Statistics"),
+                  tags$li("Population Structure Analysis (PCA, DAPC)"),
+                  tags$li("Genome-Wide Association Studies (GWAS)"),
+                  tags$li("Genomic Selection (GS)")
+                ),
+                br()
+              ),
+              p("BIGapp is installed. You can access BIGapp features in the app.")
             ),
             
             # Not installed
@@ -173,8 +204,18 @@ mod_install_ui <- function(id) {
                 )),
                 span("Not installed", class = "install-status-badge install-status-missing")
               ),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Genotype Processing (call off-targets SNPs, Filtering)"),
+                  tags$li("Markers Summary Statistics"),
+                  tags$li("Population Structure Analysis (PCA, DAPC)"),
+                  tags$li("Genome-Wide Association Studies (GWAS)"),
+                  tags$li("Genomic Selection (GS)")
+                ),
+                br()
+              ),
               p("Install the BIGapp package to enable the genomic analysis features."),
-              
               div(
                 style = "margin-top: 12px; margin-bottom: 10px;",
                 actionButton(
