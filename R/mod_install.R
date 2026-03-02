@@ -234,7 +234,99 @@ mod_install_ui <- function(id) {
             )
           )
         )
-      )
+      ),
+      fluidRow(
+        # --- Familia card ----------------------------------------------------
+        column(
+          width = 6,
+          div(
+            class = "install-card",
+            
+            # Already installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == true", ns("familiaInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/familia_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "Familia")
+                  ),
+                )),
+                span("Installed", class = "install-status-badge install-status-ok")
+              ),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Unsupervised ancestry estimation with SNMF() ADMIXTURE-like algorithms"),
+                  tags$li("Supervised ancestry estimation with PolyBreedTools"),
+                  tags$li("Support for diploid and polyploid species")
+                ),
+                br()
+              ),
+              p("Familia is installed. You can access ancestry estimation features in the app.")
+            ),
+            
+            # Not installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == false", ns("familiaInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/familia_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "Familia")
+                  ),
+                )),
+                span("Not installed", class = "install-status-badge install-status-missing")
+              ),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Unsupervised ancestry estimation with SNMF() ADMIXTURE-like algorithms"),
+                  tags$li("Supervised ancestry estimation with PolyBreedTools"),
+                  tags$li("Support for diploid and polyploid species")
+                ),
+                br()
+              ),
+              p("Install the familia package to enable ancestry estimation workflows."),
+              
+              div(
+                style = "margin-top: 12px; margin-bottom: 10px;",
+                actionButton(
+                  ns("install_familia"),
+                  "Install Familia",
+                  icon = icon("download")
+                )
+              )
+            ),
+            
+            # Log (always visible)
+            tags$label("Installation log"),
+            div(
+              class = "install-log",
+              uiOutput(ns("install_log_familia"))
+            )
+          )
+        ),
+        
+        # --- Empty card -----------------------------------------------------
+        column(
+          width = 6
+        )
+      ) #Closing fluidrow parentheses
     )
   )
 }
@@ -250,6 +342,9 @@ mod_install_server <- function(input, output, session, parent_session){
   qploidy_installed <- reactiveVal(
     requireNamespace("Qploidy", quietly = TRUE)
   )
+  familia_installed <- reactiveVal(
+    requireNamespace("familia", quietly = TRUE)
+  )
   bigapp_installed <- reactiveVal(
     requireNamespace("BIGapp", quietly = TRUE)
   )
@@ -257,12 +352,16 @@ mod_install_server <- function(input, output, session, parent_session){
   output$qploidyInstalled <- reactive({ qploidy_installed() })
   outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
   
+  output$familiaInstalled <- reactive({ familia_installed() })
+  outputOptions(output, "familiaInstalled", suspendWhenHidden = FALSE)
+  
   output$BIGappInstalled <- reactive({ bigapp_installed() })
   outputOptions(output, "BIGappInstalled", suspendWhenHidden = FALSE)
   
   # Initialize logs as empty
   output$install_log_qploidy <- renderUI(NULL)
   output$install_log_BIGapp <- renderUI(NULL)
+  output$install_log_familia <- renderUI(NULL)
   
   # --- Qploidy installation ----------------------------------------------
   observeEvent(input$install_qploidy, {
@@ -307,6 +406,57 @@ mod_install_server <- function(input, output, session, parent_session){
         duration = NULL
       )
       output$install_log_qploidy <- renderUI(
+        if (is.null(err_msg))
+          "Unknown error (check server permissions/logs)."
+        else
+          err_msg
+      )
+    }
+  })
+  
+  # --- Qploidy installation ----------------------------------------------
+  observeEvent(input$install_familia, {
+    err_msg <- NULL
+    ok <- FALSE
+    
+    showNotification("Installing familia...", type = "message")
+    
+    # clear previous log
+    output$install_log_familia <- renderUI(NULL)
+    
+    tryCatch({
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes")
+      }
+      
+      remotes::install_github(
+        "Breeding-Insight/familia",
+        upgrade = "never",
+        quiet = TRUE
+      )
+      
+      ok <- requireNamespace("familia", quietly = TRUE)
+    }, error = function(e) {
+      err_msg <<- conditionMessage(e)
+    })
+    
+    if (ok) {
+      familia_installed(TRUE)
+      showNotification(
+        "familia installed successfully.",
+        type = "message",
+        duration = 8
+      )
+      output$install_log_familia <- renderUI(HTML(
+        'familia installation completed. <b style="color:#d9534f;">Restart</b> the app to load familia features.'
+      ))
+    } else {
+      showNotification(
+        "familia installation failed. See details below.",
+        type = "error",
+        duration = NULL
+      )
+      output$install_log_familia <- renderUI(
         if (is.null(err_msg))
           "Unknown error (check server permissions/logs)."
         else
