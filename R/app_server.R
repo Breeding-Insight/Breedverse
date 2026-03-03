@@ -10,7 +10,7 @@ app_server <- function(input, output, session) {
   # Your application server logic
 
   ##Add server configurations
-  options(shiny.maxRequestSize = 10000 * 1024^2)  # Set maximum upload size to 10GB
+  options(shiny.maxRequestSize = 1000000 * 1024^2)  # Set maximum upload size to 1000GB
   #shiny.maxRequestSize = 10000 * 1024^2; # 10 GB <- This is for a future limit when using BI's server remotely
 
   output$qploidyInstalled <- reactive({
@@ -21,9 +21,14 @@ app_server <- function(input, output, session) {
     "BIGapp" %in% rownames(installed.packages())
   })
   
+  output$familiaInstalled <- reactive({
+    "familia" %in% rownames(installed.packages())
+  })
+  
   # Expose the value to JS even when panel is hidden
   outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "BIGappInstalled", suspendWhenHidden = FALSE)
+  outputOptions(output, "familiaInstalled", suspendWhenHidden = FALSE)
 
   ## Modules
   
@@ -67,6 +72,18 @@ app_server <- function(input, output, session) {
                parent_session = session)
     callModule(BIGapp:::mod_GS_server,
                "GS_1",
+               parent_session = session)
+  }
+  
+  ##familia
+  
+  if(isTRUE(requireNamespace("familia", quietly = TRUE))) {
+    library(familia)
+    callModule(familia:::mod_SNMF_server,
+               "SNMF_1",
+               parent_session = session)
+    callModule(familia:::mod_polybreedtools_server,
+               "PolyBreedTools_1",
                parent_session = session)
   }
   
