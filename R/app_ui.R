@@ -64,8 +64,25 @@ app_ui <- function(request) {
                     ),
                     
                     conditionalPanel(
+                      condition = "output.familiaInstalled == true",
+                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ancestry (R/familia)"),
+                      menuItem(
+                        "Unsupervised",
+                        icon = icon("shuffle"),
+                        startExpanded = FALSE,
+                        menuSubItem("SNMF", tabName = "snmf", icon = icon("list-ol"))
+                      ),
+                      menuItem(
+                        "Supervised",
+                        icon = icon("diagram-project"),
+                        startExpanded = FALSE,
+                        menuSubItem("PolyBreedTools", tabName = "polybreedtools", icon = icon("share-from-square"))
+                      )
+                    ),
+                    
+                    conditionalPanel(
                       condition = "output.BIGappInstalled == true",      
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Install modules"),
+                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
                     menuItem("Convert to VCF", tabName = "dosage2vcf", icon = icon("share-from-square")),
                     menuItem("Dosage Calling", tabName = "updog", icon = icon("list-ol")),
                     menuItem("VCF Filtering", tabName = "filtering", icon = icon("filter")),
@@ -148,6 +165,16 @@ app_ui <- function(request) {
             tabName = "qploidy", 
             if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) 
               Qploidy:::mod_qploidy_ui("qploidy_1")
+          ),
+          tabItem(
+            tabName = "snmf", 
+            if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
+              familia:::mod_SNMF_ui("SNMF_1")
+          ),
+          tabItem(
+            tabName = "polybreedtools", 
+            if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
+              familia:::mod_polybreedtools_ui("PolyBreedTools_1")
           ),
           tabItem(
             tabName = "filtering", 
