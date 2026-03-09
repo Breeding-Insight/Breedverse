@@ -20,10 +20,10 @@ mod_Home_ui <- function(id){
       fluidRow(
         column(width = 4,
                box(
-                 title = "BIverse", status = "info", solidHeader = FALSE, width = 12, collapsible = FALSE,
+                 title = "Breedverse", status = "info", solidHeader = FALSE, width = 12, collapsible = FALSE,
                  HTML(
                    paste0(
-                     "<p><b>About BIverse.</b> This is a Demo :) </p>",
+                     "<p><b>About Breedverse.</b> This is a Demo :) </p>",
                      "</ul>"
                    )
                  ),
@@ -78,11 +78,11 @@ mod_Home_ui <- function(id){
                  style = "text-decoration: none; color: inherit;"  # Optional: removes underline and retains original color
                ),
                a(
-                 href = "file:///Users/cht47/Documents/github/BIverse/doc/BIverse.html",  # Replace with your desired URL
+                 href = "file:///Users/cht47/Documents/github/Breedverse/doc/Breedverse.html",  # Replace with your desired URL
                  target = "_blank",  # Optional: opens the link in a new tab
                  valueBox(
                    value = NULL,
-                   subtitle = "BIverse Tutorial",
+                   subtitle = "Breedverse Tutorial",
                    icon = icon("compass"),
                    color = "info",
                    gradient = TRUE,

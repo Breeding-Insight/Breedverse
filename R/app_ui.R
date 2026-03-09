@@ -81,6 +81,12 @@ app_ui <- function(request) {
                     ),
                     
                     conditionalPanel(
+                      condition = "output.allomateInstalled == true",
+                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Mating Estimation (R/AlloMate)"),
+                      menuItem("AlloMate", tabName = "allomate", icon = icon("diagram-project")),
+                    ),
+                    
+                    conditionalPanel(
                       condition = "output.BIGappInstalled == true",      
                     tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
                     menuItem("Convert to VCF", tabName = "dosage2vcf", icon = icon("share-from-square")),
@@ -118,8 +124,8 @@ app_ui <- function(request) {
           style = "display: flex; align-items: center;",  # Align text and images horizontally
           div(
             style = "display: flex; flex-direction: column; margin-right: 15px; text-align: right;",
-            div("2025 Breeding Insight"),
-            div("Funded by USDA through Cornell University")
+            div("2026 Breeding Insight"),
+            div("Funded by USDA through UF|IFAS")
           ),
           div(
             a(
@@ -136,7 +142,7 @@ app_ui <- function(request) {
         ),
         left = div(
           style = "display: flex; align-items: center; height: 100%;",  
-          sprintf("v%s", as.character(utils::packageVersion("BIverse"))))
+          sprintf("v%s", as.character(utils::packageVersion("Breedverse"))))
       ),
       dashboardBody(
         disconnectMessage(), #Adds generic error message for any error if not already accounted for
@@ -175,6 +181,11 @@ app_ui <- function(request) {
             tabName = "polybreedtools", 
             if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
               familia:::mod_polybreedtools_ui("PolyBreedTools_1")
+          ),
+          tabItem(
+            tabName = "allomate", 
+            if(isTRUE(requireNamespace("AlloMate", quietly = TRUE))) 
+              AlloMate:::mod_allomate_ui("allomate_1")
           ),
           tabItem(
             tabName = "filtering", 
@@ -248,7 +259,7 @@ golem_add_external_resources <- function() {
     favicon(),
     bundle_resources(
       path = app_sys("app/www"),
-      app_title = "BIverse"
+      app_title = "Breedverse"
     )
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
