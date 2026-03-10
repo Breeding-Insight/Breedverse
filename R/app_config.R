@@ -9,7 +9,7 @@
 #'
 #' @noRd
 app_sys <- function(...) {
-  system.file(..., package = "BIverse")
+  system.file(..., package = "Breedverse")
 }
 
 
