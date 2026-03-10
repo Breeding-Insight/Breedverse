@@ -603,7 +603,7 @@ mod_install_server <- function(input, output, session, parent_session){
         type = "message",
         duration = 8
       )
-      output$install_log_familia <- renderUI(HTML(
+      output$install_log_allomate <- renderUI(HTML(
         'AlloMate installation completed. <b style="color:#d9534f;">Restart</b> the app to load AlloMate features.'
       ))
     } else {
@@ -612,7 +612,7 @@ mod_install_server <- function(input, output, session, parent_session){
         type = "error",
         duration = NULL
       )
-      output$install_log_familia <- renderUI(
+      output$install_log_allomate <- renderUI(
         if (is.null(err_msg))
           "Unknown error (check server permissions/logs)."
         else

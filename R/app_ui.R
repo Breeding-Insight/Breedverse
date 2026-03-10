@@ -83,7 +83,7 @@ app_ui <- function(request) {
                     conditionalPanel(
                       condition = "output.allomateInstalled == true",
                       tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Mating Estimation (R/AlloMate)"),
-                      menuItem("AlloMate", tabName = "allomate", icon = icon("diagram-project")),
+                      menuItem("AlloMate", tabName = "allomate", icon = icon("diagram-project"))
                     ),
                     
                     conditionalPanel(
