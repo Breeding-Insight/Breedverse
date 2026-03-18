@@ -44,7 +44,6 @@ app_server <- function(input, output, session) {
   
   ## Qploidy
   if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) {
-    library(Qploidy)
     callModule(Qploidy:::mod_qploidy_server,
                "qploidy_1",
                parent_session = session)
@@ -53,7 +52,6 @@ app_server <- function(input, output, session) {
   ## BIGapp
   
   if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
-    library(BIGapp)
     callModule(BIGapp:::mod_DosageCall_server,
                "DosageCall_1",
                parent_session = session)
@@ -83,7 +81,6 @@ app_server <- function(input, output, session) {
   ##familia
   
   if(isTRUE(requireNamespace("familia", quietly = TRUE))) {
-    library(familia)
     callModule(familia:::mod_SNMF_server,
                "SNMF_1",
                parent_session = session)
@@ -94,10 +91,10 @@ app_server <- function(input, output, session) {
   
   ## AlloMate
   if(isTRUE(requireNamespace("AlloMate", quietly = TRUE))) {
-    library(AlloMate)
-    callModule(AlloMate:::mod_allomate_server,
-               "allomate_1",
-               parent_session = session)
+    AlloMate:::mod_allomate_server(
+      "allomate_1",
+      parent_session = session
+    )
   } 
   
   #Session info popup
