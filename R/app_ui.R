@@ -6,6 +6,7 @@
 #' @importFrom bs4Dash bs4Badge bs4DashSidebar bs4DashNavbar bs4DashPage sidebarMenu menuItem menuSubItem dashboardBody tabItems tabItem box dashboardFooter
 #' @importFrom shinydisconnect disconnectMessage
 #' @import shinyWidgets
+#' @importFrom utils getFromNamespace
 #'
 #' @noRd
 app_ui <- function(request) {
@@ -156,67 +157,67 @@ app_ui <- function(request) {
           tabItem(
             tabName = "qploidy", 
             if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) 
-              Qploidy:::mod_qploidy_ui("qploidy_1")
+              getFromNamespace("mod_qploidy_ui", "Qploidy")("qploidy_1")
           ),
           tabItem(
             tabName = "snmf", 
             if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
-              familia:::mod_SNMF_ui("SNMF_1")
+              getFromNamespace("mod_SNMF_ui", "familia")("SNMF_1")
           ),
           tabItem(
             tabName = "polybreedtools", 
             if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
-              familia:::mod_polybreedtools_ui("PolyBreedTools_1")
+              getFromNamespace("mod_polybreedtools_ui", "familia")("PolyBreedTools_1")
           ),
           tabItem(
             tabName = "allomate", 
             if(isTRUE(requireNamespace("AlloMate", quietly = TRUE))) 
-              AlloMate:::mod_allomate_ui("allomate_1")
+              getFromNamespace("mod_allomate_ui", "AlloMate")("allomate_1")
           ),
           tabItem(
             tabName = "filtering", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_Filtering_ui("Filtering_1")
+              getFromNamespace("mod_Filtering_ui", "BIGapp")("Filtering_1")
           ),
           tabItem(
             tabName = "updog", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_DosageCall_ui("DosageCall_1")
+              getFromNamespace("mod_DosageCall_ui", "BIGapp")("DosageCall_1")
           ),
           tabItem(
             tabName = "dosage2vcf", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_dosage2vcf_ui("dosage2vcf_1")
+              getFromNamespace("mod_dosage2vcf_ui", "BIGapp")("dosage2vcf_1")
           ),
           tabItem(
             tabName = "pca", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_PCA_ui("PCA_1")
+              getFromNamespace("mod_PCA_ui", "BIGapp")("PCA_1")
           ),
           tabItem(
             tabName = "dapc", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_dapc_ui("dapc_1")
+              getFromNamespace("mod_dapc_ui", "BIGapp")("dapc_1")
           ),
           tabItem(
             tabName = "gwas", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_gwas_ui("gwas_1")
+              getFromNamespace("mod_gwas_ui", "BIGapp")("gwas_1")
           ),
           tabItem(
             tabName = "diversity", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_diversity_ui("diversity_1")
+              getFromNamespace("mod_diversity_ui", "BIGapp")("diversity_1")
           ),
           tabItem(
             tabName = "prediction_accuracy",
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_GSAcc_ui("GSAcc_1")
+              getFromNamespace("mod_GSAcc_ui", "BIGapp")("GSAcc_1")
           ),
           tabItem(
             tabName = "prediction", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_GS_ui("GS_1")
+              getFromNamespace("mod_GS_ui", "BIGapp")("GS_1")
           ),
           tabItem(
             tabName = "help", mod_help_ui("help_1")

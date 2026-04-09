@@ -7,6 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList includeMarkdown
+#' @importFrom utils install.packages
 mod_install_ui <- function(id) {
   ns <- NS(id)
   

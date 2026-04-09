@@ -124,7 +124,6 @@ mod_Home_server <- function(input, output, session, parent_session){
     # Locate NEWS.md via golem helper, then dev working directory fallbacks
     news_file <- app_sys("NEWS.md")
     if (!nzchar(news_file) || !file.exists(news_file)) {
-      # Try common dev-mode locations relative to package root
       candidates <- c(
         file.path(getwd(), "NEWS.md"),
         file.path(getwd(), "..", "NEWS.md"),
@@ -138,38 +137,54 @@ mod_Home_server <- function(input, output, session, parent_session){
     version_starts <- grep("^## ", lines)
     if (length(version_starts) == 0) return(NULL)
 
-    v_start <- version_starts[1]
-    v_title <- sub("^## ", "", lines[v_start])
-    v_end   <- if (length(version_starts) > 1) version_starts[2] - 1 else length(lines)
-    content <- lines[(v_start + 1):v_end]
+    # Parse up to the two most recent versions
+    n_versions <- min(2, length(version_starts))
 
-    html_parts <- character(0)
-    in_list    <- FALSE
-    for (line in content) {
-      if (grepl("^### ", line)) {
-        if (in_list) { html_parts <- c(html_parts, "</ul>"); in_list <- FALSE }
-        heading    <- sub("^### ", "", line)
-        html_parts <- c(html_parts, paste0("<h5><b>", heading, "</b></h5>"))
-      } else if (grepl("^\\* ", line)) {
-        if (!in_list) { html_parts <- c(html_parts, "<ul>"); in_list <- TRUE }
-        item       <- sub("^\\* ", "", line)
-        item       <- gsub("\\*\\*(.+?)\\*\\*", "<b>\\1</b>", item)
-        html_parts <- c(html_parts, paste0("<li>", item, "</li>"))
-      } else if (nzchar(trimws(line))) {
-        if (in_list) { html_parts <- c(html_parts, "</ul>"); in_list <- FALSE }
-        text       <- gsub("\\*\\*(.+?)\\*\\*", "<b>\\1</b>", line)
-        html_parts <- c(html_parts, paste0("<p>", text, "</p>"))
+    parse_section <- function(content) {
+      html_parts <- character(0)
+      in_list    <- FALSE
+      for (line in content) {
+        if (grepl("^### ", line)) {
+          if (in_list) { html_parts <- c(html_parts, "</ul>"); in_list <- FALSE }
+          heading    <- sub("^### ", "", line)
+          html_parts <- c(html_parts, paste0("<h5><b>", heading, "</b></h5>"))
+        } else if (grepl("^\\* ", line)) {
+          if (!in_list) { html_parts <- c(html_parts, "<ul>"); in_list <- TRUE }
+          item       <- sub("^\\* ", "", line)
+          item       <- gsub("\\*\\*(.+?)\\*\\*", "<b>\\1</b>", item)
+          html_parts <- c(html_parts, paste0("<li>", item, "</li>"))
+        } else if (nzchar(trimws(line))) {
+          if (in_list) { html_parts <- c(html_parts, "</ul>"); in_list <- FALSE }
+          text       <- gsub("\\*\\*(.+?)\\*\\*", "<b>\\1</b>", line)
+          html_parts <- c(html_parts, paste0("<p>", text, "</p>"))
+        }
       }
+      if (in_list) html_parts <- c(html_parts, "</ul>")
+      html_parts
     }
-    if (in_list) html_parts <- c(html_parts, "</ul>")
+
+    all_html <- character(0)
+    for (i in seq_len(n_versions)) {
+      v_start <- version_starts[i]
+      v_title <- sub("^## ", "", lines[v_start])
+      v_end   <- if (i < length(version_starts)) version_starts[i + 1] - 1 else length(lines)
+      content <- lines[(v_start + 1):v_end]
+
+      section_html <- parse_section(content)
+
+      if (i > 1) all_html <- c(all_html, "<hr/>")
+      all_html <- c(all_html,
+                    paste0("<h4><b>", v_title, "</b></h4>"),
+                    section_html)
+    }
 
     box(
-      title       = paste0("What's New \u2014 ", v_title),
+      title       = "What's New",
       status      = "info",
       solidHeader = FALSE,
       width       = 12,
       collapsible = TRUE,
-      HTML(paste(html_parts, collapse = "\n"))
+      HTML(paste(all_html, collapse = "\n"))
     )
   })
 

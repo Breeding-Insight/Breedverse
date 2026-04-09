@@ -1,37 +1,53 @@
 Package: Breedverse
 Title: Collection of R Shiny Packages From Breeding Insight
 Version: 0.1.0
-Authors@R: c(person(given='Breeding', 
+Authors@R: c(person(given='Cristiane', 
+                    family='Taniguti', 
+                    email = 'ctaniguti@ufl.edu', 
+                    role = c('cre', 'aut')),
+             person(given='Alexander', 
+                    family='Sandercock', 
+                    role = c('aut')),
+             person(given='Josue', 
+                    family='Chinchilla-Vargas', 
+                    role = c('aut')),
+             person(given='Arlyn', 
+                    family='Ackerman', 
+                    role = c('aut')),
+             person(given='Breeding', 
                     family='Insight', 
-                    email = 'cht47@cornell.edu', 
-                    role = c('cre', 'aut'))
+                    role = 'aut')
              )
-Description: Provides a interface for users to add modules from BIGapp, Qploidy and AlloMate packages.
-License: AGPL (>= 3)
+Description: Provides an interface for users to add modules from BIGapp, Qploidy, familia and AlloMate packages.
+License: Apache License 2.0
 Depends: R (>= 3.6.0)
 biocViews:
 Imports: 
     shiny,
-    DT,
     bs4Dash,
     config,
     golem,
     shinyWidgets,
     shinydisconnect,
-    shinyalert,
     curl,
-    httr
-Encoding: UTF-8
-URL: https://github.com/Cristianetaniguti/Qploidy
-BugReports: https://github.com/Cristianetaniguti/Qploidy/issues
-LazyData: true
-RoxygenNote: 7.3.3
+    httr,
+    utils
 Suggests: 
     covr,
     spelling,
     rmdformats,
     knitr (>= 1.10),
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    remotes,
+    Qploidy,
+    BIGapp,
+    familia,
+    AlloMate
+URL: https://github.com/Breeding-Insight/Breedverse
+BugReports: https://github.com/Breeding-Insight/Breedverse/issues
+LazyData: true
+RoxygenNote: 7.3.3
+Encoding: UTF-8
 Config/testthat/edition: 3
 Language: en-US
