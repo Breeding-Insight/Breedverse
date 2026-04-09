@@ -67,16 +67,11 @@ app_ui <- function(request) {
                       condition = "output.familiaInstalled == true",
                       tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ancestry (R/familia)"),
                       menuItem(
-                        "Unsupervised",
-                        icon = icon("shuffle"),
+                        "familia",
+                        icon = icon("seedling"),
                         startExpanded = FALSE,
-                        menuSubItem("SNMF", tabName = "snmf", icon = icon("list-ol"))
-                      ),
-                      menuItem(
-                        "Supervised",
-                        icon = icon("diagram-project"),
-                        startExpanded = FALSE,
-                        menuSubItem("PolyBreedTools", tabName = "polybreedtools", icon = icon("share-from-square"))
+                        menuSubItem("Supervised", tabName = "snmf", icon = icon("list-ol")),
+                        menuSubItem("Unsupervised", tabName = "polybreedtools", icon = icon("share-from-square"))
                       )
                     ),
                     
@@ -87,31 +82,22 @@ app_ui <- function(request) {
                     ),
                     
                     conditionalPanel(
-                      condition = "output.BIGappInstalled == true",      
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
-                    menuItem("Convert to VCF", tabName = "dosage2vcf", icon = icon("share-from-square")),
-                    menuItem("Dosage Calling", tabName = "updog", icon = icon("list-ol")),
-                    menuItem("VCF Filtering", tabName = "filtering", icon = icon("filter")),
-                    
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Summary Metrics"),
-                    menuItem("Genomic Diversity", tabName = "diversity", icon = icon("chart-pie")),
-                    
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Population Structure"),
-                    menuItem("PCA", tabName = "pca", icon = icon("chart-simple")),
-                    menuItem("DAPC", tabName = "dapc", icon = icon("circle-nodes")),
-                    
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "GWAS"),
-                    menuItem("GWASpoly", tabName = "gwas", icon = icon("think-peaks")),
-                    
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genomic Selection"),
-                    menuItem(
-                      span("Predictive Ability"),
-                      tabName = "prediction_accuracy",
-                      icon = icon("right-left")),
-                    menuItem(
-                      span("Genomic Prediction"),
-                      tabName = "prediction",
-                      icon = icon("angles-right"))
+                      condition = "output.BIGappInstalled == true",
+                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
+                      menuItem(
+                        "BIGapp",
+                        icon = icon("dna"),
+                        startExpanded = FALSE,
+                        menuSubItem("Convert to VCF", tabName = "dosage2vcf", icon = icon("share-from-square")),
+                        menuSubItem("Dosage Calling", tabName = "updog", icon = icon("list-ol")),
+                        menuSubItem("VCF Filtering", tabName = "filtering", icon = icon("filter")),
+                        menuSubItem("Genomic Diversity", tabName = "diversity", icon = icon("chart-pie")),
+                        menuSubItem("PCA", tabName = "pca", icon = icon("chart-simple")),
+                        menuSubItem("DAPC", tabName = "dapc", icon = icon("circle-nodes")),
+                        menuSubItem("GWASpoly", tabName = "gwas", icon = icon("think-peaks")),
+                        menuSubItem("Predictive Ability", tabName = "prediction_accuracy", icon = icon("right-left")),
+                        menuSubItem("Genomic Prediction", tabName = "prediction", icon = icon("angles-right"))
+                      )
                     ),
                     
                     tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Information"),

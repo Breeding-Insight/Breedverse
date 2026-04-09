@@ -483,50 +483,57 @@ mod_install_server <- function(input, output, session, parent_session){
   # --- Qploidy installation ----------------------------------------------
   observeEvent(input$install_qploidy, {
     err_msg <- NULL
-    ok <- FALSE
-    
-    showNotification("Installing Qploidy...", type = "message")
-    
-    # clear previous log
+    ok      <- FALSE
+    log_lines <- character(0)
+
     output$install_log_qploidy <- renderUI(NULL)
-    
-    tryCatch({
-      if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes")
+
+    withProgress(message = "Installing Qploidy", value = 0, {
+
+      capture_msg <- function(m) {
+        log_lines <<- c(log_lines, conditionMessage(m))
+        output$install_log_qploidy <- renderUI(
+          pre(style = "font-size:11px; white-space:pre-wrap;",
+              paste(log_lines, collapse = ""))
+        )
+        invokeRestart("muffleMessage")
       }
-      
-      remotes::install_github(
-        "Cristianetaniguti/Qploidy",
-        upgrade = "never",
-        quiet = TRUE
+
+      withCallingHandlers(
+        tryCatch({
+          if (!requireNamespace("remotes", quietly = TRUE)) {
+            incProgress(0.05, detail = "Installing remotes...")
+            install.packages("remotes")
+          }
+          incProgress(0.1, detail = "Contacting GitHub...")
+          remotes::install_github(
+            "Cristianetaniguti/Qploidy",
+            upgrade = "never",
+            quiet   = FALSE
+          )
+          incProgress(0.9, detail = "Verifying...")
+          ok <- requireNamespace("Qploidy", quietly = TRUE)
+          incProgress(1,   detail = "Done")
+        }, error = function(e) {
+          err_msg <<- conditionMessage(e)
+        }),
+        message = capture_msg
       )
-      
-      ok <- requireNamespace("Qploidy", quietly = TRUE)
-    }, error = function(e) {
-      err_msg <<- conditionMessage(e)
     })
-    
+
     if (ok) {
       qploidy_installed(TRUE)
-      showNotification(
-        "Qploidy installed successfully.",
-        type = "message",
-        duration = 8
-      )
+      showNotification("Qploidy installed successfully.", type = "message", duration = 8)
       output$install_log_qploidy <- renderUI(HTML(
-        'Qploidy installation completed. <b style="color:#d9534f;">Restart</b> the app to load Qploidy features.'
+        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
+               'Qploidy installation completed. <b style="color:#d9534f;">Restart</b> the app to load Qploidy features.')
       ))
     } else {
-      showNotification(
-        "Qploidy installation failed. See details below.",
-        type = "error",
-        duration = NULL
-      )
+      showNotification("Qploidy installation failed. See log below.", type = "error", duration = NULL)
       output$install_log_qploidy <- renderUI(
-        if (is.null(err_msg))
-          "Unknown error (check server permissions/logs)."
-        else
-          err_msg
+        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
+              paste(c(log_lines, err_msg), collapse = ""))
       )
     }
   })
@@ -534,50 +541,57 @@ mod_install_server <- function(input, output, session, parent_session){
   # --- Familia installation ----------------------------------------------
   observeEvent(input$install_familia, {
     err_msg <- NULL
-    ok <- FALSE
-    
-    showNotification("Installing familia...", type = "message")
-    
-    # clear previous log
+    ok      <- FALSE
+    log_lines <- character(0)
+
     output$install_log_familia <- renderUI(NULL)
-    
-    tryCatch({
-      if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes")
+
+    withProgress(message = "Installing familia", value = 0, {
+
+      capture_msg <- function(m) {
+        log_lines <<- c(log_lines, conditionMessage(m))
+        output$install_log_familia <- renderUI(
+          pre(style = "font-size:11px; white-space:pre-wrap;",
+              paste(log_lines, collapse = ""))
+        )
+        invokeRestart("muffleMessage")
       }
-      
-      remotes::install_github(
-        "Breeding-Insight/familia",
-        upgrade = "never",
-        quiet = TRUE
+
+      withCallingHandlers(
+        tryCatch({
+          if (!requireNamespace("remotes", quietly = TRUE)) {
+            incProgress(0.05, detail = "Installing remotes...")
+            install.packages("remotes")
+          }
+          incProgress(0.1, detail = "Contacting GitHub...")
+          remotes::install_github(
+            "Breeding-Insight/familia",
+            upgrade = "never",
+            quiet   = FALSE
+          )
+          incProgress(0.9, detail = "Verifying...")
+          ok <- requireNamespace("familia", quietly = TRUE)
+          incProgress(1,   detail = "Done")
+        }, error = function(e) {
+          err_msg <<- conditionMessage(e)
+        }),
+        message = capture_msg
       )
-      
-      ok <- requireNamespace("familia", quietly = TRUE)
-    }, error = function(e) {
-      err_msg <<- conditionMessage(e)
     })
-    
+
     if (ok) {
       familia_installed(TRUE)
-      showNotification(
-        "familia installed successfully.",
-        type = "message",
-        duration = 8
-      )
+      showNotification("familia installed successfully.", type = "message", duration = 8)
       output$install_log_familia <- renderUI(HTML(
-        'familia installation completed. <b style="color:#d9534f;">Restart</b> the app to load familia features.'
+        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
+               'familia installation completed. <b style="color:#d9534f;">Restart</b> the app to load familia features.')
       ))
     } else {
-      showNotification(
-        "familia installation failed. See details below.",
-        type = "error",
-        duration = NULL
-      )
+      showNotification("familia installation failed. See log below.", type = "error", duration = NULL)
       output$install_log_familia <- renderUI(
-        if (is.null(err_msg))
-          "Unknown error (check server permissions/logs)."
-        else
-          err_msg
+        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
+              paste(c(log_lines, err_msg), collapse = ""))
       )
     }
   })
@@ -585,51 +599,58 @@ mod_install_server <- function(input, output, session, parent_session){
   # --- AlloMate installation ----------------------------------------------
   observeEvent(input$install_allomate, {
     err_msg <- NULL
-    ok <- FALSE
-    
-    showNotification("Installing AlloMate...", type = "message")
-    
-    # clear previous log
+    ok      <- FALSE
+    log_lines <- character(0)
+
     output$install_log_allomate <- renderUI(NULL)
-    
-    tryCatch({
-      if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes")
+
+    withProgress(message = "Installing AlloMate", value = 0, {
+
+      capture_msg <- function(m) {
+        log_lines <<- c(log_lines, conditionMessage(m))
+        output$install_log_allomate <- renderUI(
+          pre(style = "font-size:11px; white-space:pre-wrap;",
+              paste(log_lines, collapse = ""))
+        )
+        invokeRestart("muffleMessage")
       }
-      
-      remotes::install_github(
-        "Breeding-Insight/AlloMate",
-        upgrade = "never",
-        ref="development",
-        quiet = TRUE
+
+      withCallingHandlers(
+        tryCatch({
+          if (!requireNamespace("remotes", quietly = TRUE)) {
+            incProgress(0.05, detail = "Installing remotes...")
+            install.packages("remotes")
+          }
+          incProgress(0.1, detail = "Contacting GitHub...")
+          remotes::install_github(
+            "Breeding-Insight/AlloMate",
+            upgrade = "never",
+            ref     = "development",
+            quiet   = FALSE
+          )
+          incProgress(0.9, detail = "Verifying...")
+          ok <- requireNamespace("AlloMate", quietly = TRUE)
+          incProgress(1,   detail = "Done")
+        }, error = function(e) {
+          err_msg <<- conditionMessage(e)
+        }),
+        message = capture_msg
       )
-      
-      ok <- requireNamespace("AlloMate", quietly = TRUE)
-    }, error = function(e) {
-      err_msg <<- conditionMessage(e)
     })
-    
+
     if (ok) {
       allomate_installed(TRUE)
-      showNotification(
-        "AlloMate installed successfully.",
-        type = "message",
-        duration = 8
-      )
+      showNotification("AlloMate installed successfully.", type = "message", duration = 8)
       output$install_log_allomate <- renderUI(HTML(
-        'AlloMate installation completed. <b style="color:#d9534f;">Restart</b> the app to load AlloMate features.'
+        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
+               'AlloMate installation completed. <b style="color:#d9534f;">Restart</b> the app to load AlloMate features.')
       ))
     } else {
-      showNotification(
-        "AlloMate installation failed. See details below.",
-        type = "error",
-        duration = NULL
-      )
+      showNotification("AlloMate installation failed. See log below.", type = "error", duration = NULL)
       output$install_log_allomate <- renderUI(
-        if (is.null(err_msg))
-          "Unknown error (check server permissions/logs)."
-        else
-          err_msg
+        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
+              paste(c(log_lines, err_msg), collapse = ""))
       )
     }
   })
@@ -637,50 +658,57 @@ mod_install_server <- function(input, output, session, parent_session){
   # --- BIGapp installation -----------------------------------------------
   observeEvent(input$install_bigapp, {
     err_msg <- NULL
-    ok <- FALSE
-    
-    showNotification("Installing BIGapp...", type = "message")
-    
-    # clear previous log
+    ok      <- FALSE
+    log_lines <- character(0)
+
     output$install_log_BIGapp <- renderUI(NULL)
-    
-    tryCatch({
-      if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes")
+
+    withProgress(message = "Installing BIGapp", value = 0, {
+
+      capture_msg <- function(m) {
+        log_lines <<- c(log_lines, conditionMessage(m))
+        output$install_log_BIGapp <- renderUI(
+          pre(style = "font-size:11px; white-space:pre-wrap;",
+              paste(log_lines, collapse = ""))
+        )
+        invokeRestart("muffleMessage")
       }
-      
-      remotes::install_github(
-        "Breeding-Insight/BIGapp",
-        upgrade = "never",
-        quiet = TRUE
+
+      withCallingHandlers(
+        tryCatch({
+          if (!requireNamespace("remotes", quietly = TRUE)) {
+            incProgress(0.05, detail = "Installing remotes...")
+            install.packages("remotes")
+          }
+          incProgress(0.1, detail = "Contacting GitHub...")
+          remotes::install_github(
+            "Breeding-Insight/BIGapp",
+            upgrade = "never",
+            quiet   = FALSE
+          )
+          incProgress(0.9, detail = "Verifying...")
+          ok <- requireNamespace("BIGapp", quietly = TRUE)
+          incProgress(1,   detail = "Done")
+        }, error = function(e) {
+          err_msg <<- conditionMessage(e)
+        }),
+        message = capture_msg
       )
-      
-      ok <- requireNamespace("BIGapp", quietly = TRUE)
-    }, error = function(e) {
-      err_msg <<- conditionMessage(e)
     })
-    
+
     if (ok) {
       bigapp_installed(TRUE)
-      showNotification(
-        "BIGapp installed successfully.",
-        type = "message",
-        duration = 8
-      )
+      showNotification("BIGapp installed successfully.", type = "message", duration = 8)
       output$install_log_BIGapp <- renderUI(HTML(
-        'BIGapp installation completed. <b style="color:#d9534f;">Restart</b> the app to load BIGapp features.'
+        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
+               'BIGapp installation completed. <b style="color:#d9534f;">Restart</b> the app to load BIGapp features.')
       ))
     } else {
-      showNotification(
-        "BIGapp installation failed. See details below.",
-        type = "error",
-        duration = NULL
-      )
+      showNotification("BIGapp installation failed. See log below.", type = "error", duration = NULL)
       output$install_log_BIGapp <- renderUI(
-        if (is.null(err_msg))
-          "Unknown error (check server permissions/logs)."
-        else
-          err_msg
+        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
+              paste(c(log_lines, err_msg), collapse = ""))
       )
     }
   })
