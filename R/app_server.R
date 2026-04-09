@@ -36,7 +36,12 @@ app_server <- function(input, output, session) {
   outputOptions(output, "allomateInstalled", suspendWhenHidden = FALSE)
 
   ## Modules
-  
+
+  ## Home Module
+  callModule(mod_Home_server,
+             "Home_1",
+             parent_session = session)
+
   ## Install Module
   callModule(mod_install_server,
              "install_1",

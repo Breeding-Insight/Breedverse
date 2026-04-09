@@ -23,8 +23,19 @@ mod_Home_ui <- function(id){
                  title = "Breedverse", status = "info", solidHeader = FALSE, width = 12, collapsible = FALSE,
                  HTML(
                    paste0(
-                     "<p><b>About Breedverse.</b> This is a Demo :) </p>",
-                     "</ul>"
+                     "<p><b>About Breedverse.</b> Breedverse is a user-friendly, easy-to-install interface ",
+                     "that brings together a curated catalog of applications developed by ",
+                     "<b>Breeding Insight</b> to support a wide range of breeding and data analysis tasks.</p>",
+                     "<p>Getting started is simple:</p>",
+                     "<ul>",
+                     "  <li>Navigate to the <b>Install</b> tab to browse the available features.</li>",
+                     "  <li>Select the tools that match your needs &mdash; features are organized by the individual apps modules and activated based on user demand.</li>",
+                     "  <li>Once installed, all enabled features will appear in the <b>left navigation menu</b>, ready to use.</li>",
+                     "</ul>",
+                     "<p>Whether you are working with genomic data, phenotypic records, or population analyses, ",
+                     "Breedverse provides a seamless environment to access the right tools without complex setup.</p>",
+                     "<p>For detailed information on <b>input files</b>, <b>parameters</b>, and <b>outputs</b> for each tool, ",
+                     "refer to the <b>Help</b> pages available at the bottom of the left navigation menu.</p>"
                    )
                  ),
                  style = "overflow-y: auto; height: 500px"
@@ -91,6 +102,11 @@ mod_Home_ui <- function(id){
                  style = "text-decoration: none; color: inherit;"  # Optional: removes underline and retains original color
                )
         )
+      ),
+      fluidRow(
+        column(width = 8,
+               uiOutput(ns("news_box"))
+        )
       )
     )
   )
@@ -103,6 +119,59 @@ mod_Home_ui <- function(id){
 mod_Home_server <- function(input, output, session, parent_session){
 
   ns <- session$ns
+
+  output$news_box <- renderUI({
+    # Locate NEWS.md via golem helper, then dev working directory fallbacks
+    news_file <- app_sys("NEWS.md")
+    if (!nzchar(news_file) || !file.exists(news_file)) {
+      # Try common dev-mode locations relative to package root
+      candidates <- c(
+        file.path(getwd(), "NEWS.md"),
+        file.path(getwd(), "..", "NEWS.md"),
+        file.path(getwd(), "..", "..", "NEWS.md")
+      )
+      news_file <- Filter(file.exists, candidates)[1]
+      if (is.null(news_file) || is.na(news_file)) return(NULL)
+    }
+
+    lines <- readLines(news_file, warn = FALSE)
+    version_starts <- grep("^## ", lines)
+    if (length(version_starts) == 0) return(NULL)
+
+    v_start <- version_starts[1]
+    v_title <- sub("^## ", "", lines[v_start])
+    v_end   <- if (length(version_starts) > 1) version_starts[2] - 1 else length(lines)
+    content <- lines[(v_start + 1):v_end]
+
+    html_parts <- character(0)
+    in_list    <- FALSE
+    for (line in content) {
+      if (grepl("^### ", line)) {
+        if (in_list) { html_parts <- c(html_parts, "</ul>"); in_list <- FALSE }
+        heading    <- sub("^### ", "", line)
+        html_parts <- c(html_parts, paste0("<h5><b>", heading, "</b></h5>"))
+      } else if (grepl("^\\* ", line)) {
+        if (!in_list) { html_parts <- c(html_parts, "<ul>"); in_list <- TRUE }
+        item       <- sub("^\\* ", "", line)
+        item       <- gsub("\\*\\*(.+?)\\*\\*", "<b>\\1</b>", item)
+        html_parts <- c(html_parts, paste0("<li>", item, "</li>"))
+      } else if (nzchar(trimws(line))) {
+        if (in_list) { html_parts <- c(html_parts, "</ul>"); in_list <- FALSE }
+        text       <- gsub("\\*\\*(.+?)\\*\\*", "<b>\\1</b>", line)
+        html_parts <- c(html_parts, paste0("<p>", text, "</p>"))
+      }
+    }
+    if (in_list) html_parts <- c(html_parts, "</ul>")
+
+    box(
+      title       = paste0("What's New \u2014 ", v_title),
+      status      = "info",
+      solidHeader = FALSE,
+      width       = 12,
+      collapsible = TRUE,
+      HTML(paste(html_parts, collapse = "\n"))
+    )
+  })
 
 }
 

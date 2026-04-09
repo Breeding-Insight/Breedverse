@@ -2,7 +2,8 @@
 
 <!-- badges: start -->
 [![Development](https://img.shields.io/badge/development-active-blue.svg)](https://img.shields.io/badge/development-active-blue.svg)
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![GitHub License](https://img.shields.io/github/license/Breeding-Insight/breedverse)
+
 <!-- badges: end -->
 
 **Breedverse** is a modular R Shiny application developed by [Breeding Insight](https://www.breedinginsight.org) at University of Florida (UF/IFAS). It serves as a unified hub that lets users install and launch specialized breeding analysis tools — all from a single interface, with no command-line setup required.
@@ -38,7 +39,7 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 ### Qploidy — Ploidy Estimation
 
-> GitHub: [`Breeding-Insight/QploidyApp`](https://github.com/Breeding-Insight/QploidyApp)
+> GitHub: [`Cristianetaniguti/Qploidy`](https://github.com/Cristianetaniguti/Qploidy)
 
 | Feature | Description |
 |---|---|
@@ -101,8 +102,4 @@ Modules are installed from within the app via the **Install Modules** page. Each
 - Website: https://www.breedinginsight.org
 - Contact: https://breedinginsight.org/contact-us/
 
----
 
-## License
-
-AGPL (≥ 3)

@@ -95,6 +95,8 @@ mod_install_ui <- function(id) {
                 )),
                 span("Installed", class = "install-status-badge install-status-ok")
               ),
+              p(tags$a(href = "https://github.com/Cristianetaniguti/Qploidy", target = "_blank",
+                       icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -127,6 +129,8 @@ mod_install_ui <- function(id) {
                 )),
                 span("Not installed", class = "install-status-badge install-status-missing")
               ),
+              p(tags$a(href = "https://github.com/Cristianetaniguti/Qploidy", target = "_blank",
+                       icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -138,7 +142,6 @@ mod_install_ui <- function(id) {
                 br()
               ),
               p("Install the Qploidy package to enable ploidy estimation workflows."),
-              
               div(
                 style = "margin-top: 12px; margin-bottom: 10px;",
                 actionButton(
@@ -183,6 +186,8 @@ mod_install_ui <- function(id) {
                 )),
                 span("Installed", class = "install-status-badge install-status-ok")
               ),
+              p(tags$a(href = "https://github.com/Breeding-Insight/BIGapp", target = "_blank",
+                       icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -216,6 +221,8 @@ mod_install_ui <- function(id) {
                 )),
                 span("Not installed", class = "install-status-badge install-status-missing")
               ),
+              p(tags$a(href = "https://github.com/Breeding-Insight/BIGapp", target = "_blank",
+                       icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -274,6 +281,8 @@ mod_install_ui <- function(id) {
                 )),
                 span("Installed", class = "install-status-badge install-status-ok")
               ),
+              p(tags$a(href = "https://github.com/Breeding-Insight/familia", target = "_blank",
+                       icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -306,6 +315,8 @@ mod_install_ui <- function(id) {
                 )),
                 span("Not installed", class = "install-status-badge install-status-missing")
               ),
+              p(tags$a(href = "https://github.com/Breeding-Insight/familia", target = "_blank",
+                       icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -316,7 +327,6 @@ mod_install_ui <- function(id) {
                 br()
               ),
               p("Install the familia package to enable ancestry estimation workflows."),
-              
               div(
                 style = "margin-top: 12px; margin-bottom: 10px;",
                 actionButton(
@@ -361,6 +371,8 @@ mod_install_ui <- function(id) {
                 )),
                 span("Installed", class = "install-status-badge install-status-ok")
               ),
+              p(tags$a(href = "https://github.com/Breeding-Insight/AlloMate", target = "_blank",
+                       icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -393,6 +405,8 @@ mod_install_ui <- function(id) {
                 )),
                 span("Not installed", class = "install-status-badge install-status-missing")
               ),
+              p(tags$a(href = "https://github.com/Breeding-Insight/AlloMate", target = "_blank",
+                       icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -404,7 +418,6 @@ mod_install_ui <- function(id) {
                 br()
               ),
               p("Install the AlloMate package to enable mating estimation workflows."),
-              
               div(
                 style = "margin-top: 12px; margin-bottom: 10px;",
                 actionButton(
