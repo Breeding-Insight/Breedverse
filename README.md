@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![Development](https://img.shields.io/badge/development-active-blue.svg)](https://img.shields.io/badge/development-active-blue.svg)
-![GitHub License](https://img.shields.io/github/license/Breeding-Insight/breedverse)
+![GitHub License](https://img.shields.io/github/license/Breeding-Insight/Breedverse)
 
 <!-- badges: end -->
 
