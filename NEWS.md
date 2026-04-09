@@ -9,6 +9,7 @@
 * Update authors, license and description
 * Adding `library()` inside the conditionals to proper recruite packages internal functions
 * Fix license badge
+* Add github actions
 
 ## breedverse 0.1.0
 

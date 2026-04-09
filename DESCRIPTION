@@ -1,6 +1,6 @@
 Package: Breedverse
 Title: Collection of R Shiny Packages From Breeding Insight
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(person(given='Cristiane', 
                     family='Taniguti', 
                     email = 'ctaniguti@ufl.edu', 
