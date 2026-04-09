@@ -3,6 +3,7 @@
 <!-- badges: start -->
 [![Development](https://img.shields.io/badge/development-active-blue.svg)](https://github.com/Breeding-Insight/Breedverse)
 [![GitHub License](https://img.shields.io/github/license/Breeding-Insight/Breedverse)](https://github.com/Breeding-Insight/Breedverse/blob/main/LICENSE)
+[![R-CMD-check](https://github.com/Breeding-Insight/Breedverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Breeding-Insight/Breedverse/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
 
