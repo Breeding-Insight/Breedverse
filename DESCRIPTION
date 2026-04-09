@@ -1,6 +1,6 @@
-Package: BIverse
-Title: Collection of packages created by Breeding Insight
-Version: 0.0.1
+Package: Breedverse
+Title: Collection of R Shiny Packages From Breeding Insight
+Version: 0.1.0
 Authors@R: c(person(given='Breeding', 
                     family='Insight', 
                     email = 'cht47@cornell.edu', 
