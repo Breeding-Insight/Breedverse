@@ -44,6 +44,11 @@ Suggests:
     BIGapp,
     familia,
     AlloMate
+Remotes:
+    Cristianetaniguti/Qploidy,
+    Breeding-Insight/BIGapp,
+    Breeding-Insight/familia,
+    Breeding-Insight/AlloMate@development
 URL: https://github.com/Breeding-Insight/Breedverse
 BugReports: https://github.com/Breeding-Insight/Breedverse/issues
 LazyData: true
