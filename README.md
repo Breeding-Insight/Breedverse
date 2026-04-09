@@ -1,8 +1,9 @@
 # Breedverse
 
 <!-- badges: start -->
-[![Development](https://img.shields.io/badge/development-active-blue.svg)](https://img.shields.io/badge/development-active-blue.svg)
-![GitHub License](https://img.shields.io/github/license/Breeding-Insight/Breedverse)
+[![Development](https://img.shields.io/badge/development-active-blue.svg)](https://github.com/Breeding-Insight/Breedverse)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/Breeding-Insight/Breedverse/blob/main/LICENSE)
+[![R-CMD-check](https://github.com/Breeding-Insight/Breedverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Breeding-Insight/Breedverse/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
 

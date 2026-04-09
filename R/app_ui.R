@@ -6,6 +6,7 @@
 #' @importFrom bs4Dash bs4Badge bs4DashSidebar bs4DashNavbar bs4DashPage sidebarMenu menuItem menuSubItem dashboardBody tabItems tabItem box dashboardFooter
 #' @importFrom shinydisconnect disconnectMessage
 #' @import shinyWidgets
+#' @importFrom utils getFromNamespace
 #'
 #' @noRd
 app_ui <- function(request) {
@@ -67,16 +68,11 @@ app_ui <- function(request) {
                       condition = "output.familiaInstalled == true",
                       tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ancestry (R/familia)"),
                       menuItem(
-                        "Unsupervised",
-                        icon = icon("shuffle"),
+                        "familia",
+                        icon = icon("seedling"),
                         startExpanded = FALSE,
-                        menuSubItem("SNMF", tabName = "snmf", icon = icon("list-ol"))
-                      ),
-                      menuItem(
-                        "Supervised",
-                        icon = icon("diagram-project"),
-                        startExpanded = FALSE,
-                        menuSubItem("PolyBreedTools", tabName = "polybreedtools", icon = icon("share-from-square"))
+                        menuSubItem("Supervised", tabName = "snmf", icon = icon("list-ol")),
+                        menuSubItem("Unsupervised", tabName = "polybreedtools", icon = icon("share-from-square"))
                       )
                     ),
                     
@@ -87,31 +83,22 @@ app_ui <- function(request) {
                     ),
                     
                     conditionalPanel(
-                      condition = "output.BIGappInstalled == true",      
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
-                    menuItem("Convert to VCF", tabName = "dosage2vcf", icon = icon("share-from-square")),
-                    menuItem("Dosage Calling", tabName = "updog", icon = icon("list-ol")),
-                    menuItem("VCF Filtering", tabName = "filtering", icon = icon("filter")),
-                    
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Summary Metrics"),
-                    menuItem("Genomic Diversity", tabName = "diversity", icon = icon("chart-pie")),
-                    
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Population Structure"),
-                    menuItem("PCA", tabName = "pca", icon = icon("chart-simple")),
-                    menuItem("DAPC", tabName = "dapc", icon = icon("circle-nodes")),
-                    
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "GWAS"),
-                    menuItem("GWASpoly", tabName = "gwas", icon = icon("think-peaks")),
-                    
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genomic Selection"),
-                    menuItem(
-                      span("Predictive Ability"),
-                      tabName = "prediction_accuracy",
-                      icon = icon("right-left")),
-                    menuItem(
-                      span("Genomic Prediction"),
-                      tabName = "prediction",
-                      icon = icon("angles-right"))
+                      condition = "output.BIGappInstalled == true",
+                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
+                      menuItem(
+                        "BIGapp",
+                        icon = icon("dna"),
+                        startExpanded = FALSE,
+                        menuSubItem("Convert to VCF", tabName = "dosage2vcf", icon = icon("share-from-square")),
+                        menuSubItem("Dosage Calling", tabName = "updog", icon = icon("list-ol")),
+                        menuSubItem("VCF Filtering", tabName = "filtering", icon = icon("filter")),
+                        menuSubItem("Genomic Diversity", tabName = "diversity", icon = icon("chart-pie")),
+                        menuSubItem("PCA", tabName = "pca", icon = icon("chart-simple")),
+                        menuSubItem("DAPC", tabName = "dapc", icon = icon("circle-nodes")),
+                        menuSubItem("GWASpoly", tabName = "gwas", icon = icon("think-peaks")),
+                        menuSubItem("Predictive Ability", tabName = "prediction_accuracy", icon = icon("right-left")),
+                        menuSubItem("Genomic Prediction", tabName = "prediction", icon = icon("angles-right"))
+                      )
                     ),
                     
                     tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Information"),
@@ -170,67 +157,67 @@ app_ui <- function(request) {
           tabItem(
             tabName = "qploidy", 
             if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) 
-              Qploidy:::mod_qploidy_ui("qploidy_1")
+              getFromNamespace("mod_qploidy_ui", "Qploidy")("qploidy_1")
           ),
           tabItem(
             tabName = "snmf", 
             if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
-              familia:::mod_SNMF_ui("SNMF_1")
+              getFromNamespace("mod_SNMF_ui", "familia")("SNMF_1")
           ),
           tabItem(
             tabName = "polybreedtools", 
             if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
-              familia:::mod_polybreedtools_ui("PolyBreedTools_1")
+              getFromNamespace("mod_polybreedtools_ui", "familia")("PolyBreedTools_1")
           ),
           tabItem(
             tabName = "allomate", 
             if(isTRUE(requireNamespace("AlloMate", quietly = TRUE))) 
-              AlloMate:::mod_allomate_ui("allomate_1")
+              getFromNamespace("mod_allomate_ui", "AlloMate")("allomate_1")
           ),
           tabItem(
             tabName = "filtering", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_Filtering_ui("Filtering_1")
+              getFromNamespace("mod_Filtering_ui", "BIGapp")("Filtering_1")
           ),
           tabItem(
             tabName = "updog", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_DosageCall_ui("DosageCall_1")
+              getFromNamespace("mod_DosageCall_ui", "BIGapp")("DosageCall_1")
           ),
           tabItem(
             tabName = "dosage2vcf", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_dosage2vcf_ui("dosage2vcf_1")
+              getFromNamespace("mod_dosage2vcf_ui", "BIGapp")("dosage2vcf_1")
           ),
           tabItem(
             tabName = "pca", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_PCA_ui("PCA_1")
+              getFromNamespace("mod_PCA_ui", "BIGapp")("PCA_1")
           ),
           tabItem(
             tabName = "dapc", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_dapc_ui("dapc_1")
+              getFromNamespace("mod_dapc_ui", "BIGapp")("dapc_1")
           ),
           tabItem(
             tabName = "gwas", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_gwas_ui("gwas_1")
+              getFromNamespace("mod_gwas_ui", "BIGapp")("gwas_1")
           ),
           tabItem(
             tabName = "diversity", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_diversity_ui("diversity_1")
+              getFromNamespace("mod_diversity_ui", "BIGapp")("diversity_1")
           ),
           tabItem(
             tabName = "prediction_accuracy",
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_GSAcc_ui("GSAcc_1")
+              getFromNamespace("mod_GSAcc_ui", "BIGapp")("GSAcc_1")
           ),
           tabItem(
             tabName = "prediction", 
             if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
-              BIGapp:::mod_GS_ui("GS_1")
+              getFromNamespace("mod_GS_ui", "BIGapp")("GS_1")
           ),
           tabItem(
             tabName = "help", mod_help_ui("help_1")

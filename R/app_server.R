@@ -5,6 +5,7 @@
 #' @import shiny
 #' @importFrom httr GET content status_code
 #' @importFrom curl new_handle curl_fetch_memory
+#' @importFrom utils getFromNamespace installed.packages packageVersion
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
@@ -49,7 +50,8 @@ app_server <- function(input, output, session) {
   
   ## Qploidy
   if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) {
-    callModule(Qploidy:::mod_qploidy_server,
+    do.call("library", list("Qploidy"))
+    callModule(getFromNamespace("mod_qploidy_server", "Qploidy"),
                "qploidy_1",
                parent_session = session)
   } 
@@ -57,28 +59,29 @@ app_server <- function(input, output, session) {
   ## BIGapp
   
   if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
-    callModule(BIGapp:::mod_DosageCall_server,
+    do.call("library", list("BIGapp"))
+    callModule(getFromNamespace("mod_DosageCall_server", "BIGapp"),
                "DosageCall_1",
                parent_session = session)
-    callModule(BIGapp:::mod_dosage2vcf_server,
+    callModule(getFromNamespace("mod_dosage2vcf_server", "BIGapp"),
                "dosage2vcf_1",
                parent_session = session)
-    callModule(BIGapp:::mod_PCA_server,
+    callModule(getFromNamespace("mod_PCA_server", "BIGapp"),
                "PCA_1",
                parent_session = session)
-    callModule(BIGapp:::mod_dapc_server,
+    callModule(getFromNamespace("mod_dapc_server", "BIGapp"),
                "dapc_1",
                parent_session = session)
-    callModule(BIGapp:::mod_gwas_server,
+    callModule(getFromNamespace("mod_gwas_server", "BIGapp"),
                "gwas_1",
                parent_session = session)
-    callModule(BIGapp:::mod_diversity_server,
+    callModule(getFromNamespace("mod_diversity_server", "BIGapp"),
                "diversity_1",
                parent_session = session)
-    callModule(BIGapp:::mod_GSAcc_server,
+    callModule(getFromNamespace("mod_GSAcc_server", "BIGapp"),
                "GSAcc_1",
                parent_session = session)
-    callModule(BIGapp:::mod_GS_server,
+    callModule(getFromNamespace("mod_GS_server", "BIGapp"),
                "GS_1",
                parent_session = session)
   }
@@ -86,17 +89,19 @@ app_server <- function(input, output, session) {
   ##familia
   
   if(isTRUE(requireNamespace("familia", quietly = TRUE))) {
-    callModule(familia:::mod_SNMF_server,
+    do.call("library", list("familia"))
+    callModule(getFromNamespace("mod_SNMF_server", "familia"),
                "SNMF_1",
                parent_session = session)
-    callModule(familia:::mod_polybreedtools_server,
+    callModule(getFromNamespace("mod_polybreedtools_server", "familia"),
                "PolyBreedTools_1",
                parent_session = session)
   }
   
   ## AlloMate
   if(isTRUE(requireNamespace("AlloMate", quietly = TRUE))) {
-    AlloMate:::mod_allomate_server(
+    do.call("library", list("AlloMate"))
+    getFromNamespace("mod_allomate_server", "AlloMate")(
       "allomate_1",
       parent_session = session
     )
