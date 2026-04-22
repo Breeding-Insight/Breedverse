@@ -1,5 +1,9 @@
 # breedverse NEWS
 
+## breedverse 0.3.0
+
+* Add GenoBrew
+
 ## breedverse 0.2.0
 
 * Collapse packages modules into a single collapsible menuItem in the left side menu

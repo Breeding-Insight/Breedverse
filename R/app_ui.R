@@ -57,13 +57,13 @@ app_ui <- function(request) {
                     tags$li(class = "header", style = "color: grey; margin-top: 10px; margin-bottom: 10px; padding-left: 15px;", "Menu"),
                     menuItem("Home", tabName = "welcome", icon = icon("house"),startExpanded = FALSE),
                     menuItem("Install modules", tabName = "install", icon = icon("share-from-square")),
-                    
+
                     conditionalPanel(
                       condition = "output.qploidyInstalled == true",
                       tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ploidy Estimation"),
                       menuItem("Qploidy", tabName = "qploidy", icon = icon("dna")),
                     ),
-                    
+
                     conditionalPanel(
                       condition = "output.familiaInstalled == true",
                       tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ancestry (R/familia)"),
@@ -75,13 +75,13 @@ app_ui <- function(request) {
                         menuSubItem("Unsupervised", tabName = "polybreedtools", icon = icon("share-from-square"))
                       )
                     ),
-                    
+
                     conditionalPanel(
                       condition = "output.allomateInstalled == true",
                       tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Mating Estimation (R/AlloMate)"),
                       menuItem("AlloMate", tabName = "allomate", icon = icon("diagram-project"))
                     ),
-                    
+
                     conditionalPanel(
                       condition = "output.BIGappInstalled == true",
                       tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
@@ -100,7 +100,18 @@ app_ui <- function(request) {
                         menuSubItem("Genomic Prediction", tabName = "prediction", icon = icon("angles-right"))
                       )
                     ),
-                    
+                    conditionalPanel(
+                      condition = "output.genobrewInstalled == true",
+                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Marker Panel Test &\n CNV Profiles"),
+                      menuItem(
+                        "GenoBrew",
+                        icon = icon("dna"),
+                        startExpanded = FALSE,
+                        menuSubItem("Select Markers", tabName = "mk_select", icon = icon("magnifying-glass")),
+                        menuSubItem("CNV profiles", tabName = "cnv", icon = icon("dna"))
+                      )
+                    ),
+
                     tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Information"),
                     menuItem("Source Code", icon = icon("circle-info"), href = "https://www.github.com/Breeding-Insight/Genomics_Shiny_App"),
                     menuItem("Help", tabName = "help", icon = icon("circle-question"))
@@ -128,7 +139,7 @@ app_ui <- function(request) {
           )
         ),
         left = div(
-          style = "display: flex; align-items: center; height: 100%;",  
+          style = "display: flex; align-items: center; height: 100%;",
           sprintf("v%s", as.character(utils::packageVersion("Breedverse"))))
       ),
       dashboardBody(
@@ -155,69 +166,79 @@ app_ui <- function(request) {
             tabName = "install", mod_install_ui("install_1")
           ),
           tabItem(
-            tabName = "qploidy", 
-            if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) 
+            tabName = "qploidy",
+            if(isTRUE(requireNamespace("Qploidy", quietly = TRUE)))
               getFromNamespace("mod_qploidy_ui", "Qploidy")("qploidy_1")
           ),
           tabItem(
-            tabName = "snmf", 
-            if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
+            tabName = "snmf",
+            if(isTRUE(requireNamespace("familia", quietly = TRUE)))
               getFromNamespace("mod_SNMF_ui", "familia")("SNMF_1")
           ),
           tabItem(
-            tabName = "polybreedtools", 
-            if(isTRUE(requireNamespace("familia", quietly = TRUE))) 
+            tabName = "polybreedtools",
+            if(isTRUE(requireNamespace("familia", quietly = TRUE)))
               getFromNamespace("mod_polybreedtools_ui", "familia")("PolyBreedTools_1")
           ),
           tabItem(
-            tabName = "allomate", 
-            if(isTRUE(requireNamespace("AlloMate", quietly = TRUE))) 
+            tabName = "allomate",
+            if(isTRUE(requireNamespace("AlloMate", quietly = TRUE)))
               getFromNamespace("mod_allomate_ui", "AlloMate")("allomate_1")
           ),
           tabItem(
-            tabName = "filtering", 
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            tabName = "filtering",
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_Filtering_ui", "BIGapp")("Filtering_1")
           ),
           tabItem(
-            tabName = "updog", 
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            tabName = "updog",
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_DosageCall_ui", "BIGapp")("DosageCall_1")
           ),
           tabItem(
-            tabName = "dosage2vcf", 
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            tabName = "dosage2vcf",
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_dosage2vcf_ui", "BIGapp")("dosage2vcf_1")
           ),
           tabItem(
-            tabName = "pca", 
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            tabName = "pca",
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_PCA_ui", "BIGapp")("PCA_1")
           ),
           tabItem(
-            tabName = "dapc", 
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            tabName = "dapc",
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_dapc_ui", "BIGapp")("dapc_1")
           ),
           tabItem(
-            tabName = "gwas", 
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            tabName = "gwas",
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_gwas_ui", "BIGapp")("gwas_1")
           ),
           tabItem(
-            tabName = "diversity", 
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            tabName = "diversity",
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_diversity_ui", "BIGapp")("diversity_1")
           ),
           tabItem(
             tabName = "prediction_accuracy",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_GSAcc_ui", "BIGapp")("GSAcc_1")
           ),
           tabItem(
-            tabName = "prediction", 
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) 
+            tabName = "prediction",
+            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
               getFromNamespace("mod_GS_ui", "BIGapp")("GS_1")
+          ),
+          tabItem(
+            tabName = "mk_select",
+            if(isTRUE(requireNamespace("GenoBrew", quietly = TRUE)))
+              getFromNamespace("mod_mk_select_ui", "GenoBrew")("mk_select_1")
+          ),
+          tabItem(
+            tabName = "cnv",
+            if(isTRUE(requireNamespace("GenoBrew", quietly = TRUE)))
+              getFromNamespace("mod_cnv_ui", "GenoBrew")("cnv_1")
           ),
           tabItem(
             tabName = "help", mod_help_ui("help_1")
@@ -241,7 +262,7 @@ golem_add_external_resources <- function() {
     "www",
     app_sys("app/www")
   )
-  
+
   tags$head(
     favicon(),
     bundle_resources(
