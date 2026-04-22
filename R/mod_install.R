@@ -10,7 +10,7 @@
 #' @importFrom utils install.packages
 mod_install_ui <- function(id) {
   ns <- NS(id)
-  
+
   tagList(
     # Small CSS to style the cards and badges
     tags$style(HTML("
@@ -67,7 +67,7 @@ mod_install_ui <- function(id) {
         border-radius: 4px;
       }
     ")),
-    
+
     fluidPage(
       fluidRow(
         class = "install-row",
@@ -76,7 +76,7 @@ mod_install_ui <- function(id) {
           width = 6,
           div(
             class = "install-card",
-            
+
             # Already installed
             conditionalPanel(
               condition = sprintf("output['%s'] == true", ns("qploidyInstalled")),
@@ -110,7 +110,7 @@ mod_install_ui <- function(id) {
               ),
               p("Qploidy is installed. You can access ploidy estimation features in the app.")
             ),
-            
+
             # Not installed
             conditionalPanel(
               condition = sprintf("output['%s'] == false", ns("qploidyInstalled")),
@@ -152,7 +152,7 @@ mod_install_ui <- function(id) {
                 )
               )
             ),
-            
+
             # Log (always visible)
             tags$label("Installation log"),
             div(
@@ -161,13 +161,13 @@ mod_install_ui <- function(id) {
             )
           )
         ),
-        
+
         # --- BIGapp card -----------------------------------------------------
         column(
           width = 6,
           div(
             class = "install-card",
-            
+
             # Already installed
             conditionalPanel(
               condition = sprintf("output['%s'] == true", ns("BIGappInstalled")),
@@ -202,7 +202,7 @@ mod_install_ui <- function(id) {
               ),
               p("BIGapp is installed. You can access BIGapp features in the app.")
             ),
-            
+
             # Not installed
             conditionalPanel(
               condition = sprintf("output['%s'] == false", ns("BIGappInstalled")),
@@ -245,7 +245,7 @@ mod_install_ui <- function(id) {
                 )
               )
             ),
-            
+
             # Log (always visible)
             tags$label("Installation log"),
             div(
@@ -262,7 +262,7 @@ mod_install_ui <- function(id) {
           width = 6,
           div(
             class = "install-card",
-            
+
             # Already installed
             conditionalPanel(
               condition = sprintf("output['%s'] == true", ns("familiaInstalled")),
@@ -296,7 +296,7 @@ mod_install_ui <- function(id) {
               ),
               p("Familia is installed. You can access ancestry estimation features in the app.")
             ),
-            
+
             # Not installed
             conditionalPanel(
               condition = sprintf("output['%s'] == false", ns("familiaInstalled")),
@@ -337,7 +337,7 @@ mod_install_ui <- function(id) {
                 )
               )
             ),
-            
+
             # Log (always visible)
             tags$label("Installation log"),
             div(
@@ -346,13 +346,13 @@ mod_install_ui <- function(id) {
             )
           )
         ),
-        
+
         # --- AlloMate Card -----------------------------------------------------
         column(
           width = 6,
           div(
             class = "install-card",
-            
+
             # Already installed
             conditionalPanel(
               condition = sprintf("output['%s'] == true", ns("allomateInstalled")),
@@ -386,7 +386,7 @@ mod_install_ui <- function(id) {
               ),
               p("AlloMate is installed. You can access mating estimation features in the app.")
             ),
-            
+
             # Not installed
             conditionalPanel(
               condition = sprintf("output['%s'] == false", ns("allomateInstalled")),
@@ -428,12 +428,102 @@ mod_install_ui <- function(id) {
                 )
               )
             ),
-            
+
             # Log (always visible)
             tags$label("Installation log"),
             div(
               class = "install-log",
               uiOutput(ns("install_log_allomate"))
+            )
+          )
+        ),
+        # --- GenoBrew card ----------------------------------------------------
+        column(
+          width = 6,
+          div(
+            class = "install-card",
+
+            # Already installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == true", ns("genobrewInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/GenoBrew_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "GenoBrew")
+                  ),
+                )),
+                span("Installed", class = "install-status-badge install-status-ok")
+              ),
+              p(tags$a(href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
+                       icon("github"), " GitHub Repository")),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Allele intensities/read counts standardization"),
+                  tags$li("Sample ploidy estimation"),
+                  tags$li("Aneuploidy detection"),
+                  tags$li("Multipoint (HMM) copy number estimation (beta)")
+                ),
+                br()
+              ),
+              p("GenoBrew is installed. You can access ploidy estimation features in the app.")
+            ),
+
+            # Not installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == false", ns("genobrewInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/Qploidy_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "GenoBrew")
+                  ),
+                )),
+                span("Not installed", class = "install-status-badge install-status-missing")
+              ),
+              p(tags$a(href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
+                       icon("github"), " GitHub Repository")),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Test marker panel performance with historical data"),
+                  tags$li("Markers basic filters"),
+                  tags$li("Interactive visualization of Qploidy2 CNV profiles results"),
+                  tags$li("Find copy number variation hostspots in the genome")
+                ),
+                br()
+              ),
+              p("Install the GenoBrew package to enable marker panel tests and CNV visualization workflows."),
+              div(
+                style = "margin-top: 12px; margin-bottom: 10px;",
+                actionButton(
+                  ns("install_genobrew"),
+                  "Install GenoBrew",
+                  icon = icon("download")
+                )
+              )
+            ),
+
+            # Log (always visible)
+            tags$label("Installation log"),
+            div(
+              class = "install-log",
+              uiOutput(ns("install_log_genobrew"))
             )
           )
         )
@@ -446,9 +536,9 @@ mod_install_ui <- function(id) {
 #'
 #' @noRd
 mod_install_server <- function(input, output, session, parent_session){
-  
+
   ns <- session$ns
-  
+
   # --- reactive installation flags ---------------------------------------
   qploidy_installed <- reactiveVal(
     requireNamespace("Qploidy", quietly = TRUE)
@@ -462,25 +552,33 @@ mod_install_server <- function(input, output, session, parent_session){
   allomate_installed <- reactiveVal(
     requireNamespace("AlloMate", quietly = TRUE)
   )
-  
+  genobrew_installed <- reactiveVal(
+    requireNamespace("GenoBrew", quietly = TRUE)
+  )
+
   output$qploidyInstalled <- reactive({ qploidy_installed() })
   outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
-  
+
   output$familiaInstalled <- reactive({ familia_installed() })
   outputOptions(output, "familiaInstalled", suspendWhenHidden = FALSE)
-  
+
   output$BIGappInstalled <- reactive({ bigapp_installed() })
   outputOptions(output, "BIGappInstalled", suspendWhenHidden = FALSE)
-  
+
   output$allomateInstalled <- reactive({ allomate_installed() })
   outputOptions(output, "allomateInstalled", suspendWhenHidden = FALSE)
-  
+
+  output$genobrewInstalled <- reactive({ genobrew_installed() })
+  outputOptions(output, "genobrewInstalled", suspendWhenHidden = FALSE)
+
   # Initialize logs as empty
   output$install_log_qploidy <- renderUI(NULL)
   output$install_log_BIGapp <- renderUI(NULL)
   output$install_log_familia <- renderUI(NULL)
   output$install_log_allomate <- renderUI(NULL)
-  
+  output$install_log_genobrew <- renderUI(NULL)
+
+
   # --- Qploidy installation ----------------------------------------------
   observeEvent(input$install_qploidy, {
     err_msg <- NULL
@@ -538,7 +636,7 @@ mod_install_server <- function(input, output, session, parent_session){
       )
     }
   })
-  
+
   # --- Familia installation ----------------------------------------------
   observeEvent(input$install_familia, {
     err_msg <- NULL
@@ -596,7 +694,7 @@ mod_install_server <- function(input, output, session, parent_session){
       )
     }
   })
-  
+
   # --- AlloMate installation ----------------------------------------------
   observeEvent(input$install_allomate, {
     err_msg <- NULL
@@ -655,7 +753,7 @@ mod_install_server <- function(input, output, session, parent_session){
       )
     }
   })
-  
+
   # --- BIGapp installation -----------------------------------------------
   observeEvent(input$install_bigapp, {
     err_msg <- NULL
@@ -713,6 +811,66 @@ mod_install_server <- function(input, output, session, parent_session){
       )
     }
   })
+
+  # --- GenoBrew installation ----------------------------------------------
+  observeEvent(input$install_genobrew, {
+    err_msg <- NULL
+    ok      <- FALSE
+    log_lines <- character(0)
+
+    output$install_log_genobrew <- renderUI(NULL)
+
+    withProgress(message = "Installing GenoBrew", value = 0, {
+
+      capture_msg <- function(m) {
+        log_lines <<- c(log_lines, conditionMessage(m))
+        output$install_log_genobrew <- renderUI(
+          pre(style = "font-size:11px; white-space:pre-wrap;",
+              paste(log_lines, collapse = ""))
+        )
+        invokeRestart("muffleMessage")
+      }
+
+      withCallingHandlers(
+        tryCatch({
+          if (!requireNamespace("remotes", quietly = TRUE)) {
+            incProgress(0.05, detail = "Installing remotes...")
+            install.packages("remotes")
+          }
+          incProgress(0.1, detail = "Contacting GitHub...")
+          remotes::install_github(
+            "Breeding-Insight/GenoBrew",
+            upgrade = "never",
+            quiet   = FALSE
+          )
+          incProgress(0.9, detail = "Verifying...")
+          ok <- requireNamespace("GenoBrew", quietly = TRUE)
+          incProgress(1,   detail = "Done")
+        }, error = function(e) {
+          err_msg <<- conditionMessage(e)
+        }),
+        message = capture_msg
+      )
+    })
+
+    if (ok) {
+      genobrew_installed(TRUE)
+      showNotification("GenoBrew installed successfully.", type = "message", duration = 8)
+      output$install_log_genobrew <- renderUI(HTML(
+        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
+               'GenoBrew installation completed. <b style="color:#d9534f;">Restart</b> the app to load GenoBrew features.')
+      ))
+    } else {
+      showNotification("GenoBrew installation failed. See log below.", type = "error", duration = NULL)
+      output$install_log_genobrew <- renderUI(
+        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
+              paste(c(log_lines, err_msg), collapse = ""))
+      )
+    }
+  })
+
+
 }
 
 ## To be copied in the UI

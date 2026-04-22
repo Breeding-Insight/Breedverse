@@ -17,24 +17,30 @@ app_server <- function(input, output, session) {
   output$qploidyInstalled <- reactive({
     "Qploidy" %in% rownames(installed.packages())
   })
-  
+
   output$BIGappInstalled <- reactive({
     "BIGapp" %in% rownames(installed.packages())
   })
-  
+
   output$familiaInstalled <- reactive({
     "familia" %in% rownames(installed.packages())
   })
-  
+
   output$allomateInstalled <- reactive({
     "AlloMate" %in% rownames(installed.packages())
   })
-  
+
+  output$genobrewInstalled <- reactive({
+    "GenoBrew" %in% rownames(installed.packages())
+  })
+
   # Expose the value to JS even when panel is hidden
   outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "BIGappInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "familiaInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "allomateInstalled", suspendWhenHidden = FALSE)
+  outputOptions(output, "genobrewInstalled", suspendWhenHidden = FALSE)
+
 
   ## Modules
 
@@ -47,17 +53,17 @@ app_server <- function(input, output, session) {
   callModule(mod_install_server,
              "install_1",
              parent_session = session)
-  
+
   ## Qploidy
   if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) {
     do.call("library", list("Qploidy"))
     callModule(getFromNamespace("mod_qploidy_server", "Qploidy"),
                "qploidy_1",
                parent_session = session)
-  } 
-  
+  }
+
   ## BIGapp
-  
+
   if(isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
     do.call("library", list("BIGapp"))
     callModule(getFromNamespace("mod_DosageCall_server", "BIGapp"),
@@ -85,9 +91,9 @@ app_server <- function(input, output, session) {
                "GS_1",
                parent_session = session)
   }
-  
+
   ##familia
-  
+
   if(isTRUE(requireNamespace("familia", quietly = TRUE))) {
     do.call("library", list("familia"))
     callModule(getFromNamespace("mod_SNMF_server", "familia"),
@@ -97,7 +103,7 @@ app_server <- function(input, output, session) {
                "PolyBreedTools_1",
                parent_session = session)
   }
-  
+
   ## AlloMate
   if(isTRUE(requireNamespace("AlloMate", quietly = TRUE))) {
     do.call("library", list("AlloMate"))
@@ -105,8 +111,19 @@ app_server <- function(input, output, session) {
       "allomate_1",
       parent_session = session
     )
-  } 
-  
+  }
+
+  ## GenoBrew
+  if(isTRUE(requireNamespace("GenoBrew", quietly = TRUE))) {
+    do.call("library", list("GenoBrew"))
+    callModule(getFromNamespace("mod_mk_select_server", "GenoBrew"),
+               "mk_select_1",
+               parent_session = session)
+    callModule(getFromNamespace("mod_cnv_server", "GenoBrew"),
+               "cnv_1",
+               parent_session = session)
+  }
+
   #Session info popup
   observeEvent(input$session_info_button, {
     showModal(modalDialog(
@@ -122,13 +139,13 @@ app_server <- function(input, output, session) {
       )
     ))
   })
-  
+
   #Check for updates from GitHub for Breedverse
   get_latest_github_commit <- function(repo, owner) {
     url <- paste0("https://api.github.com/repos/", owner, "/", repo, "/releases/latest")
     response <- GET(url)
     content <- content(response, "parsed")
-    
+
     if (status_code(response) == 200) {
       tag_name <- content$tag_name
       clean_tag_name <- sub("-.*", "", tag_name)
@@ -138,7 +155,7 @@ app_server <- function(input, output, session) {
       return(NULL)
     }
   }
-  
+
   is_internet_connected <- function() {
     handle <- new_handle()
     success <- tryCatch({
@@ -149,7 +166,7 @@ app_server <- function(input, output, session) {
     })
     return(success)
   }
-  
+
   observeEvent(input$updates_info_button, {
     # Check internet connectivity
     if (!is_internet_connected()) {
@@ -164,17 +181,17 @@ app_server <- function(input, output, session) {
       ))
       return()
     }
-    
+
     package_name <- "Breedverse"
     repo_name <- "Breedverse" # GitHub repo name
     repo_owner <- "Breeding-Insight" # User or organization name
-    
+
     # Get the installed version
     installed_version <- as.character(packageVersion(package_name))
-    
+
     # Get the latest version from GitHub (can be tag version or latest commit)
     latest_commit <- get_latest_github_commit(repo_name, repo_owner)
-    
+
     # Compare versions and prepare message
     if (latest_commit > installed_version) {
       update_status <- "A new version is available. Please update your package."
@@ -194,7 +211,7 @@ app_server <- function(input, output, session) {
         update_status
       )
     }
-    
+
     # Display message in a Shiny modal
     showModal(modalDialog(
       title = "Breedverse Updates",
