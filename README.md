@@ -91,6 +91,19 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 ---
 
+### GenoBrew — Interactive Marker Panel Evaluation and CNV Visualization
+
+> GitHub: [`Breeding-Insight/GenoBrew`](https://github.com/Breeding-Insight/GenoBrew)
+
+| Feature | Description |
+|---|---|
+| Marker Panel Tests | Test marker panel performance with historical data |
+| Interactive filters | Markers basic filters |
+| CNV profiles | Interactive visualization of Qploidy2 CNV profiles results |
+| CNV hotspots | Find copy number variation hostspots in the genome |
+
+---
+
 ## Requirements
 
 - R ≥ 3.6.0

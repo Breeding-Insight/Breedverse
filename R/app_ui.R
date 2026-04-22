@@ -102,7 +102,7 @@ app_ui <- function(request) {
                     ),
                     conditionalPanel(
                       condition = "output.genobrewInstalled == true",
-                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
+                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Marker Panel Test &\n CNV Profiles"),
                       menuItem(
                         "GenoBrew",
                         icon = icon("dna"),
