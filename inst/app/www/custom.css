@@ -1,0 +1,51 @@
+/* ── Select Samples tabsetPanel (By Sample / By Family) */
+
+/* inactive tab - grey background */
+#cnv_1-sample_select_tabs > li > a:not(.active) {
+  padding: 7px 22px !important;
+  margin-right: 6px !important;
+  background-color: #e9ecef !important;
+  border: 1px solid #dee2e6 !important;
+  border-bottom: none !important;
+  border-radius: 4px 4px 0 0 !important;
+  font-weight: 500 !important;
+  color: #495057 !important;
+}
+
+/* active tab */
+#cnv_1-sample_select_tabs > li > a.active {
+  padding: 7px 22px !important;
+  margin-right: 6px !important;
+  background-color: #ffffff !important;
+  border: 1px solid #dee2e6 !important;
+  border-bottom: 1px solid #ffffff !important;
+  border-radius: 4px 4px 0 0 !important;
+  font-weight: 600 !important;
+  color: #007bff !important;
+}
+
+/* hover on inactive tab */
+#cnv_1-sample_select_tabs > li > a:not(.active):hover {
+  background-color: #d6d8db !important;
+  color: #343a40 !important;
+}
+
+/* ── Ensure box collapse/expand buttons are always visible ── */
+.card-tools {
+  position: relative;
+  z-index: 10;
+  color: black;
+}
+
+/* ── Dashboard footer ── */
+.main-footer {
+  background-color: white;
+  color: grey;
+  height: 65px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.main-footer a {
+  color: grey;
+}
