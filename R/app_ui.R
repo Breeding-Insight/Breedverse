@@ -144,20 +144,6 @@ app_ui <- function(request) {
       ),
       dashboardBody(
         disconnectMessage(), #Adds generic error message for any error if not already accounted for
-        tags$style(
-          HTML(
-            ".main-footer {
-            background-color: white;
-            color: grey;
-            height: 65px;
-            padding-top: 5px;
-            padding-bottom: 5px;
-          }
-          .main-footer a {
-            color: grey;
-          }"
-          )
-        ),
         tabItems(
           tabItem(
             tabName = "welcome", mod_Home_ui("Home_1")
@@ -268,8 +254,27 @@ golem_add_external_resources <- function() {
     bundle_resources(
       path = app_sys("app/www"),
       app_title = "Breedverse"
-    )
+    ),
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
+    tags$style(HTML("
+      /* Ensure box collapse/expand buttons are always on top */
+      .card-tools { position: relative; z-index: 10; }
+      /* Make collapse/expand icons visible on white box headers */
+      .card-tools .btn-tool { color: #495057 !important; }
+      .card-tools .btn-tool:hover { color: #212529 !important; }
+    ")),
+    tags$script(HTML("
+      $(document).ready(function() {
+        // On page load: mirror active class from <li> onto <a> for CSS targeting
+        $('#cnv_1-sample_select_tabs li.active > a').addClass('active');
+
+        // After each tab switch (content already swapped): sync active on <a> only
+        $(document).on('shown.bs.tab', '#cnv_1-sample_select_tabs a[data-toggle=\"tab\"]', function(e) {
+          $('#cnv_1-sample_select_tabs a[data-toggle=\"tab\"]').removeClass('active');
+          $(e.target).addClass('active');
+        });
+      });
+    "))
   )
 }
