@@ -487,7 +487,7 @@ mod_install_ui <- function(id) {
                   tags$div(
                     style = "display:flex; align-items:center;",
                     tags$img(
-                      src = "www/Qploidy_logo.png",
+                      src = "www/GenoBrew_logo.png",
                       height = "100px",
                       style = "margin-right:8px;"
                     ),
