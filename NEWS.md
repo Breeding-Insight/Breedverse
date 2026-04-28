@@ -1,5 +1,9 @@
 # breedverse NEWS
 
+## breedverse 0.3.1
+
+* Remove Qploidy while it is going throught repository transition
+
 ## breedverse 0.3.0
 
 * Add GenoBrew
