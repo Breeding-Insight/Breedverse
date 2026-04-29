@@ -14,9 +14,9 @@ app_server <- function(input, output, session) {
   options(shiny.maxRequestSize = 1000000 * 1024^2)  # Set maximum upload size to 1000GB
   #shiny.maxRequestSize = 10000 * 1024^2; # 10 GB <- This is for a future limit when using BI's server remotely
 
-  output$qploidyInstalled <- reactive({
-    "Qploidy" %in% rownames(installed.packages())
-  })
+  # output$qploidyInstalled <- reactive({
+  #   "Qploidy" %in% rownames(installed.packages())
+  # })
 
   output$BIGappInstalled <- reactive({
     "BIGapp" %in% rownames(installed.packages())
@@ -35,7 +35,7 @@ app_server <- function(input, output, session) {
   })
 
   # Expose the value to JS even when panel is hidden
-  outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
+  # outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "BIGappInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "familiaInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "allomateInstalled", suspendWhenHidden = FALSE)
@@ -55,12 +55,12 @@ app_server <- function(input, output, session) {
              parent_session = session)
 
   ## Qploidy
-  if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) {
-    do.call("library", list("Qploidy"))
-    callModule(getFromNamespace("mod_qploidy_server", "Qploidy"),
-               "qploidy_1",
-               parent_session = session)
-  }
+  # if(isTRUE(requireNamespace("Qploidy", quietly = TRUE))) {
+  #   do.call("library", list("Qploidy"))
+  #   callModule(getFromNamespace("mod_qploidy_server", "Qploidy"),
+  #              "qploidy_1",
+  #              parent_session = session)
+  # }
 
   ## BIGapp
 

@@ -58,11 +58,11 @@ app_ui <- function(request) {
                     menuItem("Home", tabName = "welcome", icon = icon("house"),startExpanded = FALSE),
                     menuItem("Install modules", tabName = "install", icon = icon("share-from-square")),
 
-                    conditionalPanel(
-                      condition = "output.qploidyInstalled == true",
-                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ploidy Estimation"),
-                      menuItem("Qploidy", tabName = "qploidy", icon = icon("dna")),
-                    ),
+                    # conditionalPanel(
+                    #   condition = "output.qploidyInstalled == true",
+                    #   tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ploidy Estimation"),
+                    #   menuItem("Qploidy", tabName = "qploidy", icon = icon("dna")),
+                    # ),
 
                     conditionalPanel(
                       condition = "output.familiaInstalled == true",
@@ -151,11 +151,11 @@ app_ui <- function(request) {
           tabItem(
             tabName = "install", mod_install_ui("install_1")
           ),
-          tabItem(
-            tabName = "qploidy",
-            if(isTRUE(requireNamespace("Qploidy", quietly = TRUE)))
-              getFromNamespace("mod_qploidy_ui", "Qploidy")("qploidy_1")
-          ),
+          # tabItem(
+          #   tabName = "qploidy",
+          #   if(isTRUE(requireNamespace("Qploidy", quietly = TRUE)))
+          #     getFromNamespace("mod_qploidy_ui", "Qploidy")("qploidy_1")
+          # ),
           tabItem(
             tabName = "snmf",
             if(isTRUE(requireNamespace("familia", quietly = TRUE)))

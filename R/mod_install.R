@@ -71,7 +71,7 @@ mod_install_ui <- function(id) {
     fluidPage(
       fluidRow(
         class = "install-row",
-        # --- Qploidy card ----------------------------------------------------
+        # --- GenoBrew card ----------------------------------------------------
         column(
           width = 6,
           div(
@@ -79,7 +79,7 @@ mod_install_ui <- function(id) {
 
             # Already installed
             conditionalPanel(
-              condition = sprintf("output['%s'] == true", ns("qploidyInstalled")),
+              condition = sprintf("output['%s'] == true", ns("genobrewInstalled")),
               div(
                 class = "install-header",
                 h3(class = "install-title", div(
@@ -87,16 +87,16 @@ mod_install_ui <- function(id) {
                   tags$div(
                     style = "display:flex; align-items:center;",
                     tags$img(
-                      src = "www/Qploidy_logo.png",
+                      src = "www/GenoBrew_logo.png",
                       height = "100px",
                       style = "margin-right:8px;"
                     ),
-                    h3(class = "install-title", "Qploidy")
+                    h3(class = "install-title", "GenoBrew")
                   ),
                 )),
                 span("Installed", class = "install-status-badge install-status-ok")
               ),
-              p(tags$a(href = "https://github.com/Cristianetaniguti/Qploidy", target = "_blank",
+              p(tags$a(href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
                        icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
@@ -108,12 +108,12 @@ mod_install_ui <- function(id) {
                 ),
                 br()
               ),
-              p("Qploidy is installed. You can access ploidy estimation features in the app.")
+              p("GenoBrew is installed. You can access ploidy estimation features in the app.")
             ),
 
             # Not installed
             conditionalPanel(
-              condition = sprintf("output['%s'] == false", ns("qploidyInstalled")),
+              condition = sprintf("output['%s'] == false", ns("genobrewInstalled")),
               div(
                 class = "install-header",
                 h3(class = "install-title", div(
@@ -121,33 +121,33 @@ mod_install_ui <- function(id) {
                   tags$div(
                     style = "display:flex; align-items:center;",
                     tags$img(
-                      src = "www/Qploidy_logo.png",
+                      src = "www/GenoBrew_logo.png",
                       height = "100px",
                       style = "margin-right:8px;"
                     ),
-                    h3(class = "install-title", "Qploidy")
+                    h3(class = "install-title", "GenoBrew")
                   ),
                 )),
                 span("Not installed", class = "install-status-badge install-status-missing")
               ),
-              p(tags$a(href = "https://github.com/Cristianetaniguti/Qploidy", target = "_blank",
+              p(tags$a(href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
                        icon("github"), " GitHub Repository")),
               tagList(
                 p("Features:"),
                 tags$ul(
-                  tags$li("Allele intensities/read counts standardization"),
-                  tags$li("Sample ploidy estimation"),
-                  tags$li("Aneuploidy detection"),
-                  tags$li("Multipoint (HMM) copy number estimation (beta)")
+                  tags$li("Test marker panel performance with historical data"),
+                  tags$li("Markers basic filters"),
+                  tags$li("Interactive visualization of Qploidy2 CNV profiles results"),
+                  tags$li("Find copy number variation hostspots in the genome")
                 ),
                 br()
               ),
-              p("Install the Qploidy package to enable ploidy estimation workflows."),
+              p("Install the GenoBrew package to enable marker panel tests and CNV visualization workflows."),
               div(
                 style = "margin-top: 12px; margin-bottom: 10px;",
                 actionButton(
-                  ns("install_qploidy"),
-                  "Install Qploidy",
+                  ns("install_genobrew"),
+                  "Install GenoBrew",
                   icon = icon("download")
                 )
               )
@@ -157,10 +157,100 @@ mod_install_ui <- function(id) {
             tags$label("Installation log"),
             div(
               class = "install-log",
-              uiOutput(ns("install_log_qploidy"))
+              uiOutput(ns("install_log_genobrew"))
             )
           )
         ),
+        # --- Qploidy card ----------------------------------------------------
+        # column(
+        #   width = 6,
+        #   div(
+        #     class = "install-card",
+        #
+        #     # Already installed
+        #     conditionalPanel(
+        #       condition = sprintf("output['%s'] == true", ns("qploidyInstalled")),
+        #       div(
+        #         class = "install-header",
+        #         h3(class = "install-title", div(
+        #           class = "install-header",
+        #           tags$div(
+        #             style = "display:flex; align-items:center;",
+        #             tags$img(
+        #               src = "www/Qploidy_logo.png",
+        #               height = "100px",
+        #               style = "margin-right:8px;"
+        #             ),
+        #             h3(class = "install-title", "Qploidy")
+        #           ),
+        #         )),
+        #         span("Installed", class = "install-status-badge install-status-ok")
+        #       ),
+        #       p(tags$a(href = "https://github.com/Cristianetaniguti/Qploidy", target = "_blank",
+        #                icon("github"), " GitHub Repository")),
+        #       tagList(
+        #         p("Features:"),
+        #         tags$ul(
+        #           tags$li("Allele intensities/read counts standardization"),
+        #           tags$li("Sample ploidy estimation"),
+        #           tags$li("Aneuploidy detection"),
+        #           tags$li("Multipoint (HMM) copy number estimation (beta)")
+        #         ),
+        #         br()
+        #       ),
+        #       p("Qploidy is installed. You can access ploidy estimation features in the app.")
+        #     ),
+        #
+        #     # Not installed
+        #     conditionalPanel(
+        #       condition = sprintf("output['%s'] == false", ns("qploidyInstalled")),
+        #       div(
+        #         class = "install-header",
+        #         h3(class = "install-title", div(
+        #           class = "install-header",
+        #           tags$div(
+        #             style = "display:flex; align-items:center;",
+        #             tags$img(
+        #               src = "www/Qploidy_logo.png",
+        #               height = "100px",
+        #               style = "margin-right:8px;"
+        #             ),
+        #             h3(class = "install-title", "Qploidy")
+        #           ),
+        #         )),
+        #         span("Not installed", class = "install-status-badge install-status-missing")
+        #       ),
+        #       p(tags$a(href = "https://github.com/Cristianetaniguti/Qploidy", target = "_blank",
+        #                icon("github"), " GitHub Repository")),
+        #       tagList(
+        #         p("Features:"),
+        #         tags$ul(
+        #           tags$li("Allele intensities/read counts standardization"),
+        #           tags$li("Sample ploidy estimation"),
+        #           tags$li("Aneuploidy detection"),
+        #           tags$li("Multipoint (HMM) copy number estimation (beta)")
+        #         ),
+        #         br()
+        #       ),
+        #       p("Install the Qploidy package to enable ploidy estimation workflows."),
+        #       div(
+        #         style = "margin-top: 12px; margin-bottom: 10px;",
+        #         actionButton(
+        #           ns("install_qploidy"),
+        #           "Install Qploidy",
+        #           icon = icon("download")
+        #         )
+        #       )
+        #     ),
+        #
+        #     # Log (always visible)
+        #     tags$label("Installation log"),
+        #     div(
+        #       class = "install-log",
+        #       uiOutput(ns("install_log_qploidy"))
+        #     )
+        #   )
+        # ),
 
         # --- BIGapp card -----------------------------------------------------
         column(
@@ -436,96 +526,6 @@ mod_install_ui <- function(id) {
               uiOutput(ns("install_log_allomate"))
             )
           )
-        ),
-        # --- GenoBrew card ----------------------------------------------------
-        column(
-          width = 6,
-          div(
-            class = "install-card",
-
-            # Already installed
-            conditionalPanel(
-              condition = sprintf("output['%s'] == true", ns("genobrewInstalled")),
-              div(
-                class = "install-header",
-                h3(class = "install-title", div(
-                  class = "install-header",
-                  tags$div(
-                    style = "display:flex; align-items:center;",
-                    tags$img(
-                      src = "www/GenoBrew_logo.png",
-                      height = "100px",
-                      style = "margin-right:8px;"
-                    ),
-                    h3(class = "install-title", "GenoBrew")
-                  ),
-                )),
-                span("Installed", class = "install-status-badge install-status-ok")
-              ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
-                       icon("github"), " GitHub Repository")),
-              tagList(
-                p("Features:"),
-                tags$ul(
-                  tags$li("Allele intensities/read counts standardization"),
-                  tags$li("Sample ploidy estimation"),
-                  tags$li("Aneuploidy detection"),
-                  tags$li("Multipoint (HMM) copy number estimation (beta)")
-                ),
-                br()
-              ),
-              p("GenoBrew is installed. You can access ploidy estimation features in the app.")
-            ),
-
-            # Not installed
-            conditionalPanel(
-              condition = sprintf("output['%s'] == false", ns("genobrewInstalled")),
-              div(
-                class = "install-header",
-                h3(class = "install-title", div(
-                  class = "install-header",
-                  tags$div(
-                    style = "display:flex; align-items:center;",
-                    tags$img(
-                      src = "www/GenoBrew_logo.png",
-                      height = "100px",
-                      style = "margin-right:8px;"
-                    ),
-                    h3(class = "install-title", "GenoBrew")
-                  ),
-                )),
-                span("Not installed", class = "install-status-badge install-status-missing")
-              ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
-                       icon("github"), " GitHub Repository")),
-              tagList(
-                p("Features:"),
-                tags$ul(
-                  tags$li("Test marker panel performance with historical data"),
-                  tags$li("Markers basic filters"),
-                  tags$li("Interactive visualization of Qploidy2 CNV profiles results"),
-                  tags$li("Find copy number variation hostspots in the genome")
-                ),
-                br()
-              ),
-              p("Install the GenoBrew package to enable marker panel tests and CNV visualization workflows."),
-              div(
-                style = "margin-top: 12px; margin-bottom: 10px;",
-                actionButton(
-                  ns("install_genobrew"),
-                  "Install GenoBrew",
-                  icon = icon("download")
-                )
-              )
-            ),
-
-            # Log (always visible)
-            tags$label("Installation log"),
-            div(
-              class = "install-log",
-              uiOutput(ns("install_log_genobrew"))
-            )
-          )
         )
       ) #Closing fluidrow parentheses
     )
@@ -540,9 +540,9 @@ mod_install_server <- function(input, output, session, parent_session){
   ns <- session$ns
 
   # --- reactive installation flags ---------------------------------------
-  qploidy_installed <- reactiveVal(
-    requireNamespace("Qploidy", quietly = TRUE)
-  )
+  # qploidy_installed <- reactiveVal(
+  #   requireNamespace("Qploidy", quietly = TRUE)
+  # )
   familia_installed <- reactiveVal(
     requireNamespace("familia", quietly = TRUE)
   )
@@ -556,8 +556,8 @@ mod_install_server <- function(input, output, session, parent_session){
     requireNamespace("GenoBrew", quietly = TRUE)
   )
 
-  output$qploidyInstalled <- reactive({ qploidy_installed() })
-  outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
+  # output$qploidyInstalled <- reactive({ qploidy_installed() })
+  # outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
 
   output$familiaInstalled <- reactive({ familia_installed() })
   outputOptions(output, "familiaInstalled", suspendWhenHidden = FALSE)
@@ -572,7 +572,7 @@ mod_install_server <- function(input, output, session, parent_session){
   outputOptions(output, "genobrewInstalled", suspendWhenHidden = FALSE)
 
   # Initialize logs as empty
-  output$install_log_qploidy <- renderUI(NULL)
+  # output$install_log_qploidy <- renderUI(NULL)
   output$install_log_BIGapp <- renderUI(NULL)
   output$install_log_familia <- renderUI(NULL)
   output$install_log_allomate <- renderUI(NULL)
@@ -580,62 +580,62 @@ mod_install_server <- function(input, output, session, parent_session){
 
 
   # --- Qploidy installation ----------------------------------------------
-  observeEvent(input$install_qploidy, {
-    err_msg <- NULL
-    ok      <- FALSE
-    log_lines <- character(0)
-
-    output$install_log_qploidy <- renderUI(NULL)
-
-    withProgress(message = "Installing Qploidy", value = 0, {
-
-      capture_msg <- function(m) {
-        log_lines <<- c(log_lines, conditionMessage(m))
-        output$install_log_qploidy <- renderUI(
-          pre(style = "font-size:11px; white-space:pre-wrap;",
-              paste(log_lines, collapse = ""))
-        )
-        invokeRestart("muffleMessage")
-      }
-
-      withCallingHandlers(
-        tryCatch({
-          if (!requireNamespace("remotes", quietly = TRUE)) {
-            incProgress(0.05, detail = "Installing remotes...")
-            install.packages("remotes")
-          }
-          incProgress(0.1, detail = "Contacting GitHub...")
-          remotes::install_github(
-            "Cristianetaniguti/Qploidy",
-            upgrade = "never",
-            quiet   = FALSE
-          )
-          incProgress(0.9, detail = "Verifying...")
-          ok <- requireNamespace("Qploidy", quietly = TRUE)
-          incProgress(1,   detail = "Done")
-        }, error = function(e) {
-          err_msg <<- conditionMessage(e)
-        }),
-        message = capture_msg
-      )
-    })
-
-    if (ok) {
-      qploidy_installed(TRUE)
-      showNotification("Qploidy installed successfully.", type = "message", duration = 8)
-      output$install_log_qploidy <- renderUI(HTML(
-        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
-               'Qploidy installation completed. <b style="color:#d9534f;">Restart</b> the app to load Qploidy features.')
-      ))
-    } else {
-      showNotification("Qploidy installation failed. See log below.", type = "error", duration = NULL)
-      output$install_log_qploidy <- renderUI(
-        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
-            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
-              paste(c(log_lines, err_msg), collapse = ""))
-      )
-    }
-  })
+  # observeEvent(input$install_qploidy, {
+  #   err_msg <- NULL
+  #   ok      <- FALSE
+  #   log_lines <- character(0)
+  #
+  #   output$install_log_qploidy <- renderUI(NULL)
+  #
+  #   withProgress(message = "Installing Qploidy", value = 0, {
+  #
+  #     capture_msg <- function(m) {
+  #       log_lines <<- c(log_lines, conditionMessage(m))
+  #       output$install_log_qploidy <- renderUI(
+  #         pre(style = "font-size:11px; white-space:pre-wrap;",
+  #             paste(log_lines, collapse = ""))
+  #       )
+  #       invokeRestart("muffleMessage")
+  #     }
+  #
+  #     withCallingHandlers(
+  #       tryCatch({
+  #         if (!requireNamespace("remotes", quietly = TRUE)) {
+  #           incProgress(0.05, detail = "Installing remotes...")
+  #           install.packages("remotes")
+  #         }
+  #         incProgress(0.1, detail = "Contacting GitHub...")
+  #         remotes::install_github(
+  #           "Cristianetaniguti/Qploidy",
+  #           upgrade = "never",
+  #           quiet   = FALSE
+  #         )
+  #         incProgress(0.9, detail = "Verifying...")
+  #         ok <- requireNamespace("Qploidy", quietly = TRUE)
+  #         incProgress(1,   detail = "Done")
+  #       }, error = function(e) {
+  #         err_msg <<- conditionMessage(e)
+  #       }),
+  #       message = capture_msg
+  #     )
+  #   })
+  #
+  #   if (ok) {
+  #     qploidy_installed(TRUE)
+  #     showNotification("Qploidy installed successfully.", type = "message", duration = 8)
+  #     output$install_log_qploidy <- renderUI(HTML(
+  #       paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
+  #              'Qploidy installation completed. <b style="color:#d9534f;">Restart</b> the app to load Qploidy features.')
+  #     ))
+  #   } else {
+  #     showNotification("Qploidy installation failed. See log below.", type = "error", duration = NULL)
+  #     output$install_log_qploidy <- renderUI(
+  #       pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+  #           if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
+  #             paste(c(log_lines, err_msg), collapse = ""))
+  #     )
+  #   }
+  # })
 
   # --- Familia installation ----------------------------------------------
   observeEvent(input$install_familia, {

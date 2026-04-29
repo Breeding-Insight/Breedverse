@@ -13,23 +13,23 @@ mod_help_ui <- function(id){
     fluidPage(
       column(width=12),
       column(width=12,
-             conditionalPanel(
-               condition = "output.qploidyInstalled == true",
-               box(title="Ploidy Estimation", id = "Qploidy_box",width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
-                   "This tab uses Qploidy package to standardize marker allele counts to estimate ploidy or aneuploidy.",
-                   br(), br(),
-                   bs4Dash::tabsetPanel(id = "Qploidy_tabset",
-                                        tabPanel("Parameters description", value = "Qploidy_par", br(),
-                                                 includeMarkdown(system.file("help_files/Qploidy_par.Rmd", package = "Qploidy"))
-                                        ),
-                                        tabPanel("Results description", value = "Qploidy_results", br(),
-                                                 includeMarkdown(system.file("help_files/Qploidy_res.Rmd", package = "Qploidy"))
-                                        ),
-                                        tabPanel("How to cite", value = "Qploidy_cite", br(),
-                                                 includeMarkdown(system.file("help_files/Qploidy_cite.Rmd", package = "Qploidy"))
-                                        ))
-               )
-             ),
+             # conditionalPanel(
+             #   condition = "output.qploidyInstalled == true",
+             #   box(title="Ploidy Estimation", id = "Qploidy_box",width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+             #       "This tab uses Qploidy package to standardize marker allele counts to estimate ploidy or aneuploidy.",
+             #       br(), br(),
+             #       bs4Dash::tabsetPanel(id = "Qploidy_tabset",
+             #                            tabPanel("Parameters description", value = "Qploidy_par", br(),
+             #                                     includeMarkdown(system.file("help_files/Qploidy_par.Rmd", package = "Qploidy"))
+             #                            ),
+             #                            tabPanel("Results description", value = "Qploidy_results", br(),
+             #                                     includeMarkdown(system.file("help_files/Qploidy_res.Rmd", package = "Qploidy"))
+             #                            ),
+             #                            tabPanel("How to cite", value = "Qploidy_cite", br(),
+             #                                     includeMarkdown(system.file("help_files/Qploidy_cite.Rmd", package = "Qploidy"))
+             #                            ))
+             #   )
+             # ),
              conditionalPanel(
                condition = "output.BIGappInstalled == true",
                box(title="Convert to VCF", id = "DArT_Report2VCF_box",width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
@@ -170,9 +170,9 @@ mod_help_ui <- function(id){
 #'
 #' @noRd
 mod_help_server <- function(input, output, session, parent_session){
-  
+
   ns <- session$ns
-  
+
 }
 
 ## To be copied in the UI
