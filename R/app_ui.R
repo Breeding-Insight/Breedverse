@@ -18,7 +18,7 @@ app_ui <- function(request) {
       skin = "black",
       bs4DashNavbar(
         title = tagList(
-          tags$img(src = 'www/BreedingInsight.png', height = '40', width = '50'),
+          tags$img(src = 'www/breedverse_logo.png', height = '40', width = '35'),
         ),
         rightUi = tags$li(
           class = "dropdown",
@@ -54,9 +54,11 @@ app_ui <- function(request) {
         expandOnHover = TRUE,
         sidebarMenu(id = "MainMenu",
                     flat = FALSE,
-                    tags$li(class = "header", style = "color: grey; margin-top: 10px; margin-bottom: 10px; padding-left: 15px;", "Menu"),
+                    tags$li(class = "header","Menu"),
                     menuItem("Home", tabName = "welcome", icon = icon("house"),startExpanded = FALSE),
                     menuItem("Install modules", tabName = "install", icon = icon("share-from-square")),
+                    tags$li(class = "header", "Available Modules"),
+
 
                     # conditionalPanel(
                     #   condition = "output.qploidyInstalled == true",
@@ -66,7 +68,6 @@ app_ui <- function(request) {
 
                     conditionalPanel(
                       condition = "output.familiaInstalled == true",
-                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ancestry (R/familia)"),
                       menuItem(
                         "familia",
                         icon = icon("seedling"),
@@ -78,13 +79,11 @@ app_ui <- function(request) {
 
                     conditionalPanel(
                       condition = "output.allomateInstalled == true",
-                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Mating Estimation (R/AlloMate)"),
                       menuItem("AlloMate", tabName = "allomate", icon = icon("diagram-project"))
                     ),
 
                     conditionalPanel(
                       condition = "output.BIGappInstalled == true",
-                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Genotype Processing"),
                       menuItem(
                         "BIGapp",
                         icon = icon("dna"),
@@ -102,7 +101,6 @@ app_ui <- function(request) {
                     ),
                     conditionalPanel(
                       condition = "output.genobrewInstalled == true",
-                      tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Marker Panel Test &\n CNV Profiles"),
                       menuItem(
                         "GenoBrew",
                         icon = icon("dna"),
@@ -119,27 +117,27 @@ app_ui <- function(request) {
       ),
       footer = dashboardFooter(
         right = div(
-          style = "display: flex; align-items: center;",  # Align text and images horizontally
+          class = "dashboard-footer-right",  # Align text and images horizontally
           div(
-            style = "display: flex; flex-direction: column; margin-right: 15px; text-align: right;",
+            class = "dashboard-footer-text",  # Style the text
             div("2026 Breeding Insight"),
             div("Funded by USDA through UF|IFAS")
           ),
           div(
             a(
               img(src = "www/usda-logo-color.png", height = "45px"),
-              style = "margin-right: 15px;"
-            ),
-            a(
-              img(src = "www/cornell_seal_simple_web_b31b1b.png", height = "45px")
+              class = "dashboard-footer-logo"
             ),
             a(
               img(src = "www/IFAS.jpg", height = "45px")
+            ),
+            a(
+              img(src = "www/cornell_seal_simple_web_b31b1b.png", height = "45px")
             )
           )
         ),
         left = div(
-          style = "display: flex; align-items: center; height: 100%;",
+          class = "dashboard-footer-left",
           sprintf("v%s", as.character(utils::packageVersion("Breedverse"))))
       ),
       dashboardBody(
@@ -255,26 +253,11 @@ golem_add_external_resources <- function() {
       path = app_sys("app/www"),
       app_title = "Breedverse"
     ),
-    # Add here other external resources
-    # for example, you can add shinyalert::useShinyalert()
-    tags$style(HTML("
-      /* Ensure box collapse/expand buttons are always on top */
-      .card-tools { position: relative; z-index: 10; }
-      /* Make collapse/expand icons visible on white box headers */
-      .card-tools .btn-tool { color: #495057 !important; }
-      .card-tools .btn-tool:hover { color: #212529 !important; }
-    ")),
-    tags$script(HTML("
-      $(document).ready(function() {
-        // On page load: mirror active class from <li> onto <a> for CSS targeting
-        $('#cnv_1-sample_select_tabs li.active > a').addClass('active');
-
-        // After each tab switch (content already swapped): sync active on <a> only
-        $(document).on('shown.bs.tab', '#cnv_1-sample_select_tabs a[data-toggle=\"tab\"]', function(e) {
-          $('#cnv_1-sample_select_tabs a[data-toggle=\"tab\"]').removeClass('active');
-          $(e.target).addClass('active');
-        });
-      });
-    "))
+    tags$link(
+      rel = "stylesheet",
+      type = "text/css",
+      href = "www/custom.css"
+    ),
+    tags$script(src = "www/custom.js")
   )
 }

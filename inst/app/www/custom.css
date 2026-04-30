@@ -1,3 +1,345 @@
+/* ── Custom Box Colors ── */
+
+:root {
+  --azure-core: #48A9C5;
+  --azure-lite: #B5DDE8;
+  --azure-deep: #2A6576;
+  --green-core: #319B42;
+  --green-lite: #A3D9AC;
+  --green-deep: #1E5D28;
+  --yellow-core: #EFB526;
+  --yellow-lite: #F9E1A8;
+  --yellow-deep: #8F6D17;
+  --grey-core: #707372;
+  --grey-lite: #C8CACA;
+  --grey-deep: #434544;
+  --purple-core: #512C85;
+  --purple-lite: #A896C2;
+  --purple-deep: #311A50;
+  --red-core: #E43F4F;
+  --red-lite: #F2A7AE;
+  --red-deep: #8E1E2A;
+  --saddleBrown: #8B4513;
+  --rosybrown: #BC8F8F;
+  --coral: #FF7F50;
+  --lightcoral: #F08080;
+  --darkorange: #FF8C00;
+}
+
+/* Override all bs4Dash status colors with custom colors */
+
+/* Override all bs4Dash status colors with custom colors */
+
+/* Info -> Azure Core */
+.card-info:not(.card-outline) .card-header {
+  background-color: var(--azure-core) !important;
+  color: white !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-info:not(.card-outline) {
+  border-top: 3px solid var(--azure-core) !important;
+}
+
+/* Secondary -> Grey Core */
+.card-secondary:not(.card-outline) .card-header {
+  background-color: var(--grey-core) !important;
+  color: white !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-secondary:not(.card-outline) {
+  border-top: 3px solid var(--grey-core) !important;
+}
+
+/* Primary -> Azure Lite */
+.card-primary .card-header {
+  background-color: var(--azure-lite) !important;
+  color: #333 !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-primary:not(.card-outline) {
+  border-top: 3px solid var(--azure-lite) !important;
+}
+
+/* Success -> Green Core */
+.card-success:not(.card-outline) .card-header {
+  background-color: var(--green-core) !important;
+  color: white !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-success:not(.card-outline) {
+  border-top: 3px solid var(--green-core) !important;
+}
+
+/* Warning -> Yellow Core */
+.card-warning:not(.card-outline) .card-header {
+  background-color: var(--yellow-core) !important;
+  color: #333 !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-warning:not(.card-outline) {
+  border-top: 3px solid var(--yellow-core) !important;
+}
+
+/* Danger -> Red Core */
+.card-danger:not(.card-outline) .card-header {
+  background-color: var(--red-core) !important;
+  color: white !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-danger:not(.card-outline) {
+  border-top: 3px solid var(--red-core) !important;
+}
+
+/* Gray-dark -> Grey Deep */
+.card-gray-dark:not(.card-outline) .card-header {
+  background-color: var(--grey-deep) !important;
+  color: white !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-gray-dark:not(.card-outline) {
+  border-top: 3px solid var(--grey-deep) !important;
+}
+
+/* Gray -> Grey Lite */
+.card-gray:not(.card-outline) .card-header {
+  background-color: var(--grey-lite) !important;
+  color: #333 !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-gray:not(.card-outline) {
+  border-top: 3px solid var(--grey-lite) !important;
+}
+
+/* Indigo -> Purple Core */
+.card-indigo:not(.card-outline) .card-header {
+  background-color: var(--purple-core) !important;
+  color: white !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-indigo:not(.card-outline) {
+  border-top: 3px solid var(--purple-core) !important;
+}
+
+/* Lightblue -> Azure Deep */
+.card-lightblue:not(.card-outline) .card-header {
+  background-color: var(--azure-deep) !important;
+  color: white !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-lightblue:not(.card-outline) {
+  border-top: 3px solid var(--azure-deep) !important;
+}
+
+/* Navy -> Saddle Brown */
+.card-navy:not(.card-outline) .card-header {
+  background-color: var(--saddleBrown) !important;
+  color: white !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-navy:not(.card-outline) {
+  border-top: 3px solid var(--saddleBrown) !important;
+}
+
+/* Purple -> Purple Lite */
+.card-purple:not(.card-outline) .card-header {
+  background-color: var(--purple-lite) !important;
+  color: #333 !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-purple:not(.card-outline) {
+  border-top: 3px solid var(--purple-lite) !important;
+}
+
+/* Fuchsia -> Purple Deep */
+.card-fuchsia:not(.card-outline) .card-header {
+  background-color: var(--purple-deep) !important;
+  color: white !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-fuchsia:not(.card-outline) {
+  border-top: 3px solid var(--purple-deep) !important;
+}
+
+/* Pink -> Red Lite */
+.card-pink:not(.card-outline) .card-header {
+  background-color: var(--red-lite) !important;
+  color: #333 !important;
+    border-top-left-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+}
+.card-pink:not(.card-outline) {
+  border-top: 3px solid var(--red-lite) !important;
+}
+
+/* Maroon -> Red Deep */
+.card-maroon:not(.card-outline) .card-header {
+  background-color: var(--red-deep) !important;
+  color: white !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-maroon:not(.card-outline) {
+  border-top: 3px solid var(--red-deep) !important;
+}
+
+/* Orange -> Yellow Deep */
+.card-orange:not(.card-outline) .card-header {
+  background-color: var(--yellow-deep) !important;
+  color: white !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-orange:not(.card-outline) {
+  border-top: 3px solid var(--yellow-deep) !important;
+}
+
+/* Lime -> Green Lite */
+.card-lime:not(.card-outline) .card-header {
+  background-color: var(--green-lite) !important;
+  color: #333 !important;
+    border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-lime:not(.card-outline) {
+  border-top: 3px solid var(--green-lite) !important;
+}
+
+/* Teal -> Yellow Lite */
+.card-teal:not(.card-outline) .card-header {
+  background-color: var(--yellow-lite) !important;
+  color: #333 !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-teal:not(.card-outline) {
+  border-top: 3px solid var(--yellow-lite) !important;
+}
+
+/* Olive -> Green Deep */
+.card-olive:not(.card-outline) .card-header {
+  background-color: var(--green-deep) !important;
+  color: white !important;
+  border: none !important;
+  margin: -1px -1px 0 -1px !important;
+}
+.card-olive:not(.card-outline) {
+  border-top: 3px solid var(--green-deep) !important;
+}
+
+
+/* ── ValueBox Gradient Color Overrides ── */
+
+/* Info -> Azure Core */
+.small-box.bg-gradient-info {
+  background: linear-gradient(135deg, var(--azure-core), var(--azure-deep)) !important;
+  color: white !important;
+}
+.small-box.bg-gradient-info .icon {
+  color: rgba(255,255,255,0.3) !important;
+}
+
+/* Secondary -> Grey Core */
+.small-box.bg-gradient-secondary {
+  background: linear-gradient(135deg, var(--grey-core), var(--grey-deep)) !important;
+  color: white !important;
+}
+.small-box.bg-gradient-secondary .icon {
+  color: rgba(255,255,255,0.3) !important;
+}
+
+/* Info -> Azure Lite */
+.small-box.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--azure-lite), var(--azure-core)) !important;
+  color: #333 !important;
+}
+.small-box.bg-gradient-primary .icon {
+  color: rgba(51,51,51,0.3) !important;
+}
+
+/* Success -> Green Core */
+.small-box.bg-gradient-success {
+  background: linear-gradient(135deg, var(--green-core), var(--green-deep)) !important;
+  color: white !important;
+}
+.small-box.bg-gradient-success .icon {
+  color: rgba(255,255,255,0.3) !important;
+}
+
+/* Warning -> Yellow Core */
+.small-box.bg-gradient-warning {
+  background: linear-gradient(135deg, var(--yellow-core), var(--yellow-deep)) !important;
+  color: #333 !important;
+}
+.small-box.bg-gradient-warning .icon {
+  color: rgba(51,51,51,0.3) !important;
+}
+
+/* Danger -> Red Core */
+.small-box.bg-gradient-danger {
+  background: linear-gradient(135deg, var(--red-core), var(--red-deep)) !important;
+  color: white !important;
+}
+.small-box.bg-gradient-danger .icon {
+  color: rgba(255,255,255,0.3) !important;
+}
+
+/* Navy -> Saddle Brown */
+.small-box.bg-gradient-navy {
+  background: linear-gradient(135deg, var(--saddleBrown), #5d2f0a) !important;
+  color: white !important;
+}
+.small-box.bg-gradient-navy .icon {
+  color: rgba(255,255,255,0.3) !important;
+}
+
+/* Continue for all other colors... */
+.small-box.bg-gradient-indigo {
+  background: linear-gradient(135deg, var(--purple-core), var(--purple-deep)) !important;
+  color: white !important;
+}
+.small-box.bg-gradient-indigo .icon {
+  color: rgba(255,255,255,0.3) !important;
+}
+
+/* ── Sidebar Active Menu Item ── */
+.main-sidebar .nav-sidebar .nav-item.active .nav-link,
+.main-sidebar .nav-sidebar .nav-item .nav-link.active {
+  background-color: var(--azure-core) !important;
+  color: white !important;
+}
+
+/* Hover effect for menu items */
+.main-sidebar .nav-sidebar .nav-item .nav-link:hover {
+  background-color: var(--azure-lite) !important;
+  color: #333 !important;
+}
+
+/* Active menu item icon */
+.main-sidebar .nav-sidebar .nav-item.active .nav-link .nav-icon,
+.main-sidebar .nav-sidebar .nav-item .nav-link.active .nav-icon {
+  color: white !important;
+}
+
+/* For expanded menu items */
+.main-sidebar .nav-sidebar .nav-treeview .nav-item.active .nav-link,
+.main-sidebar .nav-sidebar .nav-treeview .nav-item .nav-link.active {
+  background-color: var(--azure-deep) !important;
+  color: white !important;
+}
+
 /* ── Select Samples tabsetPanel (By Sample / By Family) */
 
 /* inactive tab - grey background */
@@ -48,4 +390,57 @@
 
 .main-footer a {
   color: grey;
+}
+
+#MainMenu .header {
+  color: grey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 15px;
+}
+
+/* ── Most specific selector for AdminLTE override ── */
+.nav.nav-pills.nav-sidebar.flex-column.sidebar-menu .header {
+  color: grey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 15px;
+}
+
+/* ── Footer styling ── */
+.dashboard-footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-footer-text {
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
+  text-align: right;
+}
+
+.dashboard-footer-logo {
+  margin-right: 15px;
+}
+
+.dashboard-footer-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* ── Ensure box collapse/expand buttons are always on top ── */
+.card-tools { 
+  position: relative; 
+  z-index: 10; 
+}
+
+/* Make collapse/expand icons visible on white box headers */
+.card-tools .btn-tool { 
+  color: #495057 !important; 
+}
+
+.card-tools .btn-tool:hover { 
+  color: #212529 !important; 
 }

@@ -1,5 +1,13 @@
 # breedverse NEWS
 
+## breedverse 0.3.2
+
+* Add styles to CSS
+    * Change 
+    * Add custom.js for collapsible headers
+    * Add breedverse logo
+    * Add header to help page
+
 ## breedverse 0.3.1
 
 * Remove Qploidy while it is going throught repository transition

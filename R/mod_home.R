@@ -22,6 +22,9 @@ mod_Home_ui <- function(id){
                box(
                  title = "Breedverse", status = "info", solidHeader = FALSE, width = 12, collapsible = FALSE,
                  HTML(
+                   "<div style='text-align: center; margin-top: 10px; margin-bottom: 10px;'>
+                                <img src='www/breedverse_logo.png' alt='Breedverse' style='width: 120px; height: 140px;'>
+                              </div>",
                    paste0(
                      "<p><b>About Breedverse.</b> Breedverse is a user-friendly, easy-to-install interface ",
                      "that brings together a curated catalog of applications developed by ",
@@ -53,7 +56,7 @@ mod_Home_ui <- function(id){
               <li>Software Tools</li>
               <li>Analysis</li>
             </ul>
-            Breeding Insight is funded by the U.S. Department of Agriculture (USDA) Agricultural Research Service (ARS) through Cornell University.
+            Breeding Insight is funded by the U.S. Department of Agriculture (USDA) Agricultural Research Service (ARS) through University of Florida (UF) - Institute of Food and Agricultural Sciences (IFAS).
             <div style='text-align: center; margin-top: 20px;'>
               <img src='www/BreedingInsight.png' alt='Breeding Insight' style='width: 85px; height: 85px;'>
             </div>"
