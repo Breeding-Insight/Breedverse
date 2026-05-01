@@ -7,6 +7,8 @@
 
 <!-- badges: end -->
 
+# Breedverse <img src="inst/app/www/breedverse_logo.png" align="right" width="250"/>
+
 **Breedverse** is a modular R Shiny application developed by [Breeding Insight](https://www.breedinginsight.org) at University of Florida (UF/IFAS). It serves as a unified hub that lets users install and launch specialized breeding analysis tools — all from a single interface, with no command-line setup required.
 
 ---
@@ -38,17 +40,6 @@ Breedverse::run_app()
 
 Modules are installed from within the app via the **Install Modules** page. Each module is sourced from GitHub and loaded dynamically. A restart of the app is required after installation to activate the new features.
 
-### Qploidy — Ploidy Estimation
-
-> GitHub: [`Cristianetaniguti/Qploidy`](https://github.com/Cristianetaniguti/Qploidy)
-
-| Feature | Description |
-|---|---|
-| Standardization | Allele intensities / read counts standardization |
-| Ploidy Estimation | Sample-level ploidy inference |
-| Aneuploidy Detection | Identify chromosomal copy-number aberrations |
-
----
 
 ### BIGapp — Genotype Processing, Population Genomics, GWAS and GS
 
