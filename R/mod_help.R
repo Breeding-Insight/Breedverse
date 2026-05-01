@@ -7,12 +7,22 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList includeMarkdown
+#'
 mod_help_ui <- function(id){
   ns <- NS(id)
   tagList(
     fluidPage(
       column(width=12),
       column(width=12,
+             div(
+               style = "padding: 20px;",
+               div(
+                 style = "text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #17a2b8;",
+                 tags$h2("Help Documentation", style = "color: #17a2b8; margin-bottom: 10px;"),
+                 tags$p("Click a module to expand its help section.",
+                        style = "color: #666; font-size: 16px;")
+               )),
+
              # conditionalPanel(
              #   condition = "output.qploidyInstalled == true",
              #   box(title="Ploidy Estimation", id = "Qploidy_box",width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
