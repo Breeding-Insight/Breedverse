@@ -28,8 +28,6 @@
 
 /* Override all bs4Dash status colors with custom colors */
 
-/* Override all bs4Dash status colors with custom colors */
-
 /* Info -> Azure Core */
 .card-info:not(.card-outline) .card-header {
   background-color: var(--azure-core) !important;
@@ -315,15 +313,22 @@
 }
 
 /* ── Sidebar Active Menu Item ── */
+/* Colors are driven by --sidebar-* variables set in app_ui.R */
+:root {
+  --sidebar-core: var(--azure-core);
+  --sidebar-lite: var(--azure-lite);
+  --sidebar-deep: var(--azure-deep);
+}
+
 .main-sidebar .nav-sidebar .nav-item.active .nav-link,
 .main-sidebar .nav-sidebar .nav-item .nav-link.active {
-  background-color: var(--azure-core) !important;
+  background-color: var(--sidebar-core) !important;
   color: white !important;
 }
 
 /* Hover effect for menu items */
 .main-sidebar .nav-sidebar .nav-item .nav-link:hover {
-  background-color: var(--azure-lite) !important;
+  background-color: var(--sidebar-lite) !important;
   color: #333 !important;
 }
 
@@ -336,7 +341,7 @@
 /* For expanded menu items */
 .main-sidebar .nav-sidebar .nav-treeview .nav-item.active .nav-link,
 .main-sidebar .nav-sidebar .nav-treeview .nav-item .nav-link.active {
-  background-color: var(--azure-deep) !important;
+  background-color: var(--sidebar-deep) !important;
   color: white !important;
 }
 

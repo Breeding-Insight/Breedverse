@@ -13,6 +13,15 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    # Dynamic sidebar color theme — only sets the :root CSS variables
+    # ── Sidebar color theme ──────────────────────────────────────────────────────
+    # Change this value to switch the active sidebar menu item color.
+    # Available options: "azure", "green", "yellow", "grey", "purple", "red"
+    # ─────────────────────────────────────────────────────────────────────────────
+    tags$head(tags$style(HTML(sprintf(
+      ":root { --sidebar-core: var(--%s-core); --sidebar-lite: var(--%s-lite); --sidebar-deep: var(--%s-deep); }",
+      "azure", "azure", "azure"
+    )))),
     # Your application UI logic
     bs4DashPage(
       skin = "black",
