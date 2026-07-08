@@ -1,5 +1,11 @@
 # breedverse NEWS
 
+## breedverse 0.4.0
+
+* Add VIEWpoly
+* Add VIEWpoly and GenoBrew help materials 
+* Update CSS style file
+
 ## breedverse 0.3.2
 
 * Add styles to CSS

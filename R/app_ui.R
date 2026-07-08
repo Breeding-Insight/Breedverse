@@ -4,7 +4,6 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @importFrom bs4Dash bs4Badge bs4DashSidebar bs4DashNavbar bs4DashPage sidebarMenu menuItem menuSubItem dashboardBody tabItems tabItem box dashboardFooter
-#' @importFrom shinydisconnect disconnectMessage
 #' @import shinyWidgets
 #' @importFrom utils getFromNamespace
 #'
@@ -27,7 +26,7 @@ app_ui <- function(request) {
       skin = "black",
       bs4DashNavbar(
         title = tagList(
-          tags$img(src = 'www/breedverse_logo.png', height = '40', width = '35'),
+          tags$img(src = "www/breedverse_logo.png", height = "40", width = "35"),
         ),
         rightUi = tags$li(
           class = "dropdown",
@@ -54,81 +53,84 @@ app_ui <- function(request) {
           )
         )
       ),
-      help = NULL, #This is the default bs4Dash button to control the presence of tooltips and popovers, which can be added as a user help/info feature.
+      help = NULL, # This is the default bs4Dash button to control the presence of tooltips and popovers, which can be added as a user help/info feature.
       bs4DashSidebar(
-        skin="light",
+        skin = "light",
         status = "info",
-        fixed=TRUE,
-        #minified = F,
+        fixed = TRUE,
+        # minified = F,
         expandOnHover = TRUE,
-        sidebarMenu(id = "MainMenu",
-                    flat = FALSE,
-                    tags$li(class = "header","Menu"),
-                    menuItem("Home", tabName = "welcome", icon = icon("house"),startExpanded = FALSE),
-                    menuItem("Install modules", tabName = "install", icon = icon("share-from-square")),
-                    tags$li(class = "header", "Available Modules"),
-
-
-                    # conditionalPanel(
-                    #   condition = "output.qploidyInstalled == true",
-                    #   tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Ploidy Estimation"),
-                    #   menuItem("Qploidy", tabName = "qploidy", icon = icon("dna")),
-                    # ),
-
-                    conditionalPanel(
-                      condition = "output.familiaInstalled == true",
-                      menuItem(
-                        "familia",
-                        icon = icon("seedling"),
-                        startExpanded = FALSE,
-                        menuSubItem("Supervised", tabName = "snmf", icon = icon("list-ol")),
-                        menuSubItem("Unsupervised", tabName = "polybreedtools", icon = icon("share-from-square"))
-                      )
-                    ),
-
-                    conditionalPanel(
-                      condition = "output.allomateInstalled == true",
-                      menuItem("AlloMate", tabName = "allomate", icon = icon("diagram-project"))
-                    ),
-
-                    conditionalPanel(
-                      condition = "output.BIGappInstalled == true",
-                      menuItem(
-                        "BIGapp",
-                        icon = icon("dna"),
-                        startExpanded = FALSE,
-                        menuSubItem("Convert to VCF", tabName = "dosage2vcf", icon = icon("share-from-square")),
-                        menuSubItem("Dosage Calling", tabName = "updog", icon = icon("list-ol")),
-                        menuSubItem("VCF Filtering", tabName = "filtering", icon = icon("filter")),
-                        menuSubItem("Genomic Diversity", tabName = "diversity", icon = icon("chart-pie")),
-                        menuSubItem("PCA", tabName = "pca", icon = icon("chart-simple")),
-                        menuSubItem("DAPC", tabName = "dapc", icon = icon("circle-nodes")),
-                        menuSubItem("GWASpoly", tabName = "gwas", icon = icon("think-peaks")),
-                        menuSubItem("Predictive Ability", tabName = "prediction_accuracy", icon = icon("right-left")),
-                        menuSubItem("Genomic Prediction", tabName = "prediction", icon = icon("angles-right"))
-                      )
-                    ),
-                    conditionalPanel(
-                      condition = "output.genobrewInstalled == true",
-                      menuItem(
-                        "GenoBrew",
-                        icon = icon("dna"),
-                        startExpanded = FALSE,
-                        menuSubItem("Select Markers", tabName = "mk_select", icon = icon("magnifying-glass")),
-                        menuSubItem("CNV profiles", tabName = "cnv", icon = icon("dna"))
-                      )
-                    ),
-
-                    tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Information"),
-                    menuItem("Source Code", icon = icon("circle-info"), href = "https://www.github.com/Breeding-Insight/Genomics_Shiny_App"),
-                    menuItem("Help", tabName = "help", icon = icon("circle-question"))
+        sidebarMenu(
+          id = "MainMenu",
+          flat = FALSE,
+          tags$li(class = "header", "Menu"),
+          menuItem("Home", tabName = "welcome", icon = icon("house"), startExpanded = FALSE),
+          menuItem("Install modules", tabName = "install", icon = icon("share-from-square")),
+          tags$li(class = "header", "Available Modules"),
+          conditionalPanel(
+            condition = "output.familiaInstalled == true",
+            menuItem(
+              "familia",
+              icon = icon("seedling"),
+              startExpanded = FALSE,
+              menuSubItem("Supervised", tabName = "snmf", icon = icon("list-ol")),
+              menuSubItem("Unsupervised", tabName = "polybreedtools", icon = icon("share-from-square"))
+            )
+          ),
+          conditionalPanel(
+            condition = "output.allomateInstalled == true",
+            menuItem("AlloMate", tabName = "allomate", icon = icon("diagram-project"))
+          ),
+          conditionalPanel(
+            condition = "output.BIGappInstalled == true",
+            menuItem(
+              "BIGapp",
+              icon = icon("dna"),
+              startExpanded = FALSE,
+              menuSubItem("Convert to VCF", tabName = "dosage2vcf", icon = icon("share-from-square")),
+              menuSubItem("Dosage Calling", tabName = "updog", icon = icon("list-ol")),
+              menuSubItem("VCF Filtering", tabName = "filtering", icon = icon("filter")),
+              menuSubItem("Genomic Diversity", tabName = "diversity", icon = icon("chart-pie")),
+              menuSubItem("PCA", tabName = "pca", icon = icon("chart-simple")),
+              menuSubItem("DAPC", tabName = "dapc", icon = icon("circle-nodes")),
+              menuSubItem("GWASpoly", tabName = "gwas", icon = icon("think-peaks")),
+              menuSubItem("Predictive Ability", tabName = "prediction_accuracy", icon = icon("right-left")),
+              menuSubItem("Genomic Prediction", tabName = "prediction", icon = icon("angles-right"))
+            )
+          ),
+          conditionalPanel(
+            condition = "output.genobrewInstalled == true",
+            menuItem(
+              "GenoBrew",
+              icon = icon("dna"),
+              startExpanded = FALSE,
+              menuSubItem("Select Markers", tabName = "mk_select", icon = icon("magnifying-glass")),
+              menuSubItem("CNV profiles", tabName = "cnv", icon = icon("dna"))
+            )
+          ),
+          conditionalPanel(
+            condition = "output.viewpolyInstalled == true",
+            menuItem(
+              "VIEWpoly",
+              icon = icon("dna"),
+              startExpanded = FALSE,
+              menuSubItem("Input Data", tabName = "upload", icon = icon("chart-pie")),
+              menuSubItem("QTL", tabName = "qtl", icon = icon("dna")),
+              menuSubItem("Genome", tabName = "genes", icon = icon("globe")),
+              menuSubItem("Map", tabName = "map", icon = icon("map")),
+              menuSubItem("Hidecan", tabName = "hidecan", icon = icon("eye-slash"))
+            )
+          ),
+          tags$li(class = "header", style = "color: grey; margin-top: 18px; margin-bottom: 10px; padding-left: 15px;", "Information"),
+          menuItem("Source Code", icon = icon("circle-info"), href = "https://www.github.com/Breeding-Insight/Genomics_Shiny_App"),
+          menuItem("Help", tabName = "help", icon = icon("circle-question"))
         )
       ),
       footer = dashboardFooter(
         right = div(
-          class = "dashboard-footer-right",  # Align text and images horizontally
+          class = "dashboard-footer-right", # Align text and images horizontally
           div(
-            class = "dashboard-footer-text",  # Style the text
+            class = "dashboard-footer-text", # Style the text
             div("2026 Breeding Insight"),
             div("Funded by USDA through UF|IFAS")
           ),
@@ -147,10 +149,10 @@ app_ui <- function(request) {
         ),
         left = div(
           class = "dashboard-footer-left",
-          sprintf("v%s", as.character(utils::packageVersion("Breedverse"))))
+          sprintf("v%s", as.character(utils::packageVersion("Breedverse")))
+        )
       ),
       dashboardBody(
-        disconnectMessage(), #Adds generic error message for any error if not already accounted for
         tabItems(
           tabItem(
             tabName = "welcome", mod_Home_ui("Home_1")
@@ -158,81 +160,120 @@ app_ui <- function(request) {
           tabItem(
             tabName = "install", mod_install_ui("install_1")
           ),
-          # tabItem(
-          #   tabName = "qploidy",
-          #   if(isTRUE(requireNamespace("Qploidy", quietly = TRUE)))
-          #     getFromNamespace("mod_qploidy_ui", "Qploidy")("qploidy_1")
-          # ),
           tabItem(
             tabName = "snmf",
-            if(isTRUE(requireNamespace("familia", quietly = TRUE)))
+            if (isTRUE(requireNamespace("familia", quietly = TRUE))) {
               getFromNamespace("mod_SNMF_ui", "familia")("SNMF_1")
+            }
           ),
           tabItem(
             tabName = "polybreedtools",
-            if(isTRUE(requireNamespace("familia", quietly = TRUE)))
+            if (isTRUE(requireNamespace("familia", quietly = TRUE))) {
               getFromNamespace("mod_polybreedtools_ui", "familia")("PolyBreedTools_1")
+            }
           ),
           tabItem(
             tabName = "allomate",
-            if(isTRUE(requireNamespace("AlloMate", quietly = TRUE)))
+            if (isTRUE(requireNamespace("AlloMate", quietly = TRUE))) {
               getFromNamespace("mod_allomate_ui", "AlloMate")("allomate_1")
+            }
           ),
           tabItem(
             tabName = "filtering",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_Filtering_ui", "BIGapp")("Filtering_1")
+            }
           ),
           tabItem(
             tabName = "updog",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_DosageCall_ui", "BIGapp")("DosageCall_1")
+            }
           ),
           tabItem(
             tabName = "dosage2vcf",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_dosage2vcf_ui", "BIGapp")("dosage2vcf_1")
+            }
           ),
           tabItem(
             tabName = "pca",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_PCA_ui", "BIGapp")("PCA_1")
+            }
           ),
           tabItem(
             tabName = "dapc",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_dapc_ui", "BIGapp")("dapc_1")
+            }
           ),
           tabItem(
             tabName = "gwas",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_gwas_ui", "BIGapp")("gwas_1")
+            }
           ),
           tabItem(
             tabName = "diversity",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_diversity_ui", "BIGapp")("diversity_1")
+            }
           ),
           tabItem(
             tabName = "prediction_accuracy",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_GSAcc_ui", "BIGapp")("GSAcc_1")
+            }
           ),
           tabItem(
             tabName = "prediction",
-            if(isTRUE(requireNamespace("BIGapp", quietly = TRUE)))
+            if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_GS_ui", "BIGapp")("GS_1")
+            }
           ),
           tabItem(
             tabName = "mk_select",
-            if(isTRUE(requireNamespace("GenoBrew", quietly = TRUE)))
+            if (isTRUE(requireNamespace("GenoBrew", quietly = TRUE))) {
               getFromNamespace("mod_mk_select_ui", "GenoBrew")("mk_select_1")
+            }
           ),
           tabItem(
             tabName = "cnv",
-            if(isTRUE(requireNamespace("GenoBrew", quietly = TRUE)))
+            if (isTRUE(requireNamespace("GenoBrew", quietly = TRUE))) {
               getFromNamespace("mod_cnv_ui", "GenoBrew")("cnv_1")
+            }
           ),
+          tabItem(
+            tabName = "upload",
+            if (isTRUE(requireNamespace("viewpoly", quietly = TRUE))) {
+              getFromNamespace("mod_upload_ui", "viewpoly")("upload_1")
+            }
+          ),
+          tabItem(
+            tabName = "qtl",
+            if (isTRUE(requireNamespace("viewpoly", quietly = TRUE))) {
+              getFromNamespace("mod_qtl_view_ui", "viewpoly")("qtl_1")
+            }
+          ),
+          tabItem(
+            tabName = "genes",
+            if (isTRUE(requireNamespace("viewpoly", quietly = TRUE))) {
+              getFromNamespace("mod_genes_view_ui", "viewpoly")("genes_1")
+            }
+          ),
+          tabItem(
+            tabName = "map",
+            if (isTRUE(requireNamespace("viewpoly", quietly = TRUE))) {
+              getFromNamespace("mod_map_view_ui", "viewpoly")("map_1")
+            }
+          ), 
+          tabItem(
+            tabName = "hidecan",
+            if (isTRUE(requireNamespace("viewpoly", quietly = TRUE))) {
+              getFromNamespace("mod_hidecan_view_ui", "viewpoly")("hidecan_1")
+            }
+          ),  
           tabItem(
             tabName = "help", mod_help_ui("help_1")
           )
