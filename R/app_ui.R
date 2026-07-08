@@ -68,9 +68,9 @@ app_ui <- function(request) {
           menuItem("Install modules", tabName = "install", icon = icon("share-from-square")),
           tags$li(class = "header", "Available Modules"),
           conditionalPanel(
-            condition = "output.familiaInstalled == true",
+            condition = "output.FamiliaInstalled == true",
             menuItem(
-              "familia",
+              "Familia",
               icon = icon("seedling"),
               startExpanded = FALSE,
               menuSubItem("Supervised", tabName = "snmf", icon = icon("list-ol")),
@@ -162,14 +162,14 @@ app_ui <- function(request) {
           ),
           tabItem(
             tabName = "snmf",
-            if (isTRUE(requireNamespace("familia", quietly = TRUE))) {
-              getFromNamespace("mod_SNMF_ui", "familia")("SNMF_1")
+            if (isTRUE(requireNamespace("Familia", quietly = TRUE))) {
+              getFromNamespace("mod_SNMF_ui", "Familia")("SNMF_1")
             }
           ),
           tabItem(
             tabName = "polybreedtools",
-            if (isTRUE(requireNamespace("familia", quietly = TRUE))) {
-              getFromNamespace("mod_polybreedtools_ui", "familia")("PolyBreedTools_1")
+            if (isTRUE(requireNamespace("Familia", quietly = TRUE))) {
+              getFromNamespace("mod_polybreedtools_ui", "Familia")("PolyBreedTools_1")
             }
           ),
           tabItem(

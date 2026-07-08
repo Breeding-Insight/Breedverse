@@ -18,8 +18,8 @@ app_server <- function(input, output, session) {
     "BIGapp" %in% rownames(installed.packages())
   })
 
-  output$familiaInstalled <- reactive({
-    "familia" %in% rownames(installed.packages())
+  output$FamiliaInstalled <- reactive({
+    "Familia" %in% rownames(installed.packages())
   })
 
   output$allomateInstalled <- reactive({
@@ -37,7 +37,7 @@ app_server <- function(input, output, session) {
   # Expose the value to JS even when panel is hidden
   # outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "BIGappInstalled", suspendWhenHidden = FALSE)
-  outputOptions(output, "familiaInstalled", suspendWhenHidden = FALSE)
+  outputOptions(output, "FamiliaInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "allomateInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "genobrewInstalled", suspendWhenHidden = FALSE)
   outputOptions(output, "viewpolyInstalled", suspendWhenHidden = FALSE)
@@ -94,15 +94,15 @@ app_server <- function(input, output, session) {
     )
   }
 
-  ## familia
+  ## Familia
 
-  if (isTRUE(requireNamespace("familia", quietly = TRUE))) {
-    do.call("library", list("familia"))
-    callModule(getFromNamespace("mod_SNMF_server", "familia"),
+  if (isTRUE(requireNamespace("Familia", quietly = TRUE))) {
+    do.call("library", list("Familia"))
+    callModule(getFromNamespace("mod_SNMF_server", "Familia"),
       "SNMF_1",
       parent_session = session
     )
-    callModule(getFromNamespace("mod_polybreedtools_server", "familia"),
+    callModule(getFromNamespace("mod_polybreedtools_server", "Familia"),
       "PolyBreedTools_1",
       parent_session = session
     )

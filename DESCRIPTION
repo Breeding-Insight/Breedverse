@@ -19,7 +19,7 @@ Authors@R: c(person(given='Cristiane',
                     role = 'aut')
              )
 Description: Provides an interface for users to add modules from BIGapp, familia, GenoBrew, AlloMate, and VIEWpoly packages.
-License: Apache License 2.0
+License: Apache License 2.0 | file LICENSE
 Depends: R (>= 3.6.0)
 biocViews:
 Imports: 
@@ -41,7 +41,7 @@ Suggests:
     remotes,
     AlloMate,
     BIGapp,
-    familia,
+    Familia,
     GenoBrew,
     viewpoly
 Remotes:
