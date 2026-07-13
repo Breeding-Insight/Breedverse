@@ -7,15 +7,14 @@
 
 <!-- badges: end -->
 
-# Breedverse <img src="inst/app/www/breedverse_logo.png" align="right" width="250"/>
-
 **Breedverse** is a modular R Shiny application developed by [Breeding Insight](https://www.breedinginsight.org) at University of Florida (UF/IFAS). It serves as a unified hub that lets users install and launch specialized breeding analysis tools — all from a single interface, with no command-line setup required.
 
-
+![Breedverse overview](inst/app/www/verse.png)
 
 ## Overview
 
 Breedverse itself is a lightweight launcher. After installing it, users can install any combination of analysis modules directly from within the app. Each module unlocks a dedicated section in the sidebar with its own set of analysis tools.
+
 
 ---
 
