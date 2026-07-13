@@ -117,7 +117,7 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 ## Requirements
 
-- R ≥ 3.6.0
+- R ≥ 4.1.0
 - Internet connection for module installation (modules are pulled from GitHub)
 
 ---

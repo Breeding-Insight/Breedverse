@@ -5,6 +5,7 @@
 * Add all help materials
 * Add tutorial links
 * Add CRAN packages links
+* Requires R 4.1.0 for VIEWpoly
 
 ## breedverse 0.4.0
 

@@ -20,7 +20,7 @@ Authors@R: c(person(given='Cristiane',
              )
 Description: Provides an interface for users to add modules from BIGapp, familia, GenoBrew, AlloMate, and VIEWpoly packages.
 License: Apache License 2.0 | file LICENSE
-Depends: R (>= 3.6.0)
+Depends: R (>= 4.1.0)
 biocViews:
 Imports: 
     shiny,
@@ -48,8 +48,7 @@ Remotes:
     Breeding-Insight/AlloMate@development,
     Breeding-Insight/BIGapp,
     Breeding-Insight/familia,
-    Breeding-Insight/GenoBrew@development,
-    Breeding-Insight/viewpoly
+    Breeding-Insight/GenoBrew@development
 URL: https://github.com/Breeding-Insight/Breedverse
 BugReports: https://github.com/Breeding-Insight/Breedverse/issues
 LazyData: true
