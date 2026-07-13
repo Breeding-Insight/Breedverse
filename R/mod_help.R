@@ -255,7 +255,7 @@ mod_help_ui <- function(id) {
             )
           ),
           box(
-            title = "Select Markers", id = "Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+            title = "Select Markers", id = "GenoBrew_Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "Here you will find detailed description of the Select Markers module inputs and outputs. Please access the tutorial for a step-by-step guide:",
             br(), br(),
             tabsetPanel(
