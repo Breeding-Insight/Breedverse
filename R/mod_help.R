@@ -210,7 +210,7 @@ mod_help_ui <- function(id) {
           ),
           box(
             title = "Genomic Prediction", id = "Genomic_Prediction_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
-            "his tab estimates the trait and estimated-breeding-values (EBVs) for either all individuals in a genomic dataset, or by training the model with one genomic dataset to predict the values in another.",
+            "This tab estimates the trait and estimated-breeding-values (EBVs) for either all individuals in a genomic dataset, or by training the model with one genomic dataset to predict the values in another.",
             br(), br(),
             bs4Dash::tabsetPanel(
               id = "Genomic_Prediction_tabset",
