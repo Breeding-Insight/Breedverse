@@ -25,8 +25,29 @@ mod_help_ui <- function(id) {
             )
           )
         ),
+        ### AlloMate
+        conditionalPanel(
+          condition = "output.allomateInstalled == true",
+          div(
+            style = "display: flex; align-items: center; margin: 10px 0 20px 0; padding: 12px 16px; background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%); border-left: 4px solid #17a2b8; border-radius: 0 6px 6px 0;",
+            tags$img(src = "www/allomate_logo.png", height = "50px", style = "margin-right: 14px;"),
+            div(
+              tags$h4("AlloMate Help Material", style = "margin: 0; color: #17a2b8; font-weight: 600;"),
+              tags$p("Documentation and guides for the AlloMate ancestry estimation modules.", style = "margin: 3px 0 0 0; color: #666; font-size: 13px;")
+            )
+          ),
+          shiny::uiOutput(ns("help_accordion_allomate")),
+        ),
         conditionalPanel(
           condition = "output.BIGappInstalled == true",
+          div(
+            style = "display: flex; align-items: center; margin: 10px 0 20px 0; padding: 12px 16px; background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%); border-left: 4px solid #17a2b8; border-radius: 0 6px 6px 0;",
+            tags$img(src = "www/BIG_R_logo.png", height = "50px", style = "margin-right: 14px;"),
+            div(
+              tags$h4("BIGapp Help Material", style = "margin: 0; color: #17a2b8; font-weight: 600;"),
+              tags$p("Documentation and guides for the BIGapp genomic analysis modules.", style = "margin: 3px 0 0 0; color: #666; font-size: 13px;")
+            )
+          ),
           box(
             title = "Convert to VCF", id = "DArT_Report2VCF_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "This tab converts the processed genotype and counts files from DArT into a VCF file (v4.3). This file can then be used as the genotype input for the analyses within BIGapp or used with other genomics applications.",
@@ -208,9 +229,31 @@ mod_help_ui <- function(id) {
             )
           )
         ),
+        ### Familia
+        conditionalPanel(
+          condition = "output.FamiliaInstalled == true",
+          div(
+            style = "display: flex; align-items: center; margin: 10px 0 20px 0; padding: 12px 16px; background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%); border-left: 4px solid #17a2b8; border-radius: 0 6px 6px 0;",
+            tags$img(src = "www/familia_logo.png", height = "50px", style = "margin-right: 14px;"),
+            div(
+              tags$h4("Familia Help Material", style = "margin: 0; color: #17a2b8; font-weight: 600;"),
+              tags$p("Documentation and guides for the Familia ancestry estimation modules.", style = "margin: 3px 0 0 0; color: #666; font-size: 13px;")
+            )
+          ),
+          shiny::uiOutput(ns("help_accordion")),
+        ),
+
         ### GenoBrew
         conditionalPanel(
           condition = "output.genobrewInstalled == true",
+          div(
+            style = "display: flex; align-items: center; margin: 10px 0 20px 0; padding: 12px 16px; background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%); border-left: 4px solid #17a2b8; border-radius: 0 6px 6px 0;",
+            tags$img(src = "www/GenoBrew_logo.png", height = "50px", style = "margin-right: 14px;"),
+            div(
+              tags$h4("GenoBrew Help Material", style = "margin: 0; color: #17a2b8; font-weight: 600;"),
+              tags$p("Documentation and guides for the GenoBrew marker panel and CNV modules.", style = "margin: 3px 0 0 0; color: #666; font-size: 13px;")
+            )
+          ),
           box(
             title = "Select Markers", id = "Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "Here you will find detailed description of the Select Markers module inputs and outputs. Please access the tutorial for a step-by-step guide:",
@@ -254,6 +297,14 @@ mod_help_ui <- function(id) {
         ),
         conditionalPanel(
           condition = "output.viewpolyInstalled == true",
+          div(
+            style = "display: flex; align-items: center; margin: 10px 0 20px 0; padding: 12px 16px; background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%); border-left: 4px solid #17a2b8; border-radius: 0 6px 6px 0;",
+            tags$img(src = "www/viewpoly_logo.png", height = "50px", style = "margin-right: 14px;"),
+            div(
+              tags$h4("VIEWpoly Help Material", style = "margin: 0; color: #17a2b8; font-weight: 600;"),
+              tags$p("Documentation and guides for the VIEWpoly multi-tool integration and QTL visualization modules.", style = "margin: 3px 0 0 0; color: #666; font-size: 13px;")
+            )
+          ),
           box(
             title = "Input Data", id = "Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "This tab allows users to upload and manage input data for analysis.",
@@ -367,6 +418,44 @@ mod_help_ui <- function(id) {
 #' @noRd
 mod_help_server <- function(input, output, session, parent_session) {
   ns <- session$ns
+
+  if (isTRUE(requireNamespace("AlloMate", quietly = TRUE))) {
+    output$help_accordion_allomate <- shiny::renderUI({
+      shiny::tagList(
+        box(
+          title = "AlloMate", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+          getFromNamespace("help_content_allomate", "AlloMate")()
+        )
+      )
+    })
+  }
+
+  if (isTRUE(requireNamespace("Familia", quietly = TRUE))) {
+    output$help_accordion <- shiny::renderUI({
+      shiny::tagList(
+        box(
+          title = "Pedigree Cleaner", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+          getFromNamespace("help_content_ped_cleaner", "Familia")()
+        ),
+        box(
+          title = "Find Parentage", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+          getFromNamespace("help_content_find_parentage", "Familia")()
+        ),
+        box(
+          title = "Validate Pedigree", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+          getFromNamespace("help_content_validate_ped", "Familia")()
+        ),
+        box(
+          title = HTML("BreedTools<sup>poly</sup>"), width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+          getFromNamespace("help_content_polybreedtools", "Familia")()
+        ),
+        box(
+          title = "SNMF", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+          getFromNamespace("help_content_SNMF", "Familia")()
+        )
+      )
+    })
+  }
 }
 
 ## To be copied in the UI

@@ -68,16 +68,6 @@ app_ui <- function(request) {
           menuItem("Install modules", tabName = "install", icon = icon("share-from-square")),
           tags$li(class = "header", "Available Modules"),
           conditionalPanel(
-            condition = "output.FamiliaInstalled == true",
-            menuItem(
-              "Familia",
-              icon = icon("seedling"),
-              startExpanded = FALSE,
-              menuSubItem("Supervised", tabName = "snmf", icon = icon("list-ol")),
-              menuSubItem("Unsupervised", tabName = "polybreedtools", icon = icon("share-from-square"))
-            )
-          ),
-          conditionalPanel(
             condition = "output.allomateInstalled == true",
             menuItem("AlloMate", tabName = "allomate", icon = icon("diagram-project"))
           ),
@@ -96,6 +86,16 @@ app_ui <- function(request) {
               menuSubItem("GWASpoly", tabName = "gwas", icon = icon("think-peaks")),
               menuSubItem("Predictive Ability", tabName = "prediction_accuracy", icon = icon("right-left")),
               menuSubItem("Genomic Prediction", tabName = "prediction", icon = icon("angles-right"))
+            )
+          ),
+          conditionalPanel(
+            condition = "output.FamiliaInstalled == true",
+            menuItem(
+              "Familia",
+              icon = icon("seedling"),
+              startExpanded = FALSE,
+              menuSubItem("Supervised", tabName = "snmf", icon = icon("list-ol")),
+              menuSubItem("Unsupervised", tabName = "polybreedtools", icon = icon("share-from-square"))
             )
           ),
           conditionalPanel(
@@ -161,24 +161,12 @@ app_ui <- function(request) {
             tabName = "install", mod_install_ui("install_1")
           ),
           tabItem(
-            tabName = "snmf",
-            if (isTRUE(requireNamespace("Familia", quietly = TRUE))) {
-              getFromNamespace("mod_SNMF_ui", "Familia")("SNMF_1")
-            }
-          ),
-          tabItem(
-            tabName = "polybreedtools",
-            if (isTRUE(requireNamespace("Familia", quietly = TRUE))) {
-              getFromNamespace("mod_polybreedtools_ui", "Familia")("PolyBreedTools_1")
-            }
-          ),
-          tabItem(
             tabName = "allomate",
             if (isTRUE(requireNamespace("AlloMate", quietly = TRUE))) {
               getFromNamespace("mod_allomate_ui", "AlloMate")("allomate_1")
             }
           ),
-          tabItem(
+                    tabItem(
             tabName = "filtering",
             if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {
               getFromNamespace("mod_Filtering_ui", "BIGapp")("Filtering_1")
@@ -233,6 +221,18 @@ app_ui <- function(request) {
             }
           ),
           tabItem(
+            tabName = "snmf",
+            if (isTRUE(requireNamespace("Familia", quietly = TRUE))) {
+              getFromNamespace("mod_SNMF_ui", "Familia")("SNMF_1")
+            }
+          ),
+          tabItem(
+            tabName = "polybreedtools",
+            if (isTRUE(requireNamespace("Familia", quietly = TRUE))) {
+              getFromNamespace("mod_polybreedtools_ui", "Familia")("PolyBreedTools_1")
+            }
+          ),
+          tabItem(
             tabName = "mk_select",
             if (isTRUE(requireNamespace("GenoBrew", quietly = TRUE))) {
               getFromNamespace("mod_mk_select_ui", "GenoBrew")("mk_select_1")
@@ -267,13 +267,13 @@ app_ui <- function(request) {
             if (isTRUE(requireNamespace("viewpoly", quietly = TRUE))) {
               getFromNamespace("mod_map_view_ui", "viewpoly")("map_1")
             }
-          ), 
+          ),
           tabItem(
             tabName = "hidecan",
             if (isTRUE(requireNamespace("viewpoly", quietly = TRUE))) {
               getFromNamespace("mod_hidecan_view_ui", "viewpoly")("hidecan_1")
             }
-          ),  
+          ),
           tabItem(
             tabName = "help", mod_help_ui("help_1")
           )

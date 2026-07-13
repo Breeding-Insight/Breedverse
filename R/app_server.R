@@ -56,6 +56,12 @@ app_server <- function(input, output, session) {
     parent_session = session
   )
 
+  ## Help Module
+  callModule(mod_help_server,
+    "help_1",
+    parent_session = session
+  )
+
   ## BIGapp
 
   if (isTRUE(requireNamespace("BIGapp", quietly = TRUE))) {

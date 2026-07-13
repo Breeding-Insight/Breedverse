@@ -1,5 +1,11 @@
 # breedverse NEWS
 
+## breedverse 0.5.0
+
+* Add all help materials
+* Add tutorial links
+* Add CRAN packages links
+
 ## breedverse 0.4.0
 
 * Add VIEWpoly
