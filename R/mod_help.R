@@ -326,7 +326,7 @@ mod_help_ui <- function(id) {
             )
           ),
           box(
-            title = "ViewQTL", id = "QTL_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+            title = "ViewQTL", id = "VIEWpoly_QTL_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "This tab allows users to upload and manage input data for analysis.",
             br(), br(),
             tabsetPanel(
