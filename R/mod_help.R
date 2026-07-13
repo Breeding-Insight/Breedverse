@@ -275,7 +275,7 @@ mod_help_ui <- function(id) {
             )
           ),
           box(
-            title = "CNV Profiles", id = "QTL_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+            title = "CNV Profiles", id = "GenoBrew_CNV_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "Here you will find detailed description of the CNV Profiles module inputs and outputs. Please access the tutorial for a step-by-step guide:",
             br(), br(),
             tabsetPanel(
