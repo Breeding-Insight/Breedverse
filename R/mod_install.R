@@ -543,7 +543,7 @@ mod_install_ui <- function(id) {
               tagList(
                 p("Features:"),
                 tags$ul(
-                  tags$li("Multi-tool Integration (polymapR, MAPpoly, OneMap, QTLpoly, diaQTL, GWASpoly, HIDECAN)"),
+                  tags$li("Multi-tool Integration (polymapR, MAPpoly, OneMap, polyqtlR, QTLpoly, diaQTL, GWASpoly, HIDECAN)"),
                   tags$li("Interactive QTL Visualization"),
                   tags$li("Genome Browser Integration (JBrowseR)"),
                   tags$li("Breeding Value Analysis"),
@@ -592,7 +592,7 @@ mod_install_ui <- function(id) {
               tagList(
                 p("Features:"),
                 tags$ul(
-                  tags$li("Multi-tool Integration (polymapR, MAPpoly, OneMap, QTLpoly, diaQTL, GWASpoly, HIDECAN)"),
+                  tags$li("Multi-tool Integration (polymapR, MAPpoly, OneMap, polyqtlR,QTLpoly, diaQTL, GWASpoly, HIDECAN)"),
                   tags$li("Interactive QTL Visualization"),
                   tags$li("Genome Browser Integration (JBrowseR)"),
                   tags$li("Breeding Value Analysis"),

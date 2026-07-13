@@ -106,7 +106,7 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 | Feature | Description |
 |---|---|
-| Multi-tool Integration | Works with polymapR, MAPpoly, OneMap, QTLpoly, diaQTL, GWASpoly, HIDECAN |
+| Multi-tool Integration | Works with polymapR, MAPpoly, OneMap, polyqtlR, QTLpoly, diaQTL, GWASpoly, HIDECAN |
 | QTL Visualization | Interactive QTL profile and effect plots |
 | Genome Browser | JBrowseR integration for genome-level exploration |
 | Breeding Value Analysis | Visualize marker effects and breeding values |
