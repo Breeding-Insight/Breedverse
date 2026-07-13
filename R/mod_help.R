@@ -210,7 +210,7 @@ mod_help_ui <- function(id) {
           ),
           box(
             title = "Genomic Prediction", id = "Genomic_Prediction_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
-            "his tab estimates the trait and estimated-breeding-values (EBVs) for either all individuals in a genomic dataset, or by training the model with one genomic dataset to predict the values in another.",
+            "This tab estimates the trait and estimated-breeding-values (EBVs) for either all individuals in a genomic dataset, or by training the model with one genomic dataset to predict the values in another.",
             br(), br(),
             bs4Dash::tabsetPanel(
               id = "Genomic_Prediction_tabset",
@@ -255,7 +255,7 @@ mod_help_ui <- function(id) {
             )
           ),
           box(
-            title = "Select Markers", id = "Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+            title = "Select Markers", id = "GenoBrew_Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "Here you will find detailed description of the Select Markers module inputs and outputs. Please access the tutorial for a step-by-step guide:",
             br(), br(),
             tabsetPanel(
@@ -275,7 +275,7 @@ mod_help_ui <- function(id) {
             )
           ),
           box(
-            title = "CNV Profiles", id = "QTL_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+            title = "CNV Profiles", id = "GenoBrew_CNV_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "Here you will find detailed description of the CNV Profiles module inputs and outputs. Please access the tutorial for a step-by-step guide:",
             br(), br(),
             tabsetPanel(
@@ -306,7 +306,7 @@ mod_help_ui <- function(id) {
             )
           ),
           box(
-            title = "Input Data", id = "Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+            title = "Input Data", id = "VIEWpoly_Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "This tab allows users to upload and manage input data for analysis.",
             br(), br(),
             tabsetPanel(
@@ -326,7 +326,7 @@ mod_help_ui <- function(id) {
             )
           ),
           box(
-            title = "ViewQTL", id = "QTL_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+            title = "ViewQTL", id = "VIEWpoly_QTL_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "This tab allows users to upload and manage input data for analysis.",
             br(), br(),
             tabsetPanel(
