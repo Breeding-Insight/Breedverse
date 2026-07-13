@@ -1,5 +1,18 @@
 # breedverse NEWS
 
+## breedverse 0.5.0
+
+* Add all help materials
+* Add tutorial links
+* Add CRAN packages links
+* Requires R 4.1.0 for VIEWpoly
+
+## breedverse 0.4.0
+
+* Add VIEWpoly
+* Add VIEWpoly and GenoBrew help materials 
+* Update CSS style file
+
 ## breedverse 0.3.2
 
 * Add styles to CSS

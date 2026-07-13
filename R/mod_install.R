@@ -1,4 +1,4 @@
-#' qploidy placeholder UI Function
+#'  UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -67,376 +67,9 @@ mod_install_ui <- function(id) {
         border-radius: 4px;
       }
     ")),
-
     fluidPage(
       fluidRow(
         class = "install-row",
-        # --- GenoBrew card ----------------------------------------------------
-        column(
-          width = 6,
-          div(
-            class = "install-card",
-
-            # Already installed
-            conditionalPanel(
-              condition = sprintf("output['%s'] == true", ns("genobrewInstalled")),
-              div(
-                class = "install-header",
-                h3(class = "install-title", div(
-                  class = "install-header",
-                  tags$div(
-                    style = "display:flex; align-items:center;",
-                    tags$img(
-                      src = "www/GenoBrew_logo.png",
-                      height = "100px",
-                      style = "margin-right:8px;"
-                    ),
-                    h3(class = "install-title", "GenoBrew")
-                  ),
-                )),
-                span("Installed", class = "install-status-badge install-status-ok")
-              ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
-                       icon("github"), " GitHub Repository")),
-              tagList(
-                p("Features:"),
-                tags$ul(
-                  tags$li("Allele intensities/read counts standardization"),
-                  tags$li("Sample ploidy estimation"),
-                  tags$li("Aneuploidy detection"),
-                  tags$li("Multipoint (HMM) copy number estimation (beta)")
-                ),
-                br()
-              ),
-              p("GenoBrew is installed. You can access ploidy estimation features in the app.")
-            ),
-
-            # Not installed
-            conditionalPanel(
-              condition = sprintf("output['%s'] == false", ns("genobrewInstalled")),
-              div(
-                class = "install-header",
-                h3(class = "install-title", div(
-                  class = "install-header",
-                  tags$div(
-                    style = "display:flex; align-items:center;",
-                    tags$img(
-                      src = "www/GenoBrew_logo.png",
-                      height = "100px",
-                      style = "margin-right:8px;"
-                    ),
-                    h3(class = "install-title", "GenoBrew")
-                  ),
-                )),
-                span("Not installed", class = "install-status-badge install-status-missing")
-              ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
-                       icon("github"), " GitHub Repository")),
-              tagList(
-                p("Features:"),
-                tags$ul(
-                  tags$li("Test marker panel performance with historical data"),
-                  tags$li("Markers basic filters"),
-                  tags$li("Interactive visualization of Qploidy2 CNV profiles results"),
-                  tags$li("Find copy number variation hostspots in the genome")
-                ),
-                br()
-              ),
-              p("Install the GenoBrew package to enable marker panel tests and CNV visualization workflows."),
-              div(
-                style = "margin-top: 12px; margin-bottom: 10px;",
-                actionButton(
-                  ns("install_genobrew"),
-                  "Install GenoBrew",
-                  icon = icon("download")
-                )
-              )
-            ),
-
-            # Log (always visible)
-            tags$label("Installation log"),
-            div(
-              class = "install-log",
-              uiOutput(ns("install_log_genobrew"))
-            )
-          )
-        ),
-        # --- Qploidy card ----------------------------------------------------
-        # column(
-        #   width = 6,
-        #   div(
-        #     class = "install-card",
-        #
-        #     # Already installed
-        #     conditionalPanel(
-        #       condition = sprintf("output['%s'] == true", ns("qploidyInstalled")),
-        #       div(
-        #         class = "install-header",
-        #         h3(class = "install-title", div(
-        #           class = "install-header",
-        #           tags$div(
-        #             style = "display:flex; align-items:center;",
-        #             tags$img(
-        #               src = "www/Qploidy_logo.png",
-        #               height = "100px",
-        #               style = "margin-right:8px;"
-        #             ),
-        #             h3(class = "install-title", "Qploidy")
-        #           ),
-        #         )),
-        #         span("Installed", class = "install-status-badge install-status-ok")
-        #       ),
-        #       p(tags$a(href = "https://github.com/Cristianetaniguti/Qploidy", target = "_blank",
-        #                icon("github"), " GitHub Repository")),
-        #       tagList(
-        #         p("Features:"),
-        #         tags$ul(
-        #           tags$li("Allele intensities/read counts standardization"),
-        #           tags$li("Sample ploidy estimation"),
-        #           tags$li("Aneuploidy detection"),
-        #           tags$li("Multipoint (HMM) copy number estimation (beta)")
-        #         ),
-        #         br()
-        #       ),
-        #       p("Qploidy is installed. You can access ploidy estimation features in the app.")
-        #     ),
-        #
-        #     # Not installed
-        #     conditionalPanel(
-        #       condition = sprintf("output['%s'] == false", ns("qploidyInstalled")),
-        #       div(
-        #         class = "install-header",
-        #         h3(class = "install-title", div(
-        #           class = "install-header",
-        #           tags$div(
-        #             style = "display:flex; align-items:center;",
-        #             tags$img(
-        #               src = "www/Qploidy_logo.png",
-        #               height = "100px",
-        #               style = "margin-right:8px;"
-        #             ),
-        #             h3(class = "install-title", "Qploidy")
-        #           ),
-        #         )),
-        #         span("Not installed", class = "install-status-badge install-status-missing")
-        #       ),
-        #       p(tags$a(href = "https://github.com/Cristianetaniguti/Qploidy", target = "_blank",
-        #                icon("github"), " GitHub Repository")),
-        #       tagList(
-        #         p("Features:"),
-        #         tags$ul(
-        #           tags$li("Allele intensities/read counts standardization"),
-        #           tags$li("Sample ploidy estimation"),
-        #           tags$li("Aneuploidy detection"),
-        #           tags$li("Multipoint (HMM) copy number estimation (beta)")
-        #         ),
-        #         br()
-        #       ),
-        #       p("Install the Qploidy package to enable ploidy estimation workflows."),
-        #       div(
-        #         style = "margin-top: 12px; margin-bottom: 10px;",
-        #         actionButton(
-        #           ns("install_qploidy"),
-        #           "Install Qploidy",
-        #           icon = icon("download")
-        #         )
-        #       )
-        #     ),
-        #
-        #     # Log (always visible)
-        #     tags$label("Installation log"),
-        #     div(
-        #       class = "install-log",
-        #       uiOutput(ns("install_log_qploidy"))
-        #     )
-        #   )
-        # ),
-
-        # --- BIGapp card -----------------------------------------------------
-        column(
-          width = 6,
-          div(
-            class = "install-card",
-
-            # Already installed
-            conditionalPanel(
-              condition = sprintf("output['%s'] == true", ns("BIGappInstalled")),
-              div(
-                class = "install-header",
-                h3(class = "install-title", div(
-                  class = "install-header",
-                  tags$div(
-                    style = "display:flex; align-items:center;",
-                    tags$img(
-                      src = "www/BIG_R_logo.png",
-                      height = "100px",
-                      style = "margin-right:8px;"
-                    ),
-                    h3(class = "install-title", "BIGapp")
-                  ),
-                )),
-                span("Installed", class = "install-status-badge install-status-ok")
-              ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/BIGapp", target = "_blank",
-                       icon("github"), " GitHub Repository")),
-              tagList(
-                p("Features:"),
-                tags$ul(
-                  tags$li("Genotype Processing (call off-targets SNPs, Filtering)"),
-                  tags$li("Markers Summary Statistics"),
-                  tags$li("Population Structure Analysis (PCA, DAPC)"),
-                  tags$li("Genome-Wide Association Studies (GWAS)"),
-                  tags$li("Genomic Selection (GS)")
-                ),
-                br()
-              ),
-              p("BIGapp is installed. You can access BIGapp features in the app.")
-            ),
-
-            # Not installed
-            conditionalPanel(
-              condition = sprintf("output['%s'] == false", ns("BIGappInstalled")),
-              div(
-                class = "install-header",
-                h3(class = "install-title", div(
-                  class = "install-header",
-                  tags$div(
-                    style = "display:flex; align-items:center;",
-                    tags$img(
-                      src = "www/BIG_R_logo.png",
-                      height = "100px",
-                      style = "margin-right:8px;"
-                    ),
-                    h3(class = "install-title", "BIGapp")
-                  )
-                )),
-                span("Not installed", class = "install-status-badge install-status-missing")
-              ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/BIGapp", target = "_blank",
-                       icon("github"), " GitHub Repository")),
-              tagList(
-                p("Features:"),
-                tags$ul(
-                  tags$li("Genotype Processing (call off-targets SNPs, Filtering)"),
-                  tags$li("Markers Summary Statistics"),
-                  tags$li("Population Structure Analysis (PCA, DAPC)"),
-                  tags$li("Genome-Wide Association Studies (GWAS)"),
-                  tags$li("Genomic Selection (GS)")
-                ),
-                br()
-              ),
-              p("Install the BIGapp package to enable the genomic analysis features."),
-              div(
-                style = "margin-top: 12px; margin-bottom: 10px;",
-                actionButton(
-                  ns("install_bigapp"),
-                  "Install BIGapp",
-                  icon = icon("download")
-                )
-              )
-            ),
-
-            # Log (always visible)
-            tags$label("Installation log"),
-            div(
-              class = "install-log",
-              uiOutput(ns("install_log_BIGapp"))
-            )
-          )
-        )
-      ),
-      fluidRow(
-        class = "install-row",
-        # --- Familia card ----------------------------------------------------
-        column(
-          width = 6,
-          div(
-            class = "install-card",
-
-            # Already installed
-            conditionalPanel(
-              condition = sprintf("output['%s'] == true", ns("familiaInstalled")),
-              div(
-                class = "install-header",
-                h3(class = "install-title", div(
-                  class = "install-header",
-                  tags$div(
-                    style = "display:flex; align-items:center;",
-                    tags$img(
-                      src = "www/familia_logo.png",
-                      height = "100px",
-                      style = "margin-right:8px;"
-                    ),
-                    h3(class = "install-title", "Familia")
-                  ),
-                )),
-                span("Installed", class = "install-status-badge install-status-ok")
-              ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/familia", target = "_blank",
-                       icon("github"), " GitHub Repository")),
-              tagList(
-                p("Features:"),
-                tags$ul(
-                  tags$li("Unsupervised ancestry estimation with SNMF() ADMIXTURE-like algorithms"),
-                  tags$li("Supervised ancestry estimation with PolyBreedTools"),
-                  tags$li("Support for diploid and polyploid species")
-                ),
-                br(),
-                br()
-              ),
-              p("Familia is installed. You can access ancestry estimation features in the app.")
-            ),
-
-            # Not installed
-            conditionalPanel(
-              condition = sprintf("output['%s'] == false", ns("familiaInstalled")),
-              div(
-                class = "install-header",
-                h3(class = "install-title", div(
-                  class = "install-header",
-                  tags$div(
-                    style = "display:flex; align-items:center;",
-                    tags$img(
-                      src = "www/familia_logo.png",
-                      height = "100px",
-                      style = "margin-right:8px;"
-                    ),
-                    h3(class = "install-title", "Familia")
-                  ),
-                )),
-                span("Not installed", class = "install-status-badge install-status-missing")
-              ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/familia", target = "_blank",
-                       icon("github"), " GitHub Repository")),
-              tagList(
-                p("Features:"),
-                tags$ul(
-                  tags$li("Unsupervised ancestry estimation with SNMF() ADMIXTURE-like algorithms"),
-                  tags$li("Supervised ancestry estimation with PolyBreedTools"),
-                  tags$li("Support for diploid and polyploid species")
-                ),
-                br()
-              ),
-              p("Install the familia package to enable ancestry estimation workflows."),
-              div(
-                style = "margin-top: 12px; margin-bottom: 10px;",
-                actionButton(
-                  ns("install_familia"),
-                  "Install Familia",
-                  icon = icon("download")
-                )
-              )
-            ),
-
-            # Log (always visible)
-            tags$label("Installation log"),
-            div(
-              class = "install-log",
-              uiOutput(ns("install_log_familia"))
-            )
-          )
-        ),
-
         # --- AlloMate Card -----------------------------------------------------
         column(
           width = 6,
@@ -462,8 +95,10 @@ mod_install_ui <- function(id) {
                 )),
                 span("Installed", class = "install-status-badge install-status-ok")
               ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/AlloMate", target = "_blank",
-                       icon("github"), " GitHub Repository")),
+              p(tags$a(
+                href = "https://github.com/Breeding-Insight/AlloMate", target = "_blank",
+                icon("github"), " GitHub Repository"
+              )),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -496,8 +131,10 @@ mod_install_ui <- function(id) {
                 )),
                 span("Not installed", class = "install-status-badge install-status-missing")
               ),
-              p(tags$a(href = "https://github.com/Breeding-Insight/AlloMate", target = "_blank",
-                       icon("github"), " GitHub Repository")),
+              p(tags$a(
+                href = "https://github.com/Breeding-Insight/AlloMate", target = "_blank",
+                icon("github"), " GitHub Repository"
+              )),
               tagList(
                 p("Features:"),
                 tags$ul(
@@ -526,8 +163,467 @@ mod_install_ui <- function(id) {
               uiOutput(ns("install_log_allomate"))
             )
           )
+        ),
+
+        # --- BIGapp card -----------------------------------------------------
+        column(
+          width = 6,
+          div(
+            class = "install-card",
+
+            # Already installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == true", ns("BIGappInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/BIG_R_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "BIGapp")
+                  ),
+                )),
+                span("Installed", class = "install-status-badge install-status-ok")
+              ),
+              div(
+                style = "display: flex; gap: 16px;",
+                tags$a(
+                  href = "https://github.com/Breeding-Insight/BIGapp", target = "_blank",
+                  icon("github"), " GitHub Repository"
+                ),
+                tags$a(
+                  href = "https://CRAN.R-project.org/package=BIGr", target = "_blank",
+                  tags$img(src = "www/cran_logo.png", style = "height: 16px; vertical-align: middle; margin-right: 5px;"),
+                  "Related CRAN Package"
+                )
+              ), br(),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Genotype Processing (call off-targets SNPs, Filtering)"),
+                  tags$li("Markers Summary Statistics"),
+                  tags$li("Population Structure Analysis (PCA, DAPC)"),
+                  tags$li("Genome-Wide Association Studies (GWAS)"),
+                  tags$li("Genomic Selection (GS)")
+                ),
+                br()
+              ),
+              p(tags$a(
+                href = "https://scribehow.com/o/s3XiD180SPiAYCOQwB8QDw/page/BIGapp_Tutorials__FdLsY9ZxQsi6kgT9p-U2Zg", target = "_blank",
+                icon("book-open"), " Tutorial"
+              )),
+              p("BIGapp is installed. You can access BIGapp features in the app.")
+            ),
+
+            # Not installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == false", ns("BIGappInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/BIG_R_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "BIGapp")
+                  )
+                )),
+                span("Not installed", class = "install-status-badge install-status-missing")
+              ),
+              div(
+                style = "display: flex; gap: 16px;",
+                tags$a(
+                  href = "https://github.com/Breeding-Insight/BIGapp", target = "_blank",
+                  icon("github"), " GitHub Repository"
+                ),
+                tags$a(
+                  href = "https://CRAN.R-project.org/package=BIGr", target = "_blank",
+                  tags$img(src = "www/cran_logo.png", style = "height: 16px; vertical-align: middle; margin-right: 5px;"),
+                  "Related CRAN Package"
+                )
+              ), br(),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Genotype Processing (call off-targets SNPs, Filtering)"),
+                  tags$li("Markers Summary Statistics"),
+                  tags$li("Population Structure Analysis (PCA, DAPC)"),
+                  tags$li("Genome-Wide Association Studies (GWAS)"),
+                  tags$li("Genomic Selection (GS)")
+                ),
+                br()
+              ),
+              p(tags$a(
+                href = "https://scribehow.com/o/s3XiD180SPiAYCOQwB8QDw/page/BIGapp_Tutorials__FdLsY9ZxQsi6kgT9p-U2Zg", target = "_blank",
+                icon("book-open"), " Tutorial"
+              )),
+              p("Install the BIGapp package to enable the genomic analysis features."),
+              div(
+                style = "margin-top: 12px; margin-bottom: 10px;",
+                actionButton(
+                  ns("install_bigapp"),
+                  "Install BIGapp",
+                  icon = icon("download")
+                )
+              )
+            ),
+
+            # Log (always visible)
+            tags$label("Installation log"),
+            div(
+              class = "install-log",
+              uiOutput(ns("install_log_BIGapp"))
+            )
+          )
         )
-      ) #Closing fluidrow parentheses
+      ),
+      fluidRow(
+        class = "install-row",
+        # --- Familia card ----------------------------------------------------
+        column(
+          width = 6,
+          div(
+            class = "install-card",
+
+            # Already installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == true", ns("FamiliaInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/familia_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "Familia")
+                  ),
+                )),
+                span("Installed", class = "install-status-badge install-status-ok")
+              ),
+              div(
+                style = "display: flex; gap: 16px;",
+                tags$a(
+                  href = "https://github.com/Breeding-Insight/familia", target = "_blank",
+                  icon("github"), " GitHub Repository"
+                ),
+                tags$a(
+                  href = "https://CRAN.R-project.org/package=BIGpopA", target = "_blank",
+                  tags$img(src = "www/cran_logo.png", style = "height: 16px; vertical-align: middle; margin-right: 5px;"),
+                  "Related CRAN Package"
+                )
+              ), br(),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Unsupervised ancestry estimation with SNMF() ADMIXTURE-like algorithms"),
+                  tags$li("Supervised ancestry estimation with PolyBreedTools"),
+                  tags$li("Support for diploid and polyploid species")
+                ),
+                br(),
+                br()
+              ),
+              p("Familia is installed. You can access ancestry estimation features in the app.")
+            ),
+
+            # Not installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == false", ns("FamiliaInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/familia_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "Familia")
+                  ),
+                )),
+                span("Not installed", class = "install-status-badge install-status-missing")
+              ),
+              div(
+                style = "display: flex; gap: 16px;",
+                tags$a(
+                  href = "https://github.com/Breeding-Insight/familia", target = "_blank",
+                  icon("github"), " GitHub Repository"
+                ),
+                tags$a(
+                  href = "https://CRAN.R-project.org/package=BIGpopA", target = "_blank",
+                  tags$img(src = "www/cran_logo.png", style = "height: 16px; vertical-align: middle; margin-right: 5px;"),
+                  "Related CRAN Package"
+                )
+              ), br(),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Unsupervised ancestry estimation with SNMF() ADMIXTURE-like algorithms"),
+                  tags$li("Supervised ancestry estimation with PolyBreedTools"),
+                  tags$li("Support for diploid and polyploid species")
+                ),
+                br()
+              ),
+              p("Install the Familia package to enable ancestry estimation workflows."),
+              div(
+                style = "margin-top: 12px; margin-bottom: 10px;",
+                actionButton(
+                  ns("install_Familia"),
+                  "Install Familia",
+                  icon = icon("download")
+                )
+              )
+            ),
+
+            # Log (always visible)
+            tags$label("Installation log"),
+            div(
+              class = "install-log",
+              uiOutput(ns("install_log_Familia"))
+            )
+          )
+        ),
+        # --- GenoBrew card ----------------------------------------------------
+        column(
+          width = 6,
+          div(
+            class = "install-card",
+
+            # Already installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == true", ns("genobrewInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/GenoBrew_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "GenoBrew")
+                  ),
+                )),
+                span("Installed", class = "install-status-badge install-status-ok")
+              ),
+              p(tags$a(
+                href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
+                icon("github"), " GitHub Repository"
+              )),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Test marker panel performance with historical data"),
+                  tags$li("Markers basic filters"),
+                  tags$li("Interactive visualization of Qploidy2 CNV profiles results"),
+                  tags$li("Find copy number variation hostspots in the genome")
+                ),
+                br()
+              ),
+              p(tags$a(
+                href = "https://scribehow.com/o/s3XiD180SPiAYCOQwB8QDw/viewer/GenoBrew_Interactive_Marker_Panel_Evaluation_CNV_Visualization_and_Curation__4uWloBuPT1WlnCvW2UWiTg", target = "_blank",
+                icon("book-open"), " Tutorial"
+              )),
+              p("GenoBrew is installed. You can access marker panel tests and CNV visualization workflows.")
+            ),
+
+            # Not installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == false", ns("genobrewInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/GenoBrew_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "GenoBrew")
+                  ),
+                )),
+                span("Not installed", class = "install-status-badge install-status-missing")
+              ),
+              p(tags$a(
+                href = "https://github.com/Breeding-Insight/GenoBrew", target = "_blank",
+                icon("github"), " GitHub Repository"
+              )),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Test marker panel performance with historical data"),
+                  tags$li("Markers basic filters"),
+                  tags$li("Interactive visualization of Qploidy2 CNV profiles results"),
+                  tags$li("Find copy number variation hostspots in the genome")
+                ),
+                br()
+              ),
+              p(tags$a(
+                href = "https://scribehow.com/o/s3XiD180SPiAYCOQwB8QDw/viewer/GenoBrew_Interactive_Marker_Panel_Evaluation_CNV_Visualization_and_Curation__4uWloBuPT1WlnCvW2UWiTg", target = "_blank",
+                icon("book-open"), " Tutorial"
+              )),
+              p("Install the GenoBrew package to enable marker panel tests and CNV visualization workflows."),
+              div(
+                style = "margin-top: 12px; margin-bottom: 10px;",
+                actionButton(
+                  ns("install_genobrew"),
+                  "Install GenoBrew",
+                  icon = icon("download")
+                )
+              )
+            ),
+
+            # Log (always visible)
+            tags$label("Installation log"),
+            div(
+              class = "install-log",
+              uiOutput(ns("install_log_genobrew"))
+            )
+          )
+        )
+      ),
+
+      #--- VIEWpoly card ----------------------------------------------------
+      fluidRow(
+        class = "install-row",
+        column(
+          width = 6,
+          div(
+            class = "install-card",
+
+            # Already installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == true", ns("viewpolyInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/viewpoly_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "VIEWpoly")
+                  ),
+                )),
+                span("Installed", class = "install-status-badge install-status-ok")
+              ),
+              div(
+                style = "display: flex; gap: 16px;",
+                tags$a(
+                  href = "https://github.com/Breeding-Insight/viewpoly", target = "_blank",
+                  icon("github"), " GitHub Repository"
+                ),
+                tags$a(
+                  href = "https://CRAN.R-project.org/package=viewpoly", target = "_blank",
+                  tags$img(src = "www/cran_logo.png", style = "height: 16px; vertical-align: middle; margin-right: 5px;"),
+                  "CRAN Package"
+                )
+              ), br(),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Multi-tool Integration (polymapR, MAPpoly, OneMap, QTLpoly, diaQTL, GWASpoly, HIDECAN)"),
+                  tags$li("Interactive QTL Visualization"),
+                  tags$li("Genome Browser Integration (JBrowseR)"),
+                  tags$li("Breeding Value Analysis"),
+                  tags$li("Genetic Map Exploration")
+                ),
+                br()
+              ),
+              p(tags$a(
+                href = "https://cristianetaniguti.github.io/viewpoly_vignettes/VIEWpoly_tutorial.html", target = "_blank",
+                icon("book-open"), " Tutorial"
+              )),
+              p("VIEWpoly is installed. You can access Multi-polyploid tools Integration in the app.")
+            ),
+
+            # Not installed
+            conditionalPanel(
+              condition = sprintf("output['%s'] == false", ns("viewpolyInstalled")),
+              div(
+                class = "install-header",
+                h3(class = "install-title", div(
+                  class = "install-header",
+                  tags$div(
+                    style = "display:flex; align-items:center;",
+                    tags$img(
+                      src = "www/viewpoly_logo.png",
+                      height = "100px",
+                      style = "margin-right:8px;"
+                    ),
+                    h3(class = "install-title", "VIEWpoly")
+                  ),
+                )),
+                span("Not installed", class = "install-status-badge install-status-missing")
+              ),
+              div(
+                style = "display: flex; gap: 16px;",
+                tags$a(
+                  href = "https://github.com/Breeding-Insight/viewpoly", target = "_blank",
+                  icon("github"), " GitHub Repository"
+                ),
+                tags$a(
+                  href = "https://CRAN.R-project.org/package=viewpoly", target = "_blank",
+                  tags$img(src = "www/cran_logo.png", style = "height: 16px; vertical-align: middle; margin-right: 5px;"),
+                  "CRAN Package"
+                )
+              ), br(),
+              tagList(
+                p("Features:"),
+                tags$ul(
+                  tags$li("Multi-tool Integration (polymapR, MAPpoly, OneMap, QTLpoly, diaQTL, GWASpoly, HIDECAN)"),
+                  tags$li("Interactive QTL Visualization"),
+                  tags$li("Genome Browser Integration (JBrowseR)"),
+                  tags$li("Breeding Value Analysis"),
+                  tags$li("Genetic Map Exploration")
+                ),
+                br()
+              ),
+              p(tags$a(
+                href = "https://cristianetaniguti.github.io/viewpoly_vignettes/VIEWpoly_tutorial.html", target = "_blank",
+                icon("book-open"), " Tutorial"
+              )),
+              p("VIEWpoly is not installed. Install VIEWpoly to access Multi-polyploid tools Integration in the app."),
+              div(
+                style = "margin-top: 12px; margin-bottom: 10px;",
+                actionButton(
+                  ns("install_viewpoly"),
+                  "Install VIEWpoly",
+                  icon = icon("download")
+                )
+              )
+            ),
+
+            # Log (always visible)
+            tags$label("Installation log"),
+            div(
+              class = "install-log",
+              uiOutput(ns("install_log_viewpoly"))
+            )
+          )
+        )
+      )
     )
   )
 }
@@ -535,16 +631,15 @@ mod_install_ui <- function(id) {
 #' install Server Functions
 #'
 #' @noRd
-mod_install_server <- function(input, output, session, parent_session){
-
+mod_install_server <- function(input, output, session, parent_session) {
   ns <- session$ns
 
   # --- reactive installation flags ---------------------------------------
-  # qploidy_installed <- reactiveVal(
-  #   requireNamespace("Qploidy", quietly = TRUE)
-  # )
-  familia_installed <- reactiveVal(
-    requireNamespace("familia", quietly = TRUE)
+  viewpoly_installed <- reactiveVal(
+    requireNamespace("viewpoly", quietly = TRUE)
+  )
+  Familia_installed <- reactiveVal(
+    requireNamespace("Familia", quietly = TRUE)
   )
   bigapp_installed <- reactiveVal(
     requireNamespace("BIGapp", quietly = TRUE)
@@ -556,141 +651,165 @@ mod_install_server <- function(input, output, session, parent_session){
     requireNamespace("GenoBrew", quietly = TRUE)
   )
 
-  # output$qploidyInstalled <- reactive({ qploidy_installed() })
-  # outputOptions(output, "qploidyInstalled", suspendWhenHidden = FALSE)
+  output$viewpolyInstalled <- reactive({
+    viewpoly_installed()
+  })
+  outputOptions(output, "viewpolyInstalled", suspendWhenHidden = FALSE)
 
-  output$familiaInstalled <- reactive({ familia_installed() })
-  outputOptions(output, "familiaInstalled", suspendWhenHidden = FALSE)
+  output$FamiliaInstalled <- reactive({
+    Familia_installed()
+  })
+  outputOptions(output, "FamiliaInstalled", suspendWhenHidden = FALSE)
 
-  output$BIGappInstalled <- reactive({ bigapp_installed() })
+  output$BIGappInstalled <- reactive({
+    bigapp_installed()
+  })
   outputOptions(output, "BIGappInstalled", suspendWhenHidden = FALSE)
 
-  output$allomateInstalled <- reactive({ allomate_installed() })
+  output$allomateInstalled <- reactive({
+    allomate_installed()
+  })
   outputOptions(output, "allomateInstalled", suspendWhenHidden = FALSE)
 
-  output$genobrewInstalled <- reactive({ genobrew_installed() })
+  output$genobrewInstalled <- reactive({
+    genobrew_installed()
+  })
   outputOptions(output, "genobrewInstalled", suspendWhenHidden = FALSE)
 
   # Initialize logs as empty
-  # output$install_log_qploidy <- renderUI(NULL)
+  output$install_log_viewpoly <- renderUI(NULL)
   output$install_log_BIGapp <- renderUI(NULL)
-  output$install_log_familia <- renderUI(NULL)
+  output$install_log_Familia <- renderUI(NULL)
   output$install_log_allomate <- renderUI(NULL)
   output$install_log_genobrew <- renderUI(NULL)
 
 
-  # --- Qploidy installation ----------------------------------------------
-  # observeEvent(input$install_qploidy, {
-  #   err_msg <- NULL
-  #   ok      <- FALSE
-  #   log_lines <- character(0)
-  #
-  #   output$install_log_qploidy <- renderUI(NULL)
-  #
-  #   withProgress(message = "Installing Qploidy", value = 0, {
-  #
-  #     capture_msg <- function(m) {
-  #       log_lines <<- c(log_lines, conditionMessage(m))
-  #       output$install_log_qploidy <- renderUI(
-  #         pre(style = "font-size:11px; white-space:pre-wrap;",
-  #             paste(log_lines, collapse = ""))
-  #       )
-  #       invokeRestart("muffleMessage")
-  #     }
-  #
-  #     withCallingHandlers(
-  #       tryCatch({
-  #         if (!requireNamespace("remotes", quietly = TRUE)) {
-  #           incProgress(0.05, detail = "Installing remotes...")
-  #           install.packages("remotes")
-  #         }
-  #         incProgress(0.1, detail = "Contacting GitHub...")
-  #         remotes::install_github(
-  #           "Cristianetaniguti/Qploidy",
-  #           upgrade = "never",
-  #           quiet   = FALSE
-  #         )
-  #         incProgress(0.9, detail = "Verifying...")
-  #         ok <- requireNamespace("Qploidy", quietly = TRUE)
-  #         incProgress(1,   detail = "Done")
-  #       }, error = function(e) {
-  #         err_msg <<- conditionMessage(e)
-  #       }),
-  #       message = capture_msg
-  #     )
-  #   })
-  #
-  #   if (ok) {
-  #     qploidy_installed(TRUE)
-  #     showNotification("Qploidy installed successfully.", type = "message", duration = 8)
-  #     output$install_log_qploidy <- renderUI(HTML(
-  #       paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
-  #              'Qploidy installation completed. <b style="color:#d9534f;">Restart</b> the app to load Qploidy features.')
-  #     ))
-  #   } else {
-  #     showNotification("Qploidy installation failed. See log below.", type = "error", duration = NULL)
-  #     output$install_log_qploidy <- renderUI(
-  #       pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
-  #           if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
-  #             paste(c(log_lines, err_msg), collapse = ""))
-  #     )
-  #   }
-  # })
-
-  # --- Familia installation ----------------------------------------------
-  observeEvent(input$install_familia, {
+  # --- viewpoly installation ----------------------------------------------
+  observeEvent(input$install_viewpoly, {
     err_msg <- NULL
-    ok      <- FALSE
+    ok <- FALSE
     log_lines <- character(0)
 
-    output$install_log_familia <- renderUI(NULL)
+    output$install_log_viewpoly <- renderUI(NULL)
 
-    withProgress(message = "Installing familia", value = 0, {
-
+    withProgress(message = "Installing VIEWpoly", value = 0, {
       capture_msg <- function(m) {
         log_lines <<- c(log_lines, conditionMessage(m))
-        output$install_log_familia <- renderUI(
-          pre(style = "font-size:11px; white-space:pre-wrap;",
-              paste(log_lines, collapse = ""))
+        output$install_log_viewpoly <- renderUI(
+          pre(
+            style = "font-size:11px; white-space:pre-wrap;",
+            paste(log_lines, collapse = "")
+          )
         )
         invokeRestart("muffleMessage")
       }
 
       withCallingHandlers(
-        tryCatch({
-          if (!requireNamespace("remotes", quietly = TRUE)) {
-            incProgress(0.05, detail = "Installing remotes...")
-            install.packages("remotes")
+        tryCatch(
+          {
+            incProgress(0.1, detail = "Contacting CRAN...")
+            install.packages("viewpoly")
+            incProgress(0.9, detail = "Verifying...")
+            ok <- requireNamespace("viewpoly", quietly = TRUE)
+            incProgress(1, detail = "Done")
+          },
+          error = function(e) {
+            err_msg <<- conditionMessage(e)
           }
-          incProgress(0.1, detail = "Contacting GitHub...")
-          remotes::install_github(
-            "Breeding-Insight/familia",
-            upgrade = "never",
-            quiet   = FALSE
-          )
-          incProgress(0.9, detail = "Verifying...")
-          ok <- requireNamespace("familia", quietly = TRUE)
-          incProgress(1,   detail = "Done")
-        }, error = function(e) {
-          err_msg <<- conditionMessage(e)
-        }),
+        ),
         message = capture_msg
       )
     })
 
     if (ok) {
-      familia_installed(TRUE)
-      showNotification("familia installed successfully.", type = "message", duration = 8)
-      output$install_log_familia <- renderUI(HTML(
-        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
-               'familia installation completed. <b style="color:#d9534f;">Restart</b> the app to load familia features.')
+      viewpoly_installed(TRUE)
+      showNotification("viewpoly installed successfully.", type = "message", duration = 8)
+      output$install_log_viewpoly <- renderUI(HTML(
+        paste0(
+          if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse = ""), "</pre>"),
+          'viewpoly installation completed. <b style="color:#d9534f;">Restart</b> the app to load viewpoly features.'
+        )
       ))
     } else {
-      showNotification("familia installation failed. See log below.", type = "error", duration = NULL)
-      output$install_log_familia <- renderUI(
-        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
-            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
-              paste(c(log_lines, err_msg), collapse = ""))
+      showNotification("viewpoly installation failed. See log below.", type = "error", duration = NULL)
+      output$install_log_viewpoly <- renderUI(
+        pre(
+          style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+          if (is.null(err_msg)) {
+            "Unknown error (check server permissions/logs)."
+          } else {
+            paste(c(log_lines, err_msg), collapse = "")
+          }
+        )
+      )
+    }
+  })
+
+  # --- Familia installation ----------------------------------------------
+  observeEvent(input$install_Familia, {
+    err_msg <- NULL
+    ok <- FALSE
+    log_lines <- character(0)
+
+    output$install_log_Familia <- renderUI(NULL)
+
+    withProgress(message = "Installing Familia", value = 0, {
+      capture_msg <- function(m) {
+        log_lines <<- c(log_lines, conditionMessage(m))
+        output$install_log_Familia <- renderUI(
+          pre(
+            style = "font-size:11px; white-space:pre-wrap;",
+            paste(log_lines, collapse = "")
+          )
+        )
+        invokeRestart("muffleMessage")
+      }
+
+      withCallingHandlers(
+        tryCatch(
+          {
+            if (!requireNamespace("remotes", quietly = TRUE)) {
+              incProgress(0.05, detail = "Installing remotes...")
+              install.packages("remotes")
+            }
+            incProgress(0.1, detail = "Contacting GitHub...")
+            remotes::install_github(
+              "Breeding-Insight/familia",
+              upgrade = "never",
+              quiet   = FALSE
+            )
+            incProgress(0.9, detail = "Verifying...")
+            ok <- requireNamespace("Familia", quietly = TRUE)
+            incProgress(1, detail = "Done")
+          },
+          error = function(e) {
+            err_msg <<- conditionMessage(e)
+          }
+        ),
+        message = capture_msg
+      )
+    })
+
+    if (ok) {
+      Familia_installed(TRUE)
+      showNotification("Familia installed successfully.", type = "message", duration = 8)
+      output$install_log_Familia <- renderUI(HTML(
+        paste0(
+          if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse = ""), "</pre>"),
+          'Familia installation completed. <b style="color:#d9534f;">Restart</b> the app to load Familia features.'
+        )
+      ))
+    } else {
+      showNotification("Familia installation failed. See log below.", type = "error", duration = NULL)
+      output$install_log_Familia <- renderUI(
+        pre(
+          style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+          if (is.null(err_msg)) {
+            "Unknown error (check server permissions/logs)."
+          } else {
+            paste(c(log_lines, err_msg), collapse = "")
+          }
+        )
       )
     }
   })
@@ -698,41 +817,45 @@ mod_install_server <- function(input, output, session, parent_session){
   # --- AlloMate installation ----------------------------------------------
   observeEvent(input$install_allomate, {
     err_msg <- NULL
-    ok      <- FALSE
+    ok <- FALSE
     log_lines <- character(0)
 
     output$install_log_allomate <- renderUI(NULL)
 
     withProgress(message = "Installing AlloMate", value = 0, {
-
       capture_msg <- function(m) {
         log_lines <<- c(log_lines, conditionMessage(m))
         output$install_log_allomate <- renderUI(
-          pre(style = "font-size:11px; white-space:pre-wrap;",
-              paste(log_lines, collapse = ""))
+          pre(
+            style = "font-size:11px; white-space:pre-wrap;",
+            paste(log_lines, collapse = "")
+          )
         )
         invokeRestart("muffleMessage")
       }
 
       withCallingHandlers(
-        tryCatch({
-          if (!requireNamespace("remotes", quietly = TRUE)) {
-            incProgress(0.05, detail = "Installing remotes...")
-            install.packages("remotes")
+        tryCatch(
+          {
+            if (!requireNamespace("remotes", quietly = TRUE)) {
+              incProgress(0.05, detail = "Installing remotes...")
+              install.packages("remotes")
+            }
+            incProgress(0.1, detail = "Contacting GitHub...")
+            remotes::install_github(
+              "Breeding-Insight/AlloMate@development",
+              upgrade = "never",
+              ref     = "development",
+              quiet   = FALSE
+            )
+            incProgress(0.9, detail = "Verifying...")
+            ok <- requireNamespace("AlloMate", quietly = TRUE)
+            incProgress(1, detail = "Done")
+          },
+          error = function(e) {
+            err_msg <<- conditionMessage(e)
           }
-          incProgress(0.1, detail = "Contacting GitHub...")
-          remotes::install_github(
-            "Breeding-Insight/AlloMate",
-            upgrade = "never",
-            ref     = "development",
-            quiet   = FALSE
-          )
-          incProgress(0.9, detail = "Verifying...")
-          ok <- requireNamespace("AlloMate", quietly = TRUE)
-          incProgress(1,   detail = "Done")
-        }, error = function(e) {
-          err_msg <<- conditionMessage(e)
-        }),
+        ),
         message = capture_msg
       )
     })
@@ -741,15 +864,22 @@ mod_install_server <- function(input, output, session, parent_session){
       allomate_installed(TRUE)
       showNotification("AlloMate installed successfully.", type = "message", duration = 8)
       output$install_log_allomate <- renderUI(HTML(
-        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
-               'AlloMate installation completed. <b style="color:#d9534f;">Restart</b> the app to load AlloMate features.')
+        paste0(
+          if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse = ""), "</pre>"),
+          'AlloMate installation completed. <b style="color:#d9534f;">Restart</b> the app to load AlloMate features.'
+        )
       ))
     } else {
       showNotification("AlloMate installation failed. See log below.", type = "error", duration = NULL)
       output$install_log_allomate <- renderUI(
-        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
-            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
-              paste(c(log_lines, err_msg), collapse = ""))
+        pre(
+          style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+          if (is.null(err_msg)) {
+            "Unknown error (check server permissions/logs)."
+          } else {
+            paste(c(log_lines, err_msg), collapse = "")
+          }
+        )
       )
     }
   })
@@ -757,40 +887,44 @@ mod_install_server <- function(input, output, session, parent_session){
   # --- BIGapp installation -----------------------------------------------
   observeEvent(input$install_bigapp, {
     err_msg <- NULL
-    ok      <- FALSE
+    ok <- FALSE
     log_lines <- character(0)
 
     output$install_log_BIGapp <- renderUI(NULL)
 
     withProgress(message = "Installing BIGapp", value = 0, {
-
       capture_msg <- function(m) {
         log_lines <<- c(log_lines, conditionMessage(m))
         output$install_log_BIGapp <- renderUI(
-          pre(style = "font-size:11px; white-space:pre-wrap;",
-              paste(log_lines, collapse = ""))
+          pre(
+            style = "font-size:11px; white-space:pre-wrap;",
+            paste(log_lines, collapse = "")
+          )
         )
         invokeRestart("muffleMessage")
       }
 
       withCallingHandlers(
-        tryCatch({
-          if (!requireNamespace("remotes", quietly = TRUE)) {
-            incProgress(0.05, detail = "Installing remotes...")
-            install.packages("remotes")
+        tryCatch(
+          {
+            if (!requireNamespace("remotes", quietly = TRUE)) {
+              incProgress(0.05, detail = "Installing remotes...")
+              install.packages("remotes")
+            }
+            incProgress(0.1, detail = "Contacting GitHub...")
+            remotes::install_github(
+              "Breeding-Insight/BIGapp",
+              upgrade = "never",
+              quiet   = FALSE
+            )
+            incProgress(0.9, detail = "Verifying...")
+            ok <- requireNamespace("BIGapp", quietly = TRUE)
+            incProgress(1, detail = "Done")
+          },
+          error = function(e) {
+            err_msg <<- conditionMessage(e)
           }
-          incProgress(0.1, detail = "Contacting GitHub...")
-          remotes::install_github(
-            "Breeding-Insight/BIGapp",
-            upgrade = "never",
-            quiet   = FALSE
-          )
-          incProgress(0.9, detail = "Verifying...")
-          ok <- requireNamespace("BIGapp", quietly = TRUE)
-          incProgress(1,   detail = "Done")
-        }, error = function(e) {
-          err_msg <<- conditionMessage(e)
-        }),
+        ),
         message = capture_msg
       )
     })
@@ -799,15 +933,22 @@ mod_install_server <- function(input, output, session, parent_session){
       bigapp_installed(TRUE)
       showNotification("BIGapp installed successfully.", type = "message", duration = 8)
       output$install_log_BIGapp <- renderUI(HTML(
-        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
-               'BIGapp installation completed. <b style="color:#d9534f;">Restart</b> the app to load BIGapp features.')
+        paste0(
+          if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse = ""), "</pre>"),
+          'BIGapp installation completed. <b style="color:#d9534f;">Restart</b> the app to load BIGapp features.'
+        )
       ))
     } else {
       showNotification("BIGapp installation failed. See log below.", type = "error", duration = NULL)
       output$install_log_BIGapp <- renderUI(
-        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
-            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
-              paste(c(log_lines, err_msg), collapse = ""))
+        pre(
+          style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+          if (is.null(err_msg)) {
+            "Unknown error (check server permissions/logs)."
+          } else {
+            paste(c(log_lines, err_msg), collapse = "")
+          }
+        )
       )
     }
   })
@@ -815,40 +956,44 @@ mod_install_server <- function(input, output, session, parent_session){
   # --- GenoBrew installation ----------------------------------------------
   observeEvent(input$install_genobrew, {
     err_msg <- NULL
-    ok      <- FALSE
+    ok <- FALSE
     log_lines <- character(0)
 
     output$install_log_genobrew <- renderUI(NULL)
 
     withProgress(message = "Installing GenoBrew", value = 0, {
-
       capture_msg <- function(m) {
         log_lines <<- c(log_lines, conditionMessage(m))
         output$install_log_genobrew <- renderUI(
-          pre(style = "font-size:11px; white-space:pre-wrap;",
-              paste(log_lines, collapse = ""))
+          pre(
+            style = "font-size:11px; white-space:pre-wrap;",
+            paste(log_lines, collapse = "")
+          )
         )
         invokeRestart("muffleMessage")
       }
 
       withCallingHandlers(
-        tryCatch({
-          if (!requireNamespace("remotes", quietly = TRUE)) {
-            incProgress(0.05, detail = "Installing remotes...")
-            install.packages("remotes")
+        tryCatch(
+          {
+            if (!requireNamespace("remotes", quietly = TRUE)) {
+              incProgress(0.05, detail = "Installing remotes...")
+              install.packages("remotes")
+            }
+            incProgress(0.1, detail = "Contacting GitHub...")
+            remotes::install_github(
+              "Breeding-Insight/GenoBrew",
+              upgrade = "never",
+              quiet   = FALSE
+            )
+            incProgress(0.9, detail = "Verifying...")
+            ok <- requireNamespace("GenoBrew", quietly = TRUE)
+            incProgress(1, detail = "Done")
+          },
+          error = function(e) {
+            err_msg <<- conditionMessage(e)
           }
-          incProgress(0.1, detail = "Contacting GitHub...")
-          remotes::install_github(
-            "Breeding-Insight/GenoBrew",
-            upgrade = "never",
-            quiet   = FALSE
-          )
-          incProgress(0.9, detail = "Verifying...")
-          ok <- requireNamespace("GenoBrew", quietly = TRUE)
-          incProgress(1,   detail = "Done")
-        }, error = function(e) {
-          err_msg <<- conditionMessage(e)
-        }),
+        ),
         message = capture_msg
       )
     })
@@ -857,20 +1002,25 @@ mod_install_server <- function(input, output, session, parent_session){
       genobrew_installed(TRUE)
       showNotification("GenoBrew installed successfully.", type = "message", duration = 8)
       output$install_log_genobrew <- renderUI(HTML(
-        paste0(if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse=""), '</pre>'),
-               'GenoBrew installation completed. <b style="color:#d9534f;">Restart</b> the app to load GenoBrew features.')
+        paste0(
+          if (length(log_lines)) paste0('<pre style="font-size:11px;white-space:pre-wrap;">', paste(log_lines, collapse = ""), "</pre>"),
+          'GenoBrew installation completed. <b style="color:#d9534f;">Restart</b> the app to load GenoBrew features.'
+        )
       ))
     } else {
       showNotification("GenoBrew installation failed. See log below.", type = "error", duration = NULL)
       output$install_log_genobrew <- renderUI(
-        pre(style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
-            if (is.null(err_msg)) "Unknown error (check server permissions/logs)." else
-              paste(c(log_lines, err_msg), collapse = ""))
+        pre(
+          style = "font-size:11px; white-space:pre-wrap; color:#c62828;",
+          if (is.null(err_msg)) {
+            "Unknown error (check server permissions/logs)."
+          } else {
+            paste(c(log_lines, err_msg), collapse = "")
+          }
+        )
       )
     }
   })
-
-
 }
 
 ## To be copied in the UI

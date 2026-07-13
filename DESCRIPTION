@@ -1,6 +1,6 @@
 Package: Breedverse
 Title: Collection of R Shiny Packages From Breeding Insight
-Version: 0.3.1
+Version: 0.5.0
 Authors@R: c(person(given='Cristiane', 
                     family='Taniguti', 
                     email = 'ctaniguti@ufl.edu', 
@@ -18,9 +18,9 @@ Authors@R: c(person(given='Cristiane',
                     family='Insight', 
                     role = 'aut')
              )
-Description: Provides an interface for users to add modules from BIGapp, Qploidy, familia, GenoBrew and AlloMate packages.
-License: Apache License 2.0
-Depends: R (>= 3.6.0)
+Description: Provides an interface for users to add modules from BIGapp, familia, GenoBrew, AlloMate, and VIEWpoly packages.
+License: Apache License 2.0 | file LICENSE
+Depends: R (>= 4.1.0)
 biocViews:
 Imports: 
     shiny,
@@ -28,7 +28,6 @@ Imports:
     config,
     golem,
     shinyWidgets,
-    shinydisconnect,
     curl,
     httr,
     utils
@@ -40,15 +39,15 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     remotes,
-    Qploidy,
+    AlloMate,
     BIGapp,
-    familia,
-    GenoBrew
+    Familia,
+    GenoBrew,
+    viewpoly
 Remotes:
-    Cristianetaniguti/Qploidy,
+    Breeding-Insight/AlloMate@development,
     Breeding-Insight/BIGapp,
     Breeding-Insight/familia,
-    Breeding-Insight/AlloMate@development,
     Breeding-Insight/GenoBrew@development
 URL: https://github.com/Breeding-Insight/Breedverse
 BugReports: https://github.com/Breeding-Insight/Breedverse/issues

@@ -7,15 +7,14 @@
 
 <!-- badges: end -->
 
-# Breedverse <img src="inst/app/www/breedverse_logo.png" align="right" width="250"/>
-
 **Breedverse** is a modular R Shiny application developed by [Breeding Insight](https://www.breedinginsight.org) at University of Florida (UF/IFAS). It serves as a unified hub that lets users install and launch specialized breeding analysis tools — all from a single interface, with no command-line setup required.
 
-
+![Breedverse overview](inst/app/www/verse.png)
 
 ## Overview
 
 Breedverse itself is a lightweight launcher. After installing it, users can install any combination of analysis modules directly from within the app. Each module unlocks a dedicated section in the sidebar with its own set of analysis tools.
+
 
 ---
 
@@ -43,7 +42,9 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 ### BIGapp — Genotype Processing, Population Genomics, GWAS and GS
 
-> GitHub: [`Breeding-Insight/BIGapp`](https://github.com/Breeding-Insight/BIGapp)
+> GitHub: [`Breeding-Insight/BIGapp`](https://github.com/Breeding-Insight/BIGapp)  
+> CRAN: [`BIGr`](https://CRAN.R-project.org/package=BIGr)  
+> Tutorial: [BIGAPP-TUTORIAL](https://scribehow.com/o/s3XiD180SPiAYCOQwB8QDw/page/BIGapp_Tutorials__FdLsY9ZxQsi6kgT9p-U2Zg)
 
 | Category | Feature |
 |---|---|
@@ -59,7 +60,8 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 ### Familia — Ancestry Estimation
 
-> GitHub: [`Breeding-Insight/familia`](https://github.com/Breeding-Insight/familia)
+> GitHub: [`Breeding-Insight/familia`](https://github.com/Breeding-Insight/familia)  
+> CRAN: [`BIGpopA`](https://CRAN.R-project.org/package=BIGpopA)  
 
 | Mode | Feature |
 |---|---|
@@ -71,7 +73,7 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 ### AlloMate — Optimized Mating Plans
 
-> GitHub: [`Breeding-Insight/AlloMate`](https://github.com/Breeding-Insight/AlloMate)
+> GitHub: [`Breeding-Insight/AlloMate`](https://github.com/Breeding-Insight/AlloMate)  
 
 | Feature | Description |
 |---|---|
@@ -84,7 +86,8 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 ### GenoBrew — Interactive Marker Panel Evaluation and CNV Visualization
 
-> GitHub: [`Breeding-Insight/GenoBrew`](https://github.com/Breeding-Insight/GenoBrew)
+> GitHub: [`Breeding-Insight/GenoBrew`](https://github.com/Breeding-Insight/GenoBrew)  
+> Tutorial: [GENOBREW-TUTORIAL](https://scribehow.com/o/s3XiD180SPiAYCOQwB8QDw/viewer/GenoBrew_Interactive_Marker_Panel_Evaluation_CNV_Visualization_and_Curation__4uWloBuPT1WlnCvW2UWiTg)
 
 | Feature | Description |
 |---|---|
@@ -95,9 +98,25 @@ Modules are installed from within the app via the **Install Modules** page. Each
 
 ---
 
+### VIEWpoly — Polyploid QTL and Linkage Map Visualization
+
+> GitHub: [`Breeding-Insight/viewpoly`](https://github.com/Breeding-Insight/viewpoly)  
+> CRAN: [`viewpoly`](https://CRAN.R-project.org/package=viewpoly)  
+> Tutorial: [VIEWPOLY-TUTORIAL](https://cristianetaniguti.github.io/viewpoly_vignettes/VIEWpoly_tutorial.html)
+
+| Feature | Description |
+|---|---|
+| Multi-tool Integration | Works with polymapR, MAPpoly, OneMap, QTLpoly, diaQTL, GWASpoly, HIDECAN |
+| QTL Visualization | Interactive QTL profile and effect plots |
+| Genome Browser | JBrowseR integration for genome-level exploration |
+| Breeding Value Analysis | Visualize marker effects and breeding values |
+| Genetic Map Exploration | Interactive linkage group maps |
+
+---
+
 ## Requirements
 
-- R ≥ 3.6.0
+- R ≥ 4.1.0
 - Internet connection for module installation (modules are pulled from GitHub)
 
 ---
