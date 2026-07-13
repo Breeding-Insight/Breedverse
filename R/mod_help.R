@@ -306,7 +306,7 @@ mod_help_ui <- function(id) {
             )
           ),
           box(
-            title = "Input Data", id = "Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
+            title = "Input Data", id = "VIEWpoly_Inputs_box", width = 12, collapsible = TRUE, collapsed = TRUE, status = "info", solidHeader = TRUE,
             "This tab allows users to upload and manage input data for analysis.",
             br(), br(),
             tabsetPanel(
